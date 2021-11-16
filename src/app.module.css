@@ -1,5 +1,16 @@
+* { margin: 0; padding: 0; }
+
 .App {
   text-align: center;
+}
+
+.title {
+  text-align: left;
+}
+
+.content {
+  width: 1240px;
+  margin: 0 auto;
 }
 
 .App-logo {
