@@ -1,0 +1,43 @@
+.constructor {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: end;
+    align-items: end;
+    width: 100%;
+}
+
+.top, .center, .bottom {
+    align-items: end;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.listItem {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    gap: 13.5px;
+}
+
+.total {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: end;
+    align-items: center;
+}
+
+.totalCont {
+    display: flex;
+    align-items: center;
+}
+

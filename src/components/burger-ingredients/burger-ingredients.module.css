@@ -1,15 +1,25 @@
-.navItem {
-    color: #F2F2F3;
-    text-decoration: none;
+.tabs {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.login {
-    color: #F2F2F3;
-    text-decoration: none;
+.ingredients {
+    width: 600px;
+}
+
+.type {
+
+}
+
+.title {
+    width: 100%;
+}
+
+.cards {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    justify-content: space-between;
 }
