@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
+import { createPortal } from 'react-dom';
 import styles from './burger-constructor.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
-import img from '../../images/img.png';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientCard from "../ingredient-card/ingredient-card";
+import Portal from "../../utils/create-portal";
+import OrderDetails from "../order-details/order-details";
+import ModalOverlay from "../modal-overlay/modal-overlay";
+/*import {Modal}*/
 
 const BurgerConstructor = ({data}) => {
+    const [isOn, setOn] = useState(false);
+
     const constructor = `mt-5 ml-5 ${styles.constructor}`;
     const list = `mt-10 ${styles.list}`;
     const listItem = `${styles.listItem}`;
@@ -18,10 +23,11 @@ const BurgerConstructor = ({data}) => {
     const totalCount = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
     const totalCont = `mr-10 ${styles.totalCont}`;
 
-    console.log(data);
+
     const bun = data[0];
     data.splice(0, 1);
     const items = data;
+
     return (
         <div className={constructor}>
             <section className={list}>
@@ -67,9 +73,19 @@ const BurgerConstructor = ({data}) => {
                     <p className={totalCount}>610</p>
                     <CurrencyIcon type="primary"/>
                 </div>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large"
+                        onClick={() => setOn(!isOn)}
+                        >
                     Оформить заказ
                 </Button>
+                {
+                    isOn &&
+                    <Portal>
+                        <ModalOverlay>
+                            <OrderDetails/>
+                        </ModalOverlay>
+                    </Portal>
+                }
             </div>
         </div>
     )

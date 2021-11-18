@@ -3,8 +3,6 @@ import styles from './app.module.css';
 import AppHeader from "./components/app-header/app-header";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-
-import OrderDetails from "./components/order-details/order-details";
 import doRequest from "./utils/doRequest";
 
 function App() {
@@ -33,12 +31,13 @@ function App() {
   return (
     <div className="App">
       <AppHeader/>
-        <div className={contentStyles}>
+      <div className={contentStyles}>
             <h1 className={titleStyles}>Соберите бургер</h1>
             <BurgerIngredients data={state.data}/>
             <BurgerConstructor data={state.data}/>
-{/*            <OrderDetails/>*/}
-        </div>
+{/*            */}
+      </div>
+      <div id="react-modals"/>
     </div>
   );
 }
