@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
+import PropTypes from "prop-types";
 
 
 const BurgerIngredients = ({data}) => {
+    BurgerIngredients.propTypes = {
+        data: PropTypes.array
+    };
 
     const [current, setCurrent] = React.useState('Булки')
     const ingredients = `mt-5 mr-5 ${styles.ingredients}`;

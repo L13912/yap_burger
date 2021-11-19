@@ -1,7 +1,12 @@
 import React, {} from 'react';
 import styles from './indredient-details.module.css';
+import PropTypes from "prop-types";
 
 const IngredientDetails = ({card}) => {
+    IngredientDetails.propTypes = {
+        card: PropTypes.object
+    };
+
     const imageStyles = `pt-4 pb-8 ${styles.image}`;
     const textStyles = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
     const details = `${styles.details}`;

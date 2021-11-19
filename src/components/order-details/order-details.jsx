@@ -2,7 +2,7 @@ import React, {} from 'react';
 import styles from './order-details.module.css';
 import image from '../../images/done.gif';
 
-const OrderDetails = ({}) => {
+const OrderDetails = () => {
 
     const idStyles = `text text_type_digits-large pb-6 ${styles.id}`;
     const idTextStyles = `text text_type_main-medium pb-15 ${styles.idText} ${styles.light}`;
@@ -17,8 +17,6 @@ const OrderDetails = ({}) => {
             <p className={lightTextStyles}>Ваш заказ начали готовить</p>
             <p className={navyTextStyles}>Дождитесь готовности на орбитальной станции</p>
         </>
-
-
     );
 };
 

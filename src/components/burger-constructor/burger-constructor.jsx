@@ -8,8 +8,13 @@ import Portal from "../../utils/create-portal";
 import OrderDetails from "../order-details/order-details";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
+import PropTypes from 'prop-types';
 
 const BurgerConstructor = ({data}) => {
+    BurgerConstructor.propTypes = {
+        data: PropTypes.array
+    };
+
     const [isOn, setOn] = useState(false);
 
     const handleCloseModal = () => {

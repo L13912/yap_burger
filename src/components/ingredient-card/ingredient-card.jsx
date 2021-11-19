@@ -7,8 +7,12 @@ import Portal from "../../utils/create-portal";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import PropTypes from "prop-types";
 
 const IngredientCard = ({card}) => {
+    IngredientCard.propTypes = {
+        card: PropTypes.object
+    };
 
     const [isOn, setOn] = useState(false);
 

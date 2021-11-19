@@ -6,7 +6,7 @@ import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-const AppHeader = ({}) => {
+const AppHeader = () => {
     const headerStyles = `mb-5 ${styles.header}`
     const navStyles = `${styles.nav}`
     const itemStyles = `pr-5 pl-5 ${styles.navItem}`

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './app.module.css';
 import AppHeader from "./components/app-header/app-header";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
@@ -23,9 +23,6 @@ function App() {
             });
     }, []);
 
-    console.log(state.data);
-
-
     const titleStyles = `text text_type_main-large pt-4 ${styles.title}`;
     const contentStyles = `${styles.content}`;
   return (
@@ -35,7 +32,6 @@ function App() {
             <h1 className={titleStyles}>Соберите бургер</h1>
             <BurgerIngredients data={state.data}/>
             <BurgerConstructor data={state.data}/>
-{/*            */}
       </div>
       <div id="react-modals"/>
     </div>
