@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { createPortal } from 'react-dom';
 import styles from './burger-constructor.module.css';
 import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,10 +7,14 @@ import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import Portal from "../../utils/create-portal";
 import OrderDetails from "../order-details/order-details";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-/*import {Modal}*/
+import Modal from "../modal/modal";
 
 const BurgerConstructor = ({data}) => {
     const [isOn, setOn] = useState(false);
+
+    const handleCloseModal = () => {
+        setOn(false );
+    }
 
     const constructor = `mt-5 ml-5 ${styles.constructor}`;
     const list = `mt-10 ${styles.list}`;
@@ -23,10 +26,11 @@ const BurgerConstructor = ({data}) => {
     const totalCount = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
     const totalCont = `mr-10 ${styles.totalCont}`;
 
-
+    let items = [];
     const bun = data[0];
-    data.splice(0, 1);
-    const items = data;
+    for (let i=1; i < data.length; i++) {
+        items.push(data[i]);
+    }
 
     return (
         <div className={constructor}>
@@ -81,8 +85,10 @@ const BurgerConstructor = ({data}) => {
                 {
                     isOn &&
                     <Portal>
-                        <ModalOverlay>
-                            <OrderDetails/>
+                        <ModalOverlay  close={handleCloseModal}>
+                            <Modal close={handleCloseModal}>
+                                <OrderDetails/>
+                            </Modal>
                         </ModalOverlay>
                     </Portal>
                 }

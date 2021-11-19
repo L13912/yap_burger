@@ -3,6 +3,7 @@ import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
 
+
 const BurgerIngredients = ({data}) => {
 
     const [current, setCurrent] = React.useState('Булки')
@@ -41,7 +42,7 @@ const BurgerIngredients = ({data}) => {
                 <h2 className={title}>Булки</h2>
                 <div className={cards}>
                     {buns.map((card) => (
-                        <IngredientCard key={card._id} card={card}/>
+                        <IngredientCard  key={card._id} card={card}/>
                     ))}
                 </div>
             </section>

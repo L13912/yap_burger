@@ -7,8 +7,7 @@
 }
 
 .image {
-    width: 120px;
-    height: 120px;
+    width: 240px;
 }
 
 .light {
@@ -17,4 +16,12 @@
 
 .navy {
     color: #8585AD;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+    text-align: center;
 }

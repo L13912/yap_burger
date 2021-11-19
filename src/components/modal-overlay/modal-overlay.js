@@ -1,15 +1,17 @@
-import React, {} from 'react';
+import React, {useRef, useEffect } from 'react';
 import styles from './modal-overlay.module.css';
-import ReactDOM from 'react';
-import OrderDetails from "../order-details/order-details";
 
+const ModalOverlay = ({children, close}) => {
 
-const ModalOverlay = ({children}) => {
-        return (
-            <div className={styles.modalOverlay}>
-                    {children}
-            </div>
-        )
+    window.onkeydown = (e) => {
+        if (e.key === 'Escape') close();
+    }
+
+    return (
+        <div className={styles.modalOverlay} onClick={close}>
+            {children}
+        </div>
+    )
 };
 
 export default ModalOverlay;
