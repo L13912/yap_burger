@@ -14,16 +14,16 @@ const Modal = ({children, close, title}) => {
         title: PropTypes.string
     };
 
-    const closeIcon = `mt-15 mr-10 ${styles.closeIcon}`;
-    const modalStyles = `pt-30 pb-30 pl-25 pr-25 ${styles.orderDetails}`;
-    const titleStyles = ` ml-10 mt-15 text text_type_main-large ${styles.title}`
+    const closeIconClasses = `mt-15 mr-10 ${styles.closeIcon}`;
+    const modalClasses = `pt-30 pb-30 pl-25 pr-25 ${styles.orderDetails}`;
+    const titleClasses = ` ml-10 mt-15 text text_type_main-large ${styles.title}`
 
     return createPortal(
         <ModalOverlay close={close}>
-            <div className={modalStyles}>
-                {title && <h3 className={titleStyles}>{title}</h3>
+            <div className={modalClasses}>
+                {title && <h3 className={titleClasses}>{title}</h3>
                 }
-                <div className={closeIcon} onClick={close}>
+                <div className={closeIconClasses} onClick={close}>
                     <CloseIcon type="primary"/>
                 </div>
                 {children}

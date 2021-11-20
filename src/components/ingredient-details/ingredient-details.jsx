@@ -7,8 +7,8 @@ const IngredientDetails = ({card}) => {
         card: PropTypes.object
     };
 
-    const imageStyles = `pt-4 pb-8 ${styles.image}`;
-    const textStyles = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
+    const imageClasses = `pt-4 pb-8 ${styles.image}`;
+    const textClasses = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
     const details = `${styles.details}`;
     const cont = `text text_type_main-default ${styles.navy}`;
     const name = `text text_type_main-default ${styles.navy}`;
@@ -16,8 +16,8 @@ const IngredientDetails = ({card}) => {
 
     return (
         <>
-            <img className={imageStyles} alt="Заказ принят" src={card.image}/>
-            <p className={textStyles}>{card.name}</p>
+            <img className={imageClasses} alt="Заказ принят" src={card.image}/>
+            <p className={textClasses}>{card.name}</p>
             <div className={details}>
                 <div className={cont}>
                     <p className={name}>Калории, ккал</p>
