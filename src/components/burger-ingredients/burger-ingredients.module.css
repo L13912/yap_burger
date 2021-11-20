@@ -15,6 +15,13 @@
     width: 100%;
 }
 
+.scrollCont {
+    width: 100%;
+    height: calc(100vh - 308px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .cards {
     display: flex;
     width: 100%;

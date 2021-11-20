@@ -12,9 +12,10 @@ const BurgerIngredients = ({data}) => {
 
     const [current, setCurrent] = React.useState('Булки')
     const ingredients = `mt-5 mr-5 ${styles.ingredients}`;
-    const type = `mt-10 ${styles.type}`;
+    const type = `${styles.type}`;
     const title = `mb-6 ${styles.title}`;
     const cards = `ml-4 mb-8 ${styles.cards}`;
+    const scrollContClasses = `custom-scroll mt-10 mb-10 ${styles.scrollCont}`;
 
     const buns = [];
     const sauces = [];
@@ -41,7 +42,7 @@ const BurgerIngredients = ({data}) => {
                     Начинки
                 </Tab>
             </nav>
-
+        <div className={scrollContClasses}>
             <section className={type}>
                 <h2 className={title}>Булки</h2>
                 <div className={cards}>
@@ -66,6 +67,7 @@ const BurgerIngredients = ({data}) => {
                     ))}
                 </div>
             </section>
+        </div>
         </div>
     );
 };

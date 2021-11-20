@@ -4,9 +4,7 @@ import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-compon
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import Portal from "../../utils/create-portal";
 import OrderDetails from "../order-details/order-details";
-import ModalOverlay from "../modal-overlay/modal-overlay";
 import Modal from "../modal/modal";
 import PropTypes from 'prop-types';
 
@@ -18,14 +16,14 @@ const BurgerConstructor = ({data}) => {
     const [isOn, setOn] = useState(false);
 
     const handleCloseModal = () => {
-        setOn(false );
+        setOn(false);
     }
 
     const constructor = `mt-5 ml-5 ${styles.constructor}`;
     const list = `mt-10 ${styles.list}`;
-    const listItem = `${styles.listItem}`;
+    const listItem = `mr-1 ${styles.listItem}`;
     const top = `${styles.top}`;
-    const center = `${styles.center}`;
+    const center = `custom-scroll  ${styles.center}`;
     const bottom = `${styles.bottom}`;
     const total = `mt-10 ${styles.total}`;
     const totalCount = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
@@ -33,7 +31,7 @@ const BurgerConstructor = ({data}) => {
 
     let items = [];
     const bun = data[0];
-    for (let i=1; i < data.length; i++) {
+    for (let i = 1; i < data.length; i++) {
         items.push(data[i]);
     }
 
@@ -45,11 +43,11 @@ const BurgerConstructor = ({data}) => {
                         <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text={bun.name}
+                            text={bun.name + ' (верх)'}
                             price={bun.price}
                             thumbnail={bun.image}
                         />
-                    </div> }
+                    </div>}
                 </div>
                 {items && <div className={center}>
                     {items.map((card) => (
@@ -70,11 +68,11 @@ const BurgerConstructor = ({data}) => {
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
-                            text={bun.name}
+                            text={bun.name + ' (низ)'}
                             price={bun.price}
                             thumbnail={bun.image}
                         />
-                    </div> }
+                    </div>}
                 </div>
             </section>
             <div className={total}>
@@ -84,18 +82,14 @@ const BurgerConstructor = ({data}) => {
                 </div>
                 <Button type="primary" size="large"
                         onClick={() => setOn(!isOn)}
-                        >
+                >
                     Оформить заказ
                 </Button>
                 {
                     isOn &&
-                    <Portal>
-                        <ModalOverlay  close={handleCloseModal}>
-                            <Modal close={handleCloseModal}>
-                                <OrderDetails/>
-                            </Modal>
-                        </ModalOverlay>
-                    </Portal>
+                    <Modal close={handleCloseModal}>
+                        <OrderDetails/>
+                    </Modal>
                 }
             </div>
         </div>

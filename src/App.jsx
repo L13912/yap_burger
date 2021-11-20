@@ -1,41 +1,43 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styles from './app.module.css';
 import AppHeader from "./components/app-header/app-header";
 import BurgerIngredients from "./components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-import doRequest from "./utils/doRequest";
+import getIngredients from "./utils/getIngredients";
 
 function App() {
 
     const [state, setState] = React.useState({
         isLoading: false,
-        error: false,
-        data: []
+        error: false
+    })
+
+    const [ingredients, setIngredients] = React.useState({
+        ingredientsData: []
     })
 
     useEffect(() => {
-        doRequest()
+        getIngredients()
             .then(res => {
-               setState({ ...state, data: res.data})
+                setIngredients({ingredientsData: res.data})
             })
             .catch(err => {
-                setState({ ...state, error: err})
+                setState({...state, error: err})
             });
     }, []);
 
-    const titleStyles = `text text_type_main-large pt-4 ${styles.title}`;
-    const contentStyles = `${styles.content}`;
-  return (
-    <div className="App">
-      <AppHeader/>
-      <div className={contentStyles}>
-            <h1 className={titleStyles}>Соберите бургер</h1>
-            <BurgerIngredients data={state.data}/>
-            <BurgerConstructor data={state.data}/>
-      </div>
-      <div id="react-modals"/>
-    </div>
-  );
+    const titleClasses = `text text_type_main-large pt-4 ${styles.title}`;
+    return (
+        <div className="App">
+            <AppHeader/>
+            <div className={styles.content}>
+                <h1 className={titleClasses}>Соберите бургер</h1>
+                <BurgerIngredients data={ingredients.ingredientsData}/>
+                <BurgerConstructor data={ingredients.ingredientsData}/>
+            </div>
+            <div id="react-modals"/>
+        </div>
+    );
 }
 
 export default App;
