@@ -1,6 +1,5 @@
 import React, {} from 'react';
 import styles from './indredient-details.module.css';
-import PropTypes from "prop-types";
 import {IngredientCardProps} from "../../types/ingredientsProps";
 
 const IngredientDetails = ({card}) => {
@@ -38,7 +37,7 @@ const IngredientDetails = ({card}) => {
 };
 
 IngredientDetails.propTypes = {
-    card: PropTypes.shape(IngredientCardProps)
+    card: IngredientCardProps
 };
 
 export default IngredientDetails;

@@ -20,6 +20,7 @@ function App() {
         getIngredients()
             .then(res => {
                 setIngredients({ingredientsData: res.data})
+                console.log(res.data)
             })
             .catch(err => {
                 setState({...state, error: err})

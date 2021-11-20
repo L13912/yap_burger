@@ -5,7 +5,6 @@ import image from '../../images/img.png';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import PropTypes from "prop-types";
 import {IngredientCardProps} from "../../types/ingredientsProps";
 
 const IngredientCard = ({card}) => {
@@ -41,7 +40,7 @@ const IngredientCard = ({card}) => {
 };
 
 IngredientCard.propTypes = {
-    card: PropTypes.shape(IngredientCardProps)
+    card: IngredientCardProps
 };
 
 export default IngredientCard;
