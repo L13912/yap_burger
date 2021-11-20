@@ -3,15 +3,12 @@ import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
+import {IngredientsProps} from "../../types/ingredientsProps";
 
-
-const BurgerIngredients = ({data}) => {
-    BurgerIngredients.propTypes = {
-        data: PropTypes.array
-    };
+const BurgerIngredients = ({ingredients}) => {
 
     const [current, setCurrent] = React.useState('Булки')
-    const ingredients = `mt-5 mr-5 ${styles.ingredients}`;
+    const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const type = `${styles.type}`;
     const title = `mb-6 ${styles.title}`;
     const cards = `ml-4 mb-8 ${styles.cards}`;
@@ -21,16 +18,16 @@ const BurgerIngredients = ({data}) => {
     const sauces = [];
     const main = [];
 
-    function sortData(data) {
-        for (const item of data) {
+    function sortIngredients(ingredients) {
+        for (const item of ingredients) {
             if (item.type === 'bun') buns.push(item);
             if (item.type === 'sauce') sauces.push(item);
             if (item.type === 'main') main.push(item);
         }
     }
-    sortData(data);
+    sortIngredients(ingredients);
     return (
-        <div className={ingredients}>
+        <div className={ingredientsClasses}>
             <nav className={styles.tabs}>
                 <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
                     Булки
@@ -71,5 +68,9 @@ const BurgerIngredients = ({data}) => {
         </div>
     );
 };
+
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(IngredientsProps).isRequired
+}
 
 export default BurgerIngredients;

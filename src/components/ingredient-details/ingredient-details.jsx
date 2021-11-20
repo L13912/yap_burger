@@ -1,12 +1,9 @@
 import React, {} from 'react';
 import styles from './indredient-details.module.css';
 import PropTypes from "prop-types";
+import {IngredientCardProps} from "../../types/ingredientsProps";
 
 const IngredientDetails = ({card}) => {
-    IngredientDetails.propTypes = {
-        card: PropTypes.object
-    };
-
     const imageClasses = `pt-4 pb-8 ${styles.image}`;
     const textClasses = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
     const details = `${styles.details}`;
@@ -38,6 +35,10 @@ const IngredientDetails = ({card}) => {
             </div>
         </>
     );
+};
+
+IngredientDetails.propTypes = {
+    card: PropTypes.shape(IngredientCardProps)
 };
 
 export default IngredientDetails;

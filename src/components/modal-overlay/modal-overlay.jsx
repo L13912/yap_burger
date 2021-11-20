@@ -3,11 +3,6 @@ import styles from './modal-overlay.module.css';
 import PropTypes from "prop-types";
 
 const ModalOverlay = ({children, close}) => {
-    ModalOverlay.propTypes = {
-        children: PropTypes.element,
-        close: PropTypes.func
-    };
-
     const modal = useRef(null);
 
     window.onkeydown = (e) => {
@@ -32,6 +27,11 @@ const ModalOverlay = ({children, close}) => {
             {children}
         </div>
     )
+};
+
+ModalOverlay.propTypes = {
+    children: PropTypes.element.isRequired,
+    close: PropTypes.func.isRequired
 };
 
 export default ModalOverlay;

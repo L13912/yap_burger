@@ -6,12 +6,9 @@ import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import PropTypes from "prop-types";
+import {IngredientCardProps} from "../../types/ingredientsProps";
 
 const IngredientCard = ({card}) => {
-    IngredientCard.propTypes = {
-        card: PropTypes.object
-    };
-
     const [isOn, setOn] = useState(false);
 
     const handleCloseModal = () => {
@@ -41,7 +38,10 @@ const IngredientCard = ({card}) => {
             }
         </div>
     );
-}
-;
+};
+
+IngredientCard.propTypes = {
+    card: PropTypes.shape(IngredientCardProps)
+};
 
 export default IngredientCard;

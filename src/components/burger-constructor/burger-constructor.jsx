@@ -7,14 +7,10 @@ import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
 import PropTypes from 'prop-types';
+import {IngredientsProps} from "../../types/ingredientsProps";
 
-const BurgerConstructor = ({data}) => {
-    BurgerConstructor.propTypes = {
-        data: PropTypes.array
-    };
-
+const BurgerConstructor = ({ingredients}) => {
     const [isOn, setOn] = useState(false);
-
     const handleCloseModal = () => {
         setOn(false);
     }
@@ -30,9 +26,9 @@ const BurgerConstructor = ({data}) => {
     const totalCont = `mr-10 ${styles.totalCont}`;
 
     let items = [];
-    const bun = data[0];
-    for (let i = 1; i < data.length; i++) {
-        items.push(data[i]);
+    const bun = ingredients[0];
+    for (let i = 1; i < ingredients.length; i++) {
+        items.push(ingredients[i]);
     }
 
     return (
@@ -96,4 +92,7 @@ const BurgerConstructor = ({data}) => {
     )
 };
 
+BurgerConstructor.propTypes = {
+    ingredients: PropTypes.arrayOf(IngredientsProps).isRequired
+}
 export default BurgerConstructor;

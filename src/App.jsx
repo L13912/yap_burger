@@ -32,8 +32,8 @@ function App() {
             <AppHeader/>
             <div className={styles.content}>
                 <h1 className={titleClasses}>Соберите бургер</h1>
-                <BurgerIngredients data={ingredients.ingredientsData}/>
-                <BurgerConstructor data={ingredients.ingredientsData}/>
+                <BurgerIngredients ingredients={ingredients.ingredientsData}/>
+                <BurgerConstructor ingredients={ingredients.ingredientsData}/>
             </div>
             <div id="react-modals"/>
         </div>
