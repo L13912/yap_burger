@@ -1,29 +1,18 @@
-import React, {useRef, useEffect } from 'react';
+import React from 'react';
 import styles from './modal-overlay.module.css';
 import PropTypes from "prop-types";
 
 const ModalOverlay = ({children, close}) => {
-    const modal = useRef(null);
 
-    window.onkeydown = (e) => {
-        if (e.key === 'Escape') close();
+    const handleOverlayClick = (e) => {
+        e.stopPropagation();
+        if (e.target === e.currentTarget) close(e);
     }
 
-    let closeModal = () => {};
-
-    useEffect(() => {
-        closeModal = (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            if (e.target !== modal.current) return;
-            close();
-        };
-    }, [modal])
-
     return (
-        <div className={styles.modalOverlay} ref={modal}
-             onClick={(e) => { closeModal(e) }
-        }>
+        <div className={styles.modalOverlay}
+             onClick={handleOverlayClick}
+        >
             {children}
         </div>
     )

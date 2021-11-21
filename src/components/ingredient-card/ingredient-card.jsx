@@ -8,10 +8,9 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {IngredientCardProps} from "../../types/ingredientsProps";
 
 const IngredientCard = ({card}) => {
-    const [isOn, setOn] = useState(false);
-
-    const handleCloseModal = () => {
-        setOn(false);
+    const [isVisible, setVisible] = useState(false);
+    const handleCloseModal = (e) => {
+        setVisible(false);
     }
 
     const cardClasses = `mt-5 mr-5 mb-8 ${styles.card}`;
@@ -19,7 +18,7 @@ const IngredientCard = ({card}) => {
     const descriptionClasses = `mt-5 mr-5 text text_type_main-default ${styles.description}`;
 
     return (
-        <div className={cardClasses} onClick={() => setOn(!isOn)}>
+        <div className={cardClasses} onClick={() => setVisible(!isVisible)}>
             <Counter count={1} size="default"/>
             <div className={image}>
                 <img className={styles.image} alt='Фото ингредиента' src={card.image}/>
@@ -30,7 +29,7 @@ const IngredientCard = ({card}) => {
             </div>
             <p className={descriptionClasses}>{card.name}</p>
             {
-                isOn &&
+                isVisible &&
                 <Modal close={handleCloseModal} title={"Детали ингредиента"}>
                         <IngredientDetails card={card}/>
                 </Modal>

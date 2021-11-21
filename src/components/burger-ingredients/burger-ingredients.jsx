@@ -9,7 +9,6 @@ const BurgerIngredients = ({ingredients}) => {
 
     const [current, setCurrent] = React.useState('Булки')
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
-    const type = `${styles.type}`;
     const title = `mb-6 ${styles.title}`;
     const cards = `ml-4 mb-8 ${styles.cards}`;
     const scrollContClasses = `custom-scroll mt-10 mb-10 ${styles.scrollCont}`;
@@ -40,7 +39,7 @@ const BurgerIngredients = ({ingredients}) => {
                 </Tab>
             </nav>
         <div className={scrollContClasses}>
-            <section className={type}>
+            <section>
                 <h2 className={title}>Булки</h2>
                 <div className={cards}>
                     {buns.map((card) => (
@@ -48,7 +47,7 @@ const BurgerIngredients = ({ingredients}) => {
                     ))}
                 </div>
             </section>
-            <section className={type}>
+            <section>
                 <h2 className={title}>Соусы</h2>
                 <div className={cards}>
                     {sauces.map((card) => (
@@ -56,7 +55,7 @@ const BurgerIngredients = ({ingredients}) => {
                     ))}
                 </div>
             </section>
-            <section className={type}>
+            <section>
                 <h2 className={title}>Начинки</h2>
                 <div className={cards}>
                     {main.map((card) => (

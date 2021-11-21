@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
 import {IngredientsProps} from "../../types/ingredientsProps";
 
 const BurgerConstructor = ({ingredients}) => {
-    const [isOn, setOn] = useState(false);
-    const handleCloseModal = () => {
-        setOn(false);
+    const [isVisible, setVisible] = useState(false);
+    const handleCloseModal = (e) => {
+        setVisible(false);
     }
 
     const constructor = `mt-5 ml-5 ${styles.constructor}`;
@@ -25,11 +25,8 @@ const BurgerConstructor = ({ingredients}) => {
     const totalCount = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
     const totalCont = `mr-10 ${styles.totalCont}`;
 
-    let items = [];
     const bun = ingredients[0];
-    for (let i = 1; i < ingredients.length; i++) {
-        items.push(ingredients[i]);
-    }
+    const items = ingredients.slice(1);
 
     return (
         <div className={constructor}>
@@ -45,7 +42,7 @@ const BurgerConstructor = ({ingredients}) => {
                         />
                     </div>}
                 </div>
-                {items && <div className={center}>
+                <div className={center}>
                     {items.map((card) => (
                         <div key={card._id} className={listItem}>
                             <DragIcon type="primary"/>
@@ -57,7 +54,6 @@ const BurgerConstructor = ({ingredients}) => {
                         </div>
                     ))}
                 </div>
-                }
 
                 <div className={bottom}>
                     {bun && <div className={listItem}>
@@ -77,12 +73,12 @@ const BurgerConstructor = ({ingredients}) => {
                     <CurrencyIcon type="primary"/>
                 </div>
                 <Button type="primary" size="large"
-                        onClick={() => setOn(!isOn)}
+                        onClick={() => setVisible(!isVisible)}
                 >
                     Оформить заказ
                 </Button>
                 {
-                    isOn &&
+                    isVisible &&
                     <Modal close={handleCloseModal}>
                         <OrderDetails/>
                     </Modal>
