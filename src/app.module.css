@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+.title {
+  text-align: left;
+  min-width: 100%;
+}
+
+.content {
+  width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
