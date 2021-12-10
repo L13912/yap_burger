@@ -16,7 +16,7 @@ import {ADD_CONSTRUCTOR_INGREDIENT, DELETE_CONSTRUCTOR_INGREDIENT} from "../../s
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const ingredients = useSelector(store => store.reducer.constructorIngredients);
-
+    const [total, setTotal] = React.useState(0);
     const [isVisible, setVisible] = useState(false);
     const handleCloseModal = (e) => {
         setVisible(false);
@@ -28,18 +28,24 @@ const BurgerConstructor = () => {
     const top = `${styles.top}`;
     const center = `custom-scroll  ${styles.center}`;
     const bottom = `${styles.bottom}`;
-    const total = `mt-10 ${styles.total}`;
-    const totalCount = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
-    const totalCont = `mr-10 ${styles.totalCont}`;
+    const totalClass = `mt-10 ${styles.total}`;
+    const totalCountClass = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
+    const totalContClass = `mr-10 ${styles.totalCont}`;
 
+    function calcSum(ingredients) {
+        let sum  = 0;
+        for (let bun of ingredients.buns) sum += bun.price;
+        for (let topping of ingredients.toppings) sum += topping.price;
+        return sum;
+    }
 
-    const totalValue = 0;
+    useEffect(()=> {
+        const res = calcSum(ingredients);
+        setTotal(res);
+    },[ingredients])
 
-    const [{ isHover } , dropRef] = useDrop({
+    const [, dropRef] = useDrop({
     accept: "card",
-    collect: monitor => ({
-        isHover: monitor.isOver(),
-    }),
     drop(card) {
         console.log(card)
       dispatch({
@@ -56,15 +62,13 @@ const deleteIngredient = (guid) => {
   })
 }
 
-const borderColor = isHover ? 'lightgreen' : 'transparent';
-
     return (
         <>
             <div className={constructor} ref={dropRef}>
-{/*                {totalValue === 0 && <div className={styles.info}>
+                {total === 0 && <div className={styles.info}>
                     Выберите булки, начинки и соусы в левой части, и перетащите сюда
-                </div>}*/}
-                {/*totalValue !== 0 && */ <section className={list}>
+                </div>}
+                {total !== 0 &&  <section className={list}>
                     <div className={top}>
                         {ingredients.buns[0] && <div className={listItem}>
                             <ConstructorElement
@@ -80,7 +84,7 @@ const borderColor = isHover ? 'lightgreen' : 'transparent';
                         {ingredients.toppings && ingredients.toppings.map((card) => (
                             <div key={card.guid} className={listItem}>
                                 <DragIcon type="primary"/>
-                                <ConstructorElement
+                                <ConstructorElement handleClose= { () => {deleteIngredient(card.guid)}}
                                     text={card.name}
                                     price={card.price}
                                     thumbnail={card.image}
@@ -101,9 +105,9 @@ const borderColor = isHover ? 'lightgreen' : 'transparent';
                         </div>}
                     </div>
                 </section>}
-                {totalValue !== 0 && <div className={total}>
-                    <div className={totalCont}>
-                        <p className={totalCount}>610</p>
+                {total !== 0 && <div className={totalClass}>
+                    <div className={totalContClass}>
+                        <p className={totalCountClass}>{total}</p>
                         <CurrencyIcon type="primary"/>
                     </div>
                     <Button type="primary" size="large"

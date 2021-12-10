@@ -27,7 +27,16 @@ const IngredientCard = ({card}) => {
             opacity: monitor.isDragging() ? 0.5 : 1,
         }),
     })
-    const count = 0;
+    const ingredients = useSelector(store => store.reducer.constructorIngredients);
+    const count = () => {
+        let value = 0;
+        for (let bun of ingredients.buns)
+            if (bun._id === card._id) value += 1;
+        for (let topping of ingredients.toppings)
+            if (topping._id === card._id) value += 1;
+        return value;
+    }
+
     const cardClasses = `mt-5 mr-5 mb-8 ${styles.card}`;
     const costClasses = `mt-1 mr-5 ${styles.cost}`;
     const descriptionClasses = `mt-5 mr-5 text text_type_main-default ${styles.description}`;
@@ -40,7 +49,7 @@ const IngredientCard = ({card}) => {
                 card
             });
         }}>
-            { count > 0  && <Counter count={count} size="default"/> }
+            { count() > 0  && <Counter count={count()} size="default"/> }
             <div className={image}>
                 <img className={styles.image} alt='Фото ингредиента' src={card.image}/>
             </div>
