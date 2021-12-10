@@ -1,6 +1,6 @@
 const INGREDIENTS_URL  = 'https://norma.nomoreparties.space/api/ingredients';
 
-async function getIngredients() {
+async function getIngredientsData() {
     const res = await fetch(INGREDIENTS_URL);
     const obj = await getRequestBody(res);
     if (res.status >= 400) {
@@ -19,4 +19,4 @@ async function getRequestBody(res) {
     }
 }
 
-export default getIngredients;
+export default getIngredientsData;

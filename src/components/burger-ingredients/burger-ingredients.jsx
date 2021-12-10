@@ -1,13 +1,20 @@
-import React from 'react';
+import React,{ useEffect, useRef } from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
 import {IngredientsProps} from "../../types/ingredientsProps";
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/actions';
 
-const BurgerIngredients = ({ingredients}) => {
+const BurgerIngredients = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getIngredients())
+    },[dispatch])
+    const ingredients = useSelector(store => store.reducer.ingredients);
 
-    const [current, setCurrent] = React.useState('Булки')
+    const [current, setCurrent] = React.useState('Булки');
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const title = `mb-6 ${styles.title}`;
     const cards = `ml-4 mb-8 ${styles.cards}`;
@@ -17,6 +24,10 @@ const BurgerIngredients = ({ingredients}) => {
     const sauces = [];
     const main = [];
 
+    const bunsRef = useRef(null);
+    const saucesRef = useRef(null);
+    const mainRef = useRef(null);
+
     function sortIngredients(ingredients) {
         for (const item of ingredients) {
             if (item.type === 'bun') buns.push(item);
@@ -24,7 +35,20 @@ const BurgerIngredients = ({ingredients}) => {
             if (item.type === 'main') main.push(item);
         }
     }
+
+    function handleScroll (e) {
+        const scrollPos = e.target.scrollTop;
+        const bunsPos = bunsRef.current.offsetTop / 2;
+        const saucesPos = saucesRef.current.offsetTop / 2;
+        const mainPos = mainRef.current.offsetTop / 2;
+
+        if (scrollPos >= bunsPos) setCurrent('Булки');
+        if (scrollPos >= saucesPos) setCurrent('Соусы');
+        if (scrollPos >= mainPos) setCurrent('Начинки');
+    }
+
     sortIngredients(ingredients);
+
     return (
         <div className={ingredientsClasses}>
             <nav className={styles.tabs}>
@@ -38,8 +62,8 @@ const BurgerIngredients = ({ingredients}) => {
                     Начинки
                 </Tab>
             </nav>
-        <div className={scrollContClasses}>
-            <section>
+        <div className={scrollContClasses} onScroll={handleScroll}>
+            <section  ref={bunsRef}>
                 <h2 className={title}>Булки</h2>
                 <div className={cards}>
                     {buns.map((card) => (
@@ -47,7 +71,7 @@ const BurgerIngredients = ({ingredients}) => {
                     ))}
                 </div>
             </section>
-            <section>
+            <section  ref={saucesRef}>
                 <h2 className={title}>Соусы</h2>
                 <div className={cards}>
                     {sauces.map((card) => (
@@ -55,7 +79,7 @@ const BurgerIngredients = ({ingredients}) => {
                     ))}
                 </div>
             </section>
-            <section>
+            <section ref={mainRef}>
                 <h2 className={title}>Начинки</h2>
                 <div className={cards}>
                     {main.map((card) => (
@@ -69,7 +93,7 @@ const BurgerIngredients = ({ingredients}) => {
 };
 
 BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(IngredientsProps).isRequired
+    ingredients: PropTypes.arrayOf(IngredientsProps)
 }
 
 export default BurgerIngredients;
