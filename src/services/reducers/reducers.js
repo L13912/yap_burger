@@ -5,21 +5,28 @@ import {
 
     ADD_CONSTRUCTOR_INGREDIENT,
     DELETE_CONSTRUCTOR_INGREDIENT,
+    CLEAR_CONSTRUCTOR,
+    CHANGE_INGREDIENTS_ORDER,
 
     SET_INGREDIENT_DETAILS,
     DELETE_INGREDIENT_DETAILS,
 
-    GET_ORDER_DETAILS,
-    UPDATE_ORDER_DETAILS
+    GET_ORDER_REQUEST,
+    GET_ORDER_SUCCESS,
+    GET_ORDER_ERROR,
+    CLEAR_ORDER
 } from '../actions/actions';
+import update from 'immutability-helper';
 
 const initialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,
-    constructorIngredients: {buns: [], toppings: []},
-    ingredientDetails: {},
-    orderDetails: {}
+    order: {},
+    orderRequest: false,
+    orderError: false,
+    constructorIngredients: { buns: [], toppings: []},
+    ingredientDetails: {}
 }
 
 export const reducer = (state = initialState, action) => {
@@ -46,6 +53,35 @@ export const reducer = (state = initialState, action) => {
             }
         }
 
+        case GET_ORDER_REQUEST: {
+            return {
+                ...state,
+                orderRequest: true
+            }
+        }
+        case GET_ORDER_SUCCESS: {
+            return {
+                ...state,
+                orderFailed: false,
+                orderRequest: false,
+                order: action.order
+            }
+        }
+        case GET_ORDER_ERROR: {
+            return {
+                ...state,
+                ...initialState,
+                orderError: true
+            }
+        }
+
+        case CLEAR_ORDER: {
+            return {
+                ...state,
+                order: {}
+            }
+        }
+
         case  ADD_CONSTRUCTOR_INGREDIENT: {
             return {
                 ...state,
@@ -69,6 +105,12 @@ export const reducer = (state = initialState, action) => {
                 }
             }
         }
+        case CLEAR_CONSTRUCTOR: {
+            return {
+                ...state,
+                constructorIngredients: { buns: [], toppings: []}
+            }
+        }
 
         case SET_INGREDIENT_DETAILS: {
             return {
@@ -81,6 +123,19 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredientDetails: {}
+            }
+        }
+        case CHANGE_INGREDIENTS_ORDER: {
+            const movedElement = update(state.constructorIngredients.toppings, {$splice: [[action.dragIndex, 1]]});
+            const newOrderArr = update(movedElement, {$splice: [[action.hoverIndex, 0, state.constructorIngredients.toppings[action.dragIndex]]]})
+
+            return {
+                ...state,
+                constructorIngredients: {
+                    ...state.constructorIngredients,
+/*                    buns: [...state.constructorIngredients.buns],*/
+                    toppings: newOrderArr
+                },
             }
         }
 

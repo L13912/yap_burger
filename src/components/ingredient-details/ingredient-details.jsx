@@ -1,6 +1,5 @@
 import React, {} from 'react';
 import styles from './indredient-details.module.css';
-import {IngredientCardProps} from "../../types/ingredientsProps";
 import {useSelector} from "react-redux";
 
 const IngredientDetails = () => {
@@ -36,10 +35,6 @@ const IngredientDetails = () => {
             </div>
         </div>
     );
-};
-
-IngredientDetails.propTypes = {
-    card: IngredientCardProps
 };
 
 export default IngredientDetails;

@@ -1,30 +1,41 @@
-import React, {useState, useEffect, useCallback } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styles from './burger-constructor.module.css';
-import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorCard } from '../constructor-card/constructor-card';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
-import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
-import PropTypes from 'prop-types';
-import {IngredientsProps} from "../../types/ingredientsProps";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import {ADD_CONSTRUCTOR_INGREDIENT, DELETE_CONSTRUCTOR_INGREDIENT} from "../../services/actions/actions";
-
+import {
+    ADD_CONSTRUCTOR_INGREDIENT,
+    CLEAR_CONSTRUCTOR,
+    CLEAR_ORDER,
+    getOrder, CHANGE_INGREDIENTS_ORDER
+} from "../../services/actions/actions";
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const ingredients = useSelector(store => store.reducer.constructorIngredients);
     const [total, setTotal] = React.useState(0);
     const [isVisible, setVisible] = useState(false);
+
+    const clearConstructor = () => {
+        dispatch({type: CLEAR_CONSTRUCTOR})
+    };
+    const clearOrder = () => {
+        dispatch({type: CLEAR_ORDER})
+    };
+
+
     const handleCloseModal = (e) => {
         setVisible(false);
+        clearConstructor();
+        clearOrder();
     }
 
     const constructor = `mt-5 ml-5 ${styles.constructor}`;
     const list = `mt-10 ${styles.list}`;
-    const listItem = `mr-1 ${styles.listItem}`;
     const top = `${styles.top}`;
     const center = `custom-scroll  ${styles.center}`;
     const bottom = `${styles.bottom}`;
@@ -34,9 +45,18 @@ const BurgerConstructor = () => {
 
     function calcSum(ingredients) {
         let sum  = 0;
-        for (let bun of ingredients.buns) sum += bun.price;
+        for (let bun of ingredients.buns) sum += bun.price * 2;
         for (let topping of ingredients.toppings) sum += topping.price;
         return sum;
+    }
+
+    function sendOrder(event) {
+        setVisible(!isVisible);
+        event.preventDefault();
+        const orderList = [];
+        for (let bun of ingredients.buns) orderList.push(bun._id);
+        for (let topping of ingredients.toppings) orderList.push(topping._id);
+        dispatch(getOrder(orderList))
     }
 
     useEffect(()=> {
@@ -47,7 +67,6 @@ const BurgerConstructor = () => {
     const [, dropRef] = useDrop({
     accept: "card",
     drop(card) {
-        console.log(card)
       dispatch({
         type: ADD_CONSTRUCTOR_INGREDIENT,
         ...card
@@ -55,54 +74,39 @@ const BurgerConstructor = () => {
     },
 });
 
-const deleteIngredient = (guid) => {
-  dispatch({
-    type: DELETE_CONSTRUCTOR_INGREDIENT,
-    guid
-  })
-}
+
+   const moveCard = useCallback( (dragIndex, hoverIndex) => {
+        dispatch({
+            type: CHANGE_INGREDIENTS_ORDER,
+            item: ingredients.toppings,
+            dragIndex, hoverIndex
+        })
+
+    },[ingredients.toppings, dispatch])
 
     return (
-        <>
             <div className={constructor} ref={dropRef}>
                 {total === 0 && <div className={styles.info}>
                     Выберите булки, начинки и соусы в левой части, и перетащите сюда
                 </div>}
                 {total !== 0 &&  <section className={list}>
                     <div className={top}>
-                        {ingredients.buns[0] && <div className={listItem}>
-                            <ConstructorElement
-                                type="top"
-                                isLocked={true}
-                                text={ingredients.buns[0].name + ' (верх)'}
-                                price={ingredients.buns[0].price}
-                                thumbnail={ingredients.buns[0].image}
-                            />
-                        </div>}
-                    </div>
-                    <div className={center}>
-                        {ingredients.toppings && ingredients.toppings.map((card) => (
-                            <div key={card.guid} className={listItem}>
-                                <DragIcon type="primary"/>
-                                <ConstructorElement handleClose= { () => {deleteIngredient(card.guid)}}
-                                    text={card.name}
-                                    price={card.price}
-                                    thumbnail={card.image}
-                                />
-                            </div>
+                        { ingredients.buns[0] && ingredients.buns.map((card, index) => (
+                        <ConstructorCard key={card.guid} index={index} card={card} type={'top'}/>
                         ))}
                     </div>
-
+                    <div className={center}>
+                        {ingredients.toppings && ingredients.toppings.map((card, index) => (
+                            <ConstructorCard card={card} type={'topping'}
+                                             key={card.guid}
+                                             index={index}
+                                             moveCard={moveCard}/>
+                        ))}
+                    </div>
                     <div className={bottom}>
-                        {ingredients.buns[0] && <div className={listItem}>
-                            <ConstructorElement
-                                type="bottom"
-                                isLocked={true}
-                                text={ingredients.buns[0].name + ' (низ)'}
-                                price={ingredients.buns[0].price}
-                                thumbnail={ingredients.buns[0].image}
-                            />
-                        </div>}
+                        { ingredients.buns[0] && ingredients.buns.map((card, index) => (
+                            <ConstructorCard card={card} key={card.guid + 'b'}  index={index} type={'bottom'}/>
+                        ))}
                     </div>
                 </section>}
                 {total !== 0 && <div className={totalClass}>
@@ -111,7 +115,7 @@ const deleteIngredient = (guid) => {
                         <CurrencyIcon type="primary"/>
                     </div>
                     <Button type="primary" size="large"
-                            onClick={() => setVisible(!isVisible)}
+                            onClick={(event) => sendOrder(event)}
                     >
                         Оформить заказ
                     </Button>
@@ -123,11 +127,7 @@ const deleteIngredient = (guid) => {
                     }
                 </div>}
             </div>
-        </>
     )
 };
 
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(IngredientsProps)
-}
 export default BurgerConstructor;

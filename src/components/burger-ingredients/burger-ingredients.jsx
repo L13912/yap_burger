@@ -2,8 +2,6 @@ import React,{ useEffect, useRef } from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
-import PropTypes from "prop-types";
-import {IngredientsProps} from "../../types/ingredientsProps";
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/actions';
 
@@ -91,9 +89,5 @@ const BurgerIngredients = () => {
         </div>
     );
 };
-
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(IngredientsProps)
-}
 
 export default BurgerIngredients;

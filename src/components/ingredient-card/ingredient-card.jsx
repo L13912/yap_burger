@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './ingredient-card.module.css';
 import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import image from '../../images/img.png';
@@ -31,7 +31,7 @@ const IngredientCard = ({card}) => {
     const count = () => {
         let value = 0;
         for (let bun of ingredients.buns)
-            if (bun._id === card._id) value += 1;
+            if (bun._id === card._id) value += 2;
         for (let topping of ingredients.toppings)
             if (topping._id === card._id) value += 1;
         return value;
