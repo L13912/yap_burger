@@ -1,8 +1,9 @@
 import React, {} from 'react';
 import styles from './indredient-details.module.css';
-import {IngredientCardProps} from "../../types/ingredientsProps";
+import {useSelector} from "react-redux";
 
-const IngredientDetails = ({card}) => {
+const IngredientDetails = () => {
+    const card = useSelector(store => store.reducer.ingredientDetails);
     const imageClasses = `pt-4 pb-8 ${styles.image}`;
     const textClasses = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
     const details = `${styles.details}`;
@@ -34,10 +35,6 @@ const IngredientDetails = ({card}) => {
             </div>
         </div>
     );
-};
-
-IngredientDetails.propTypes = {
-    card: IngredientCardProps
 };
 
 export default IngredientDetails;

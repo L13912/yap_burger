@@ -28,14 +28,6 @@
     margin-right: -14px;
 }
 
-.listItem {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    width: 100%;
-    gap: 13.5px;
-}
-
 .total {
     display: flex;
     flex-wrap: nowrap;
@@ -53,4 +45,16 @@
     height: calc(100vh - 308px);
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.info {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(255,255,255, 0.10);
+    height: calc(100vh - 308px);
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
 }

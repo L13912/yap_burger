@@ -12,7 +12,8 @@ export const IngredientsProps = PropTypes.shape({
     price: PropTypes.number.isRequired,
     proteins: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired
+    __v: PropTypes.number.isRequired,
+    guid: PropTypes.string
 });
 
 export const IngredientCardProps = PropTypes.shape({
