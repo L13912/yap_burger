@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import './index.css';
 import App from './components/app/app';
 import { rootReducer } from './services/reducers';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk));
 const store = createStore( rootReducer, enhancer);
@@ -18,7 +19,9 @@ const store = createStore( rootReducer, enhancer);
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App/>
+            <Router>
+                <App/>
+            </Router>
         </React.StrictMode>
     </Provider>,
     document.getElementById('root'),
