@@ -1,0 +1,17 @@
+.loginPage {
+    box-sizing: border-box;
+    width: 720px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.link {
+    color: #4C4CFF;
+    text-decoration: none;
+}

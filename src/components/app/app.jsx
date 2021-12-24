@@ -12,6 +12,10 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NotFound from '../../pages/not-found';
+import Login from '../../pages/login';
+import Register from '../../pages/register';
+import ForgotPassword from '../../pages/forgot-password';
+
 
 function App() {
     const location = useLocation();
@@ -23,7 +27,7 @@ function App() {
         <div className="App">
             <AppHeader/>
             <Switch>
-                <Route path={'/'}  exact={true}>
+                <Route path={'/'} exact={true}>
                     <div className={styles.content}>
                         <h1 className={titleClasses}>Соберите бургер</h1>
                         <DndProvider backend={HTML5Backend}>
@@ -32,6 +36,9 @@ function App() {
                         </DndProvider>
                     </div>
                 </Route>
+                <Route component={Login} exact={true}/>
+                <Route component={Register} exact={true}/>
+                <Route component={ForgotPassword} exact={true}/>
                 <Route component={NotFound} />
             </Switch>
         </div>
