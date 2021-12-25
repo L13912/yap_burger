@@ -17,25 +17,29 @@ const AppHeader = () => {
             <div className={styles.content}>
                 <nav className={navClasses}>
                     <Link to='/' className={itemClasses} >
-                        <h2>
+                        <h2 className={styles.navItem}>
                             <BurgerIcon type="primary"/>
                             <span className="text text_type_main-default pl-2">Конструктор</span>
                         </h2>
                     </Link>
-                    <h2  className={itemClasses}>
-                        <ListIcon type="secondary"/>
-                        <span  className="text text_type_main-default pl-2 text_color_inactive">Лента заказов</span>
-                    </h2>
+                    <Link to='/orders' className={itemClasses} >
+                        <h2  className={styles.navItem}>
+                            <ListIcon type="secondary"/>
+                            <span  className="text text_type_main-default pl-2 text_color_inactive">Лента заказов</span>
+                        </h2>
+                    </Link>
                 </nav>
                 <h2  className={logoClasses}>
                     <Link to='/'>
                         <Logo/>
                     </Link>
                 </h2>
-                <h2 className={styles.login}>
-                    <ProfileIcon type="primary"/>
-                    <span  className="text text_type_main-default pl-2">Личный кабинет</span>
-                </h2>
+                <Link to='/profile' className={styles.login} >
+                    <h2 className={styles.login}>
+                        <ProfileIcon type="secondary"/>
+                        <span  className="text text_type_main-default text_color_inactive pl-2">Личный кабинет</span>
+                    </h2>
+                </Link>
             </div>
         </header>
 

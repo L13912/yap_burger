@@ -15,6 +15,8 @@ import NotFound from '../../pages/not-found';
 import Login from '../../pages/login';
 import Register from '../../pages/register';
 import ForgotPassword from '../../pages/forgot-password';
+import ResetPassword from '../../pages/reset-password';
+import Profile from '../../pages/profile';
 
 
 function App() {
@@ -36,9 +38,11 @@ function App() {
                         </DndProvider>
                     </div>
                 </Route>
-                <Route component={Login} exact={true}/>
-                <Route component={Register} exact={true}/>
-                <Route component={ForgotPassword} exact={true}/>
+                <Route path='/login' component={Login} exact={true}/>
+                <Route path='/register' component={Register} exact={true}/>
+                <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
+                <Route path='/reset-password' component={ResetPassword}/>
+                <Route path='/profile' component={Profile}/>
                 <Route component={NotFound} />
             </Switch>
         </div>
