@@ -1,41 +1,38 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from './commonStyles.module.css';
-import { useAuth } from '../services/auth';
 import {Link, Redirect} from 'react-router-dom';
+import { registerUser } from '../services/actions/user-actions';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function Register() {
-    /*  let auth = useAuth();*/
-
+    const dispatch = useDispatch();
+    const user = useSelector(store => store.userReducer.user);
     const [form, setValue] = useState({ name:'', email: '', password: '' });
+    const registerUserSuccess = useSelector(store => store.userReducer.registerUserSuccess);
+
+    function onSubmit(e) {
+        e.preventDefault();
+        dispatch(registerUser(form));
+    }
 
     const onChange = e => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    /*  let login = useCallback(
-        e => {
-          e.preventDefault();
-          auth.signIn(form);
-        },
-        [auth, form]
-      );
-
-      if (auth.user) {
-        return (
-          <Redirect
-            to={{
-              pathname: '/'
-            }}
-          />
-        );
-      }*/
-
     const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
     return (
+        user ?
+            <Redirect
+                to={{ pathname: '/' }}
+            /> :
+            registerUserSuccess ?
+                <Redirect
+                    to={{ pathname: '/' }}
+                /> :
         <div className={styles.page}>
-            <form className={''}>
+            <form onSubmit={onSubmit}>
                 <h1 className={'text text_type_main-medium mb-6'}>Регистрация</h1>
                 <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} />
                 <div  className={'mb-6'}/>
@@ -48,7 +45,7 @@ export default function Register() {
                     onChange={onChange}
                 />
                 <div  className={'mb-6'}/>
-                <Button  primary={true}>
+                <Button type='primary'>
                     Зарегистрироваться
                 </Button>
             </form>
@@ -60,4 +57,3 @@ export default function Register() {
         </div>
     );
 }
-/*onClick={login}*/

@@ -1,41 +1,35 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './commonStyles.module.css';
-import { useAuth } from '../services/auth';
 import {Link, Redirect} from 'react-router-dom';
+import {loginUser} from '../services/actions/user-actions';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Login() {
-/*  let auth = useAuth();*/
-
+  const dispatch = useDispatch();
+  const isAuth = useSelector(store => store.userReducer.isAuth);
   const [form, setValue] = useState({ email: '', password: '' });
 
-  const onChange = e => {
+    function onSubmit(e) {
+        e.preventDefault();
+        dispatch(loginUser(form));
+    }
+
+    const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-
-/*  let login = useCallback(
-    e => {
-      e.preventDefault();
-      auth.signIn(form);
-    },
-    [auth, form]
-  );
-
-  if (auth.user) {
-    return (
-      <Redirect
-        to={{
-          pathname: '/'
-        }}
-      />
-    );
-  }*/
 
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return (
+      isAuth ?
+          <Redirect
+              to={{
+                  pathname: '/'
+              }}
+          /> :
       <div className={styles.page}>
-        <form className={''}>
+        <form onSubmit={onSubmit}>
           <h1 className={'text text_type_main-medium mb-6'}>Вход</h1>
           <Input placeholder="Email" value={form.email} name="email" onChange={onChange} />
           <div  className={'mb-6'}/>
@@ -46,7 +40,7 @@ export default function Login() {
             onChange={onChange}
           />
             <div  className={'mb-6'}/>
-          <Button  primary={true}>
+          <Button type='primary'>
             Войти
           </Button>
         </form>
@@ -63,4 +57,3 @@ export default function Login() {
       </div>
   );
 }
-/*onClick={login}*/

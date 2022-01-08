@@ -17,12 +17,15 @@ import Register from '../../pages/register';
 import ForgotPassword from '../../pages/forgot-password';
 import ResetPassword from '../../pages/reset-password';
 import Profile from '../../pages/profile';
+import {getUser} from '../../services/actions/user-actions';
 
 
 function App() {
     const location = useLocation();
     const background = location.state && location.state.background;
     const dispatch = useDispatch();
+
+    dispatch(getUser())
 
     const titleClasses = `text text_type_main-large pt-4 ${styles.title}`;
     return (
