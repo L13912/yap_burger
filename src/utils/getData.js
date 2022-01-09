@@ -27,7 +27,6 @@ const getOrderData = async(orderList) => {
 }
 
 const register = async(user) => {
-    console.log(user);
     const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -39,7 +38,6 @@ const register = async(user) => {
 }
 
 const login = async(user) => {
-    console.log(user);
     const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })

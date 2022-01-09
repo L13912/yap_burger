@@ -25,6 +25,7 @@ const initialState = {
     registerUserRequest: false,
     registerUserRequestFailed: false,
     registerUserSuccess: false,
+    loginUserSuccess: false,
     user: null,
     token: "",
     forgotPasswordSuccess: false,
@@ -33,7 +34,6 @@ const initialState = {
     resetPasswordSuccess: false,
     resetPasswordRequest: false,
     resetPasswordRequestFailed: true,
-
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -78,6 +78,8 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginRequest: true,
+                loginUserSuccess: false,
+                loginRequestFailed: false,
             };
         }
 
@@ -85,7 +87,8 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginRequest: false,
-                loginRequestFailed: false
+                loginRequestFailed: false,
+                loginUserSuccess: true,
             };
         }
 
@@ -93,7 +96,8 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginRequest: false,
-                loginRequestFailed: true
+                loginRequestFailed: true,
+                loginUserSuccess: false,
             };
         }
         case SET_USER: {

@@ -17,6 +17,8 @@ export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
 
+export const RESET_ITEM_TO_VIEW = 'RESET_ITEM_TO_VIEW';
+
 export function getIngredients() {
     return function (dispatch) {
         dispatch({

@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {loginUser} from '../services/actions/user-actions';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from 'react-router-dom';
+import {getIngredients} from "../services/actions/actions";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const isAuth = useSelector(store => store.userReducer.isAuth);
+    const history = useHistory();
+  const user = useSelector(store => store.userReducer.user);
   const [form, setValue] = useState({ email: '', password: '' });
+  const loginUserSuccess = useSelector(store => store.userReducer.loginUserSuccess);
 
     function onSubmit(e) {
         e.preventDefault();
         dispatch(loginUser(form));
     }
+
+    useEffect(() => {
+        if (loginUserSuccess) history.replace('/')
+    }, [loginUserSuccess])
 
     const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -22,7 +30,7 @@ export default function Login() {
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return (
-      isAuth ?
+      user ?
           <Redirect
               to={{
                   pathname: '/'

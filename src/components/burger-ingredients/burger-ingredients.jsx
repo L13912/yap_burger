@@ -1,17 +1,12 @@
-import React,{ useEffect, useRef } from 'react';
+import React,{ useRef } from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { useDispatch, useSelector } from 'react-redux';
-import { getIngredients } from '../../services/actions/actions';
+import { useSelector } from 'react-redux';
+
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getIngredients())
-    },[dispatch])
     const ingredients = useSelector(store => store.reducer.ingredients);
-
     const [current, setCurrent] = React.useState('Булки');
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const title = `mb-6 ${styles.title}`;

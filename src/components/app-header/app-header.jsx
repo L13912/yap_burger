@@ -5,27 +5,33 @@ import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 
 const AppHeader = () => {
+    const location = useLocation();
+    const currentPage = location.pathname.split('/')[1];
+
     const headerClasses = `mb-5 ${styles.header}`
     const navClasses = `${styles.nav}`
     const itemClasses = `pr-5 pl-5 ${styles.navItem}`
     const logoClasses = `pt-4 pr-5 pb-4 pl-5 ${styles.logo}`
+    const activeClass = 'text text_type_main-default pl-2';
+    const inactiveClass = 'text text_type_main-default pl-2 text_color_inactive';
     return (
         <header className={headerClasses}>
             <div className={styles.content}>
                 <nav className={navClasses}>
                     <Link to='/' className={itemClasses} >
                         <h2 className={styles.navItem}>
-                            <BurgerIcon type="primary"/>
-                            <span className="text text_type_main-default pl-2">Конструктор</span>
+                            <BurgerIcon type={currentPage === '' ? 'primary' : 'secondary'}/>
+                            <span className={currentPage === '' ? activeClass : inactiveClass}>Конструктор</span>
                         </h2>
                     </Link>
                     <Link to='/orders' className={itemClasses} >
                         <h2  className={styles.navItem}>
-                            <ListIcon type="secondary"/>
-                            <span  className="text text_type_main-default pl-2 text_color_inactive">Лента заказов</span>
+                            <ListIcon type={currentPage === 'orders' ? 'primary' : 'secondary'}/>
+                            <span className={currentPage === 'orders' ? activeClass : inactiveClass}>Лента заказов</span>
                         </h2>
                     </Link>
                 </nav>
@@ -36,13 +42,12 @@ const AppHeader = () => {
                 </h2>
                 <Link to='/profile' className={styles.login} >
                     <h2 className={styles.login}>
-                        <ProfileIcon type="secondary"/>
-                        <span  className="text text_type_main-default text_color_inactive pl-2">Личный кабинет</span>
+                        <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
+                        <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>
                     </h2>
                 </Link>
             </div>
         </header>
-
     );
 };
 

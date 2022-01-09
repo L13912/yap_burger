@@ -13,8 +13,10 @@ import {
     CLEAR_ORDER,
     getOrder, CHANGE_INGREDIENTS_ORDER
 } from "../../services/actions/actions";
+import {Link} from "react-router-dom";
 
 const BurgerConstructor = () => {
+    const user = useSelector(store => store.userReducer.user);
     const dispatch = useDispatch();
     const ingredients = useSelector(store => store.reducer.constructorIngredients);
     const [total, setTotal] = React.useState(0);
@@ -26,7 +28,6 @@ const BurgerConstructor = () => {
     const clearOrder = () => {
         dispatch({type: CLEAR_ORDER})
     };
-
 
     const handleCloseModal = (e) => {
         setVisible(false);
@@ -42,6 +43,7 @@ const BurgerConstructor = () => {
     const totalClass = `mt-10 ${styles.total}`;
     const totalCountClass = `mr-2 text text_type_digits-medium ${styles.totalCount}`;
     const totalContClass = `mr-10 ${styles.totalCont}`;
+    const linkClass = `text text_type_main-default pl-2 ${styles.link}`
 
     function calcSum(ingredients) {
         let sum  = 0;
@@ -114,11 +116,17 @@ const BurgerConstructor = () => {
                         <p className={totalCountClass}>{total}</p>
                         <CurrencyIcon type="primary"/>
                     </div>
-                    <Button type="primary" size="large"
+                    {user ? <Button type="primary" size="large"
                             onClick={(event) => sendOrder(event)}
                     >
-                        Оформить заказ
-                    </Button>
+                            Оформить заказ
+                    </Button> :
+                        <Link to='/login' className={linkClass}>
+                            <Button type='primary'>
+                                Авторизуйтесь
+                            </Button>
+                        </Link>
+                    }
                     {
                         isVisible &&
                         <Modal close={handleCloseModal}>
@@ -127,7 +135,7 @@ const BurgerConstructor = () => {
                     }
                 </div>}
             </div>
-    )
+    );
 };
 
 export default BurgerConstructor;

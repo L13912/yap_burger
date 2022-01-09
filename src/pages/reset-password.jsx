@@ -9,6 +9,7 @@ export default function ResetPassword() {
     const dispatch = useDispatch();
     const user = useSelector(store => store.userReducer.user);
     const [form, setValue] = useState({ password: '', token: '' });
+    const forgotPasswordSuccess = useSelector(store => store.userReducer.forgotPasswordSuccess);
     const resetPasswordSuccess = useSelector(store => store.userReducer.resetPasswordSuccess);
 
     const onChange = e => {
@@ -20,7 +21,6 @@ export default function ResetPassword() {
     }
 
     const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
-
     return (
         user ?
             <Redirect
@@ -30,7 +30,8 @@ export default function ResetPassword() {
                 <Redirect
                     to={{ pathname: '/' }}
                 /> :
-        <div className={styles.page}>
+                forgotPasswordSuccess ?
+            <div className={styles.page}>
             <form onSubmit={onSubmit}>
                 <h1 className={'text text_type_main-medium mb-6'}>Восстановление пароля</h1>
                 <PasswordInput
@@ -50,5 +51,9 @@ export default function ResetPassword() {
                 </Link>
             </p>
         </div>
+        :
+        <Redirect
+           to={{pathname: '/login'}}
+        />
     );
 }

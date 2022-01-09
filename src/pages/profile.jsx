@@ -65,7 +65,7 @@ export default function Profile() {
                         <Link to='/orders' className={linkClasses}>История заказов</Link>
                     </li>
                     <li>
-                        <Link to='/' onClick={logout} className={linkClasses}>Выход</Link>
+                        <Link to='/login' onClick={logout} className={linkClasses}>Выход</Link>
                     </li>
                 </ul>
                 <p className={'text text_type_main-default text_color_inactive mt-10 pt-10'}>В этом разделе вы можете

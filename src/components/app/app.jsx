@@ -1,29 +1,45 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {DndProvider} from 'react-dnd'
+import {HTML5Backend} from 'react-dnd-html5-backend';
+import {Switch, Route, useLocation, useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+
 import styles from './app.module.css';
+
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import {
-    Switch,
-    Route,
-    useLocation,
-} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import NotFound from '../../pages/not-found';
 import Login from '../../pages/login';
 import Register from '../../pages/register';
+import Ingredient from '../../pages/ingredient';
 import ForgotPassword from '../../pages/forgot-password';
 import ResetPassword from '../../pages/reset-password';
 import Profile from '../../pages/profile';
 import {getUser} from '../../services/actions/user-actions';
+import {ProtectedRoute} from '../protected-route/protected-route';
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
+import {getIngredients} from '../../services/actions/actions';
 
 
 function App() {
-    const location = useLocation();
-    const background = location.state && location.state.background;
     const dispatch = useDispatch();
+    const location = useLocation();
+    const history = useHistory();
+    let background = location.state && location.state.background;
+
+    useEffect(() => {
+        dispatch(getIngredients())
+    }, [])
+
+    const handleCloseModal = (e) => {
+        dispatch({
+            type: DELETE_INGREDIENT_DETAILS
+        })
+        history.push('/');
+    };
 
     dispatch(getUser())
 
@@ -31,7 +47,7 @@ function App() {
     return (
         <div className="App">
             <AppHeader/>
-            <Switch>
+            <Switch location={background || location}>
                 <Route path={'/'} exact={true}>
                     <div className={styles.content}>
                         <h1 className={titleClasses}>Соберите бургер</h1>
@@ -45,9 +61,20 @@ function App() {
                 <Route path='/register' component={Register} exact={true}/>
                 <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
                 <Route path='/reset-password' component={ResetPassword}/>
-                <Route path='/profile' component={Profile}/>
-                <Route component={NotFound} />
+                <ProtectedRoute path='/profile'>
+                    <Profile/>
+                </ProtectedRoute>
+                <Route path='/ingredients/:id' component={Ingredient}/>
+                <Route component={NotFound}/>
             </Switch>
+            {background && <Route path='/ingredients/:id'>
+                <Modal
+                    title='Детали ингредиента'
+                    close={handleCloseModal}
+                >
+                    <IngredientDetails/>
+                </Modal>
+            </Route>}
         </div>
     );
 }
