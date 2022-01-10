@@ -27,15 +27,16 @@ export default function Login() {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
-    const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
+    const fromPage = history.location.state.from;
+
+    const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`;
 
     return (
-        user ?
+        user && fromPage ?
+            <Redirect to={fromPage} /> :
+            user ?
             <Redirect
-                to={{
-                    pathname: '/'
-                }}
-            /> :
+                to={{pathname: '/'}}/> :
             <div className={styles.page}>
                 <form onSubmit={onSubmit}>
                     <h1 className={'text text_type_main-medium mb-6'}>Вход</h1>
