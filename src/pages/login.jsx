@@ -27,7 +27,7 @@ export default function Login() {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
-    const fromPage = history.location.state.from;
+    const fromPage = history.location?.state?.from;
 
     const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`;
 
