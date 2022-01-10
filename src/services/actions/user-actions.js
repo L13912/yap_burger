@@ -98,7 +98,7 @@ export function getUser() {
 }
 
 export function forgotPassword(user) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         dispatch({type: FORGOT_PASSWORD_REQUEST});
         forgotRequest(user).then((res) => {
             if (res) {
@@ -107,14 +107,14 @@ export function forgotPassword(user) {
                 dispatch({type: FORGOT_PASSWORD_REQUEST_FAILED});
             }
         })
-        .catch((e) => {
-            dispatch({type: FORGOT_PASSWORD_REQUEST_FAILED});
-        })
+            .catch((e) => {
+                dispatch({type: FORGOT_PASSWORD_REQUEST_FAILED});
+            })
     }
 }
 
 export function resetPassword(user) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         dispatch({type: RESET_PASSWORD_REQUEST});
         resetRequest(user).then((res) => {
             if (res) {
@@ -137,6 +137,7 @@ export function logoutUser(user) {
         logout(user).then((res) => {
             if (res) {
                 dispatch({type: LOGOUT_REQUEST_SUCCESS});
+
             } else {
                 dispatch({type: LOGOUT_REQUEST_FAILED});
             }

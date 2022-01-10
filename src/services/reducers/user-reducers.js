@@ -17,7 +17,8 @@ import {
     GET_USER_REQUEST_FAILED,
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_REQUEST_SUCCESS,
-    RESET_PASSWORD_REQUEST_FAILED
+    RESET_PASSWORD_REQUEST_FAILED,
+    LOGOUT_REQUEST_SUCCESS, LOGOUT_REQUEST
 
 } from "../actions/user-actions";
 
@@ -89,6 +90,20 @@ export const userReducer = (state = initialState, action) => {
                 loginRequest: false,
                 loginRequestFailed: false,
                 loginUserSuccess: true,
+            };
+        }
+
+        case LOGOUT_REQUEST: {
+            return {
+                ...state,
+                loginUserSuccess: false,
+            };
+        }
+
+        case LOGOUT_REQUEST_SUCCESS: {
+            return {
+                ...state,
+                loginUserSuccess: false,
             };
         }
 

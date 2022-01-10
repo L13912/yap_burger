@@ -23,16 +23,20 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
 
-
 function App() {
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
-    let background = location.state && location.state.background;
+    const background = location.state && location.state.background;
+    const refreshToken = localStorage.getItem('refreshToken');
 
     useEffect(() => {
         dispatch(getIngredients())
     }, [])
+
+    useEffect(() => {
+        dispatch(getUser())
+    }, [refreshToken])
 
     const handleCloseModal = (e) => {
         dispatch({
@@ -40,8 +44,6 @@ function App() {
         })
         history.push('/');
     };
-
-    dispatch(getUser())
 
     const titleClasses = `text text_type_main-large pt-4 ${styles.title}`;
     return (

@@ -1,4 +1,4 @@
-import  { getIngredientsData, getOrderData } from '../../utils/getData';
+import {getIngredientsData, getOrderData} from '../../utils/getData';
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
@@ -17,25 +17,23 @@ export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
 export const CLEAR_ORDER = 'CLEAR_ORDER';
 
-export const RESET_ITEM_TO_VIEW = 'RESET_ITEM_TO_VIEW';
-
 export function getIngredients() {
     return function (dispatch) {
         dispatch({
             type: GET_INGREDIENTS_REQUEST
         });
         getIngredientsData().then((res) => {
-                if (res) {
-                    dispatch({
-                        type: GET_INGREDIENTS_SUCCESS,
-                        ingredients: res
-                    })
-                } else {
-                    dispatch({
-                        type: GET_INGREDIENTS_ERROR,
-                    })
-                }
-            })
+            if (res) {
+                dispatch({
+                    type: GET_INGREDIENTS_SUCCESS,
+                    ingredients: res
+                })
+            } else {
+                dispatch({
+                    type: GET_INGREDIENTS_ERROR,
+                })
+            }
+        })
             .catch((e) => {
                 console.log(e)
                 dispatch({

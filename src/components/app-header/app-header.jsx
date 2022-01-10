@@ -5,7 +5,7 @@ import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 
 const AppHeader = () => {
@@ -22,25 +22,26 @@ const AppHeader = () => {
         <header className={headerClasses}>
             <div className={styles.content}>
                 <nav className={navClasses}>
-                    <Link to='/' className={itemClasses} >
+                    <Link to='/' className={itemClasses}>
                         <h2 className={styles.navItem}>
                             <BurgerIcon type={currentPage === '' ? 'primary' : 'secondary'}/>
                             <span className={currentPage === '' ? activeClass : inactiveClass}>Конструктор</span>
                         </h2>
                     </Link>
-                    <Link to='/orders' className={itemClasses} >
-                        <h2  className={styles.navItem}>
+                    <Link to='/orders' className={itemClasses}>
+                        <h2 className={styles.navItem}>
                             <ListIcon type={currentPage === 'orders' ? 'primary' : 'secondary'}/>
-                            <span className={currentPage === 'orders' ? activeClass : inactiveClass}>Лента заказов</span>
+                            <span
+                                className={currentPage === 'orders' ? activeClass : inactiveClass}>Лента заказов</span>
                         </h2>
                     </Link>
                 </nav>
-                <h2  className={logoClasses}>
+                <h2 className={logoClasses}>
                     <Link to='/'>
                         <Logo/>
                     </Link>
                 </h2>
-                <Link to='/profile' className={styles.login} >
+                <Link to='/profile' className={styles.login}>
                     <h2 className={styles.login}>
                         <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
                         <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>

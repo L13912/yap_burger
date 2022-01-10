@@ -9,6 +9,7 @@ const IngredientDetails = () => {
     const [card, setCard] = useState({});
     const ingredients = useSelector(store => store.reducer.ingredients);
     const tCard = useSelector(store => store.reducer.ingredientDetails);
+
     function getCurrentIngredient() {
         if (!id) return tCard;
         return ingredients.find(i => i._id === id);
@@ -23,15 +24,15 @@ const IngredientDetails = () => {
     const textClasses = `text text_type_main-medium pb-8 ${styles.idText} ${styles.light}`;
     const details = `${styles.details}`;
     const cont = `text text_type_main-default ${styles.navy}`;
-    const name = `text text_type_main-default ${styles.navy}`;
+    const name = `pr-8 text text_type_main-default ${styles.navy}`;
     const value = `pt-1  text text_type_digits-default ${styles.navy}`;
 
-    if(card === {} || card === undefined) {
+    if (card === {} || card === undefined) {
         return null;
     }
 
     return (
-        <div>
+        <div className={styles.detailsCard}>
             <img className={imageClasses} alt="Заказ принят" src={card.image}/>
             <p className={textClasses}>{card.name}</p>
             <div className={details}>

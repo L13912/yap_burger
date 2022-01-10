@@ -4,10 +4,10 @@ import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import image from '../../images/img.png';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientCardProps} from "../../types/ingredientsProps";
-import { useDispatch, useSelector } from 'react-redux';
-import { useDrag } from 'react-dnd';
-import { useHistory, useLocation } from 'react-router-dom';
-import {SET_INGREDIENT_DETAILS } from "../../services/actions/actions";
+import {useDispatch, useSelector} from 'react-redux';
+import {useDrag} from 'react-dnd';
+import {useHistory, useLocation} from 'react-router-dom';
+import {SET_INGREDIENT_DETAILS} from "../../services/actions/actions";
 
 const IngredientCard = ({card}) => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const IngredientCard = ({card}) => {
 
     const [{opacity}, dragRef] = useDrag({
         type: 'card',
-        item: {card: {...card, guid: guid()} },
+        item: {card: {...card, guid: guid()}},
         collect: monitor => ({
             opacity: monitor.isDragging() ? 0.5 : 1,
         }),
@@ -47,7 +47,7 @@ const IngredientCard = ({card}) => {
 
     return (
         <div className={cardClasses} ref={dragRef} style={{opacity}} onClick={openModal}>
-            { count() > 0  && <Counter count={count()} size="default"/> }
+            {count() > 0 && <Counter count={count()} size="default"/>}
             <div className={image}>
                 <img className={styles.image} alt='Фото ингредиента' src={card.image}/>
             </div>
@@ -60,12 +60,13 @@ const IngredientCard = ({card}) => {
     );
 };
 
-function guid () {
+function guid() {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
     }
+
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
 }

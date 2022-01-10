@@ -1,6 +1,6 @@
-import { API_URL } from '../constants';
+import {API_URL} from '../constants';
 
-const getIngredientsData = async() => {
+const getIngredientsData = async () => {
     const res = await fetch(`${API_URL}/ingredients`);
     const obj = await getRequestBody(res);
     if (!res.ok) {
@@ -9,7 +9,7 @@ const getIngredientsData = async() => {
     return obj;
 }
 
-const getOrderData = async(orderList) => {
+const getOrderData = async (orderList) => {
     const res = await fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
@@ -26,7 +26,7 @@ const getOrderData = async(orderList) => {
     return obj;
 }
 
-const register = async(user) => {
+const register = async (user) => {
     const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -37,7 +37,7 @@ const register = async(user) => {
     return obj;
 }
 
-const login = async(user) => {
+const login = async (user) => {
     const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -48,7 +48,7 @@ const login = async(user) => {
     return obj;
 }
 
-const logout = async(user) => {
+const logout = async (user) => {
     const token = localStorage.getItem('refreshToken');
     const res = await fetch(`${API_URL}/auth/logout`,
         {method: 'POST', mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify({token})});
@@ -59,7 +59,7 @@ const logout = async(user) => {
     return obj;
 }
 
-const forgotRequest = async(user) => {
+const forgotRequest = async (user) => {
     const res = await fetch(`${API_URL}/password-reset`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -70,7 +70,7 @@ const forgotRequest = async(user) => {
     return obj;
 }
 
-const resetRequest = async(user) => {
+const resetRequest = async (user) => {
     const res = await fetch(`${API_URL}/password-reset/reset`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -81,10 +81,12 @@ const resetRequest = async(user) => {
     return obj;
 }
 
-const getUserData = async(token) => {
+const getUserData = async (token) => {
     const res = await fetch(`${API_URL}/auth/user`,
-        {method: 'GET', mode: 'cors',
-            headers: {"Content-Type": "application/json", "authorization": token}});
+        {
+            method: 'GET', mode: 'cors',
+            headers: {"Content-Type": "application/json", "authorization": token}
+        });
     const obj = await getRequestBody(res);
     if (!res.ok) {
         throw new Error(obj.message);
@@ -92,10 +94,12 @@ const getUserData = async(token) => {
     return obj;
 }
 
-const patchUserData = async(user, token) => {
+const patchUserData = async (user, token) => {
     const res = await fetch(`${API_URL}/auth/user`,
-        {method: 'PATCH', mode: 'cors', headers: {"Content-Type": "application/json", "authorization": token},
-        body: JSON.stringify(user)});
+        {
+            method: 'PATCH', mode: 'cors', headers: {"Content-Type": "application/json", "authorization": token},
+            body: JSON.stringify(user)
+        });
     const obj = await getRequestBody(res);
     if (!res.ok) {
         throw new Error(obj.message);
@@ -103,11 +107,11 @@ const patchUserData = async(user, token) => {
     return obj;
 }
 
-const getAccessToken = async() => {
+const getAccessToken = async () => {
     const token = localStorage.getItem('refreshToken');
     if (!token) throw new Error('Авторизуйтесь');
     const res = await fetch(`${API_URL}/auth/token`,
-        { method: 'POST', mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify({token}) });
+        {method: 'POST', mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify({token})});
     const obj = await getRequestBody(res);
     if (!res.ok) {
         throw new Error(obj.message);
@@ -120,11 +124,11 @@ async function getRequestBody(res) {
     try {
         return JSON.parse(text);
     } catch {
-        return { message: text };
+        return {message: text};
     }
 }
 
-export  {
+export {
     getIngredientsData, getOrderData, register, login, forgotRequest,
     getUserData, logout, getAccessToken, patchUserData, resetRequest
 }
