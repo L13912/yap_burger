@@ -1,17 +1,12 @@
-import React,{ useEffect, useRef } from 'react';
+import React, {useRef} from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { useDispatch, useSelector } from 'react-redux';
-import { getIngredients } from '../../services/actions/actions';
+import {useSelector} from 'react-redux';
+
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getIngredients())
-    },[dispatch])
     const ingredients = useSelector(store => store.reducer.ingredients);
-
     const [current, setCurrent] = React.useState('Булки');
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const title = `mb-6 ${styles.title}`;
@@ -34,7 +29,7 @@ const BurgerIngredients = () => {
         }
     }
 
-    function handleScroll (e) {
+    function handleScroll(e) {
         const scrollPos = e.target.scrollTop;
         const bunsPos = bunsRef.current.offsetTop / 2;
         const saucesPos = saucesRef.current.offsetTop / 2;
@@ -60,32 +55,32 @@ const BurgerIngredients = () => {
                     Начинки
                 </Tab>
             </nav>
-        <div className={scrollContClasses} onScroll={handleScroll}>
-            <section  ref={bunsRef}>
-                <h2 className={title}>Булки</h2>
-                <div className={cards}>
-                    {buns.map((card) => (
-                        <IngredientCard  key={card._id} card={card}/>
-                    ))}
-                </div>
-            </section>
-            <section  ref={saucesRef}>
-                <h2 className={title}>Соусы</h2>
-                <div className={cards}>
-                    {sauces.map((card) => (
-                        <IngredientCard key={card._id} card={card}/>
-                    ))}
-                </div>
-            </section>
-            <section ref={mainRef}>
-                <h2 className={title}>Начинки</h2>
-                <div className={cards}>
-                    {main.map((card) => (
-                        <IngredientCard key={card._id} card={card}/>
-                    ))}
-                </div>
-            </section>
-        </div>
+            <div className={scrollContClasses} onScroll={handleScroll}>
+                <section ref={bunsRef}>
+                    <h2 className={title}>Булки</h2>
+                    <div className={cards}>
+                        {buns.map((card) => (
+                            <IngredientCard key={card._id} card={card}/>
+                        ))}
+                    </div>
+                </section>
+                <section ref={saucesRef}>
+                    <h2 className={title}>Соусы</h2>
+                    <div className={cards}>
+                        {sauces.map((card) => (
+                            <IngredientCard key={card._id} card={card}/>
+                        ))}
+                    </div>
+                </section>
+                <section ref={mainRef}>
+                    <h2 className={title}>Начинки</h2>
+                    <div className={cards}>
+                        {main.map((card) => (
+                            <IngredientCard key={card._id} card={card}/>
+                        ))}
+                    </div>
+                </section>
+            </div>
         </div>
     );
 };

@@ -25,7 +25,7 @@ const initialState = {
     order: {},
     orderRequest: false,
     orderError: false,
-    constructorIngredients: { buns: [], toppings: []},
+    constructorIngredients: {buns: [], toppings: []},
     ingredientDetails: {}
 }
 
@@ -85,13 +85,13 @@ export const reducer = (state = initialState, action) => {
         case  ADD_CONSTRUCTOR_INGREDIENT: {
             return {
                 ...state,
-                constructorIngredients: action.card.type === 'bun' ?  {
+                constructorIngredients: action.card.type === 'bun' ? {
                         buns: [action.card],
-                        toppings:[...state.constructorIngredients.toppings]
+                        toppings: [...state.constructorIngredients.toppings]
                     }
-                    :  {
+                    : {
                         buns: [...state.constructorIngredients.buns],
-                        toppings:[...state.constructorIngredients.toppings, action.card]
+                        toppings: [...state.constructorIngredients.toppings, action.card]
                     }
             }
         }
@@ -101,14 +101,14 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 constructorIngredients: {
                     buns: [...state.constructorIngredients.buns],
-                    toppings:[...state.constructorIngredients.toppings.filter((card, guid) => card.guid  !== action.guid ) ]
+                    toppings: [...state.constructorIngredients.toppings.filter((card, guid) => card.guid !== action.guid)]
                 }
             }
         }
         case CLEAR_CONSTRUCTOR: {
             return {
                 ...state,
-                constructorIngredients: { buns: [], toppings: []}
+                constructorIngredients: {buns: [], toppings: []}
             }
         }
 
@@ -133,7 +133,7 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 constructorIngredients: {
                     ...state.constructorIngredients,
-/*                    buns: [...state.constructorIngredients.buns],*/
+                    /*                    buns: [...state.constructorIngredients.buns],*/
                     toppings: newOrderArr
                 },
             }
