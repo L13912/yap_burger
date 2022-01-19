@@ -8,7 +8,7 @@ import {
 } from "../../services/actions/actions";
 import {TCard, TConstCard} from "../../types/data-types";
 
-export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) => {
+export const ConstructorCard: FC<TConstCard> = ({card, moveCard, type, index}) => {
     const dispatch = useDispatch();
     const moveRef = useRef(null);
     const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
@@ -35,7 +35,7 @@ export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) =>
         hover: (card: TCard) => {
             const dragIndex: number = ingredients.toppings.findIndex((elem: { _id: string; }) => elem._id === card._id);
             if (dragIndex === -1) return;
-            moveCard(dragIndex, index)
+            if (moveCard) moveCard(dragIndex, index)
         },
         collect: (monitor) => ({
             opacity: monitor.isOver() ? 0.2 : 1
@@ -48,7 +48,6 @@ export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) =>
         type === 'top' ?
             <ConstructorElement
                 type="top"
-                key={card.guid!}
                 isLocked={true}
                 text={card.name + ' (верх)'}
                 price={card.price}
@@ -57,7 +56,6 @@ export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) =>
             :
             type === 'bottom' ?
                 <ConstructorElement
-                    key={card.guid!}
                     type="bottom"
                     isLocked={true}
                     text={card.name + ' (низ)'}
@@ -65,10 +63,9 @@ export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) =>
                     thumbnail={card.image}
                 /> :
                 <div
-                    key={card.guid!}
-                     ref={moveRef}
-                     style={{opacity}}
-                     className={listItem}>
+                    ref={moveRef}
+                    style={{opacity}}
+                    className={listItem}>
                     <DragIcon type="primary"/>
                     <ConstructorElement handleClose={() => {
                         deleteIngredient(card.guid!)
@@ -76,8 +73,6 @@ export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) =>
                                         text={card.name}
                                         price={card.price}
                                         thumbnail={card.image}
-                                        //@ts-ignore    ПОМОГИТЕ ПОЖАЛУЙСТА! Я не понимаю, что делать с этим пропсом
-                                        moveCard={moveCard}
                     />
                 </div>
     );

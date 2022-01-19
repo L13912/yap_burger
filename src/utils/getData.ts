@@ -120,8 +120,7 @@ const getAccessToken = async () => {
     return obj;
 }
 
-/*Вот тут нужна дополнительная типизация? ТК функция универсальная, в нее может и строка приходить, и объекты разных конфигураций*/
-async function getRequestBody(res: any) {
+async function getRequestBody(res: Response) {
     const text = await res.text();
     try {
         return JSON.parse(text);

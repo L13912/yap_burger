@@ -4,17 +4,15 @@ import {useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
 import {TCard, TIngredientDetails} from "../../types/data-types";
 
-
 const IngredientDetails:FC<TIngredientDetails> = () => {
-    // @ts-ignore - Помогите пожалуйста - как типизировать хуки  react-router-dom? Не нашла документации
-    const {id} = useParams();
+    const {id}: {id: string} = useParams();
     const [card, setCard] = useState<TCard>();
     const ingredients = useSelector((store: any) => store.reducer.ingredients);
     const tCard = useSelector((store: any) => store.reducer.ingredientDetails);
 
     function getCurrentIngredient() {
         if (!id) return tCard;
-        return ingredients.find((i: { _id: number; }) => i._id === id);
+        return ingredients.find((i: { _id: string; }) => i._id === id);
     }
 
     useEffect(() => {
