@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, FC} from 'react';
 import styles from './ingredient-card.module.css';
 import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import image from '../../images/img.png';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {IngredientCardProps} from "../../types/ingredientsProps";
 import {useDispatch, useSelector} from 'react-redux';
 import {useDrag} from 'react-dnd';
 import {useHistory, useLocation} from 'react-router-dom';
 import {SET_INGREDIENT_DETAILS} from "../../services/actions/actions";
+import {TIngredientCard} from "../../types/data-types";
 
-const IngredientCard = ({card}) => {
+
+const IngredientCard:FC<TIngredientCard> = ({card}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
@@ -22,7 +23,7 @@ const IngredientCard = ({card}) => {
             opacity: monitor.isDragging() ? 0.5 : 1,
         }),
     })
-    const ingredients = useSelector(store => store.reducer.constructorIngredients);
+    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
     const count = () => {
         let value = 0;
         for (let bun of ingredients.buns)
@@ -70,9 +71,5 @@ function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
 }
-
-IngredientCard.propTypes = {
-    card: IngredientCardProps
-};
 
 export default IngredientCard;

@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, {FC} from 'react';
 import styles from './app-header.module.css';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
 
 
-const AppHeader = () => {
+const AppHeader:FC = () => {
     const location = useLocation();
     const currentPage = location.pathname.split('/')[1];
 

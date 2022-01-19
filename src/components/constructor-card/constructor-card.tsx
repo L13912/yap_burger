@@ -1,22 +1,21 @@
-import React, {useRef} from 'react';
+import React, {useRef, FC} from 'react';
 import styles from './constructor-card.module.css';
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {IngredientsProps} from "../../types/ingredientsProps";
 import {useDispatch, useSelector} from 'react-redux';
 import {useDrag, useDrop} from 'react-dnd';
 import {
     DELETE_CONSTRUCTOR_INGREDIENT
 } from "../../services/actions/actions";
-import PropTypes from "prop-types";
+import {TCard, TConstCard} from "../../types/data-types";
 
-export const ConstructorCard = ({card, moveCard, type, index}) => {
+export const ConstructorCard:FC<TConstCard> = ({card, moveCard, type, index}) => {
     const dispatch = useDispatch();
     const moveRef = useRef(null);
-    const ingredients = useSelector(store => store.reducer.constructorIngredients);
+    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
 
     const listItem = `mr-1 ${styles.listItem}`;
 
-    const deleteIngredient = (guid) => {
+    const deleteIngredient = (guid: string) => {
         dispatch({
             type: DELETE_CONSTRUCTOR_INGREDIENT,
             guid
@@ -33,8 +32,8 @@ export const ConstructorCard = ({card, moveCard, type, index}) => {
 
     const [{opacity}, drop] = useDrop({
         accept: 'card',
-        hover: (card) => {
-            const dragIndex = ingredients.toppings.findIndex(elem => elem._id === card._id);
+        hover: (card: TCard) => {
+            const dragIndex: number = ingredients.toppings.findIndex((elem: { _id: string; }) => elem._id === card._id);
             if (dragIndex === -1) return;
             moveCard(dragIndex, index)
         },
@@ -49,7 +48,7 @@ export const ConstructorCard = ({card, moveCard, type, index}) => {
         type === 'top' ?
             <ConstructorElement
                 type="top"
-                key={card.guid + index}
+                key={card.guid!}
                 isLocked={true}
                 text={card.name + ' (верх)'}
                 price={card.price}
@@ -58,33 +57,28 @@ export const ConstructorCard = ({card, moveCard, type, index}) => {
             :
             type === 'bottom' ?
                 <ConstructorElement
-                    key={card.guid + index}
+                    key={card.guid!}
                     type="bottom"
                     isLocked={true}
                     text={card.name + ' (низ)'}
                     price={card.price}
                     thumbnail={card.image}
                 /> :
-                <div key={card.guid + index}
+                <div
+                    key={card.guid!}
                      ref={moveRef}
                      style={{opacity}}
                      className={listItem}>
                     <DragIcon type="primary"/>
                     <ConstructorElement handleClose={() => {
-                        deleteIngredient(card.guid)
+                        deleteIngredient(card.guid!)
                     }}
                                         text={card.name}
                                         price={card.price}
                                         thumbnail={card.image}
+                                        //@ts-ignore    ПОМОГИТЕ ПОЖАЛУЙСТА! Я не понимаю, что делать с этим пропсом
                                         moveCard={moveCard}
                     />
                 </div>
     );
 }
-
-ConstructorCard.propTypes = {
-    card: IngredientsProps.isRequired,
-    moveCard: PropTypes.func, /*не обязательная, тк булки не перетаскиваются*/
-    type: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired
-};

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, FC, SyntheticEvent} from 'react';
 import styles from './burger-constructor.module.css';
 import {ConstructorCard} from '../constructor-card/constructor-card';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -15,10 +15,12 @@ import {
 } from "../../services/actions/actions";
 import {Link} from "react-router-dom";
 
-const BurgerConstructor = () => {
-    const user = useSelector(store => store.userReducer.user);
+import {TCard, TConstructorIngredients} from "../../types/data-types";
+
+const BurgerConstructor:FC = () => {
     const dispatch = useDispatch();
-    const ingredients = useSelector(store => store.reducer.constructorIngredients);
+    const user = useSelector((store: any) => store.userReducer.user);
+    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
     const [total, setTotal] = React.useState(0);
     const [isVisible, setVisible] = useState(false);
 
@@ -29,7 +31,7 @@ const BurgerConstructor = () => {
         dispatch({type: CLEAR_ORDER})
     };
 
-    const handleCloseModal = (e) => {
+    const handleCloseModal = ():void => {
         setVisible(false);
         clearConstructor();
         clearOrder();
@@ -45,14 +47,14 @@ const BurgerConstructor = () => {
     const totalContClass = `mr-10 ${styles.totalCont}`;
     const linkClass = `text text_type_main-default pl-2 ${styles.link}`
 
-    function calcSum(ingredients) {
+    function calcSum(ingredients: TConstructorIngredients ) {
         let sum = 0;
         for (let bun of ingredients.buns) sum += bun.price * 2;
         for (let topping of ingredients.toppings) sum += topping.price;
         return sum;
     }
 
-    function sendOrder(event) {
+    function sendOrder(event: SyntheticEvent) {
         setVisible(!isVisible);
         event.preventDefault();
         const orderList = [];
@@ -68,7 +70,7 @@ const BurgerConstructor = () => {
 
     const [, dropRef] = useDrop({
         accept: "card",
-        drop(card) {
+        drop(card: HTMLElement ) {
             dispatch({
                 type: ADD_CONSTRUCTOR_INGREDIENT,
                 ...card
@@ -93,12 +95,12 @@ const BurgerConstructor = () => {
             </div>}
             {total !== 0 && <section className={list}>
                 <div className={top}>
-                    {ingredients.buns[0] && ingredients.buns.map((card, index) => (
+                    {ingredients.buns[0] && ingredients.buns.map((card:TCard, index: number) => (
                         <ConstructorCard key={card.guid} index={index} card={card} type={'top'}/>
                     ))}
                 </div>
                 <div className={center}>
-                    {ingredients.toppings && ingredients.toppings.map((card, index) => (
+                    {ingredients.toppings && ingredients.toppings.map((card:TCard, index: number) => (
                         <ConstructorCard card={card} type={'topping'}
                                          key={card.guid}
                                          index={index}
@@ -106,7 +108,7 @@ const BurgerConstructor = () => {
                     ))}
                 </div>
                 <div className={bottom}>
-                    {ingredients.buns[0] && ingredients.buns.map((card, index) => (
+                    {ingredients.buns[0] && ingredients.buns.map((card:TCard, index: number) => (
                         <ConstructorCard card={card} key={card.guid + 'b'} index={index} type={'bottom'}/>
                     ))}
                 </div>

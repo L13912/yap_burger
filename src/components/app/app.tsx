@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, FC} from 'react';
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {Switch, Route, useLocation, useHistory} from 'react-router-dom';
@@ -23,11 +23,12 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
 
-function App() {
+const App:FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
-    const background = location.state && location.state.background;
+    const state = location.state as any;
+    const background = state && state.background;
     const refreshToken = localStorage.getItem('refreshToken');
 
     useEffect(() => {
@@ -38,7 +39,7 @@ function App() {
         dispatch(getUser())
     }, [refreshToken])
 
-    const handleCloseModal = (e) => {
+    const handleCloseModal = ():void  => {
         dispatch({
             type: DELETE_INGREDIENT_DETAILS
         })

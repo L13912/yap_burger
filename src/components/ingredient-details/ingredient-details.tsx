@@ -1,18 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import styles from './indredient-details.module.css';
 import {useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
+import {TCard, TIngredientDetails} from "../../types/data-types";
 
 
-const IngredientDetails = () => {
+const IngredientDetails:FC<TIngredientDetails> = () => {
+    // @ts-ignore
     const {id} = useParams();
-    const [card, setCard] = useState({});
-    const ingredients = useSelector(store => store.reducer.ingredients);
-    const tCard = useSelector(store => store.reducer.ingredientDetails);
+    const [card, setCard] = useState<TCard>();
+    const ingredients = useSelector((store: any) => store.reducer.ingredients);
+    const tCard = useSelector((store: any) => store.reducer.ingredientDetails);
 
     function getCurrentIngredient() {
         if (!id) return tCard;
-        return ingredients.find(i => i._id === id);
+        return ingredients.find((i: { _id: number; }) => i._id === id);
     }
 
     useEffect(() => {
@@ -27,7 +29,8 @@ const IngredientDetails = () => {
     const name = `pr-8 text text_type_main-default ${styles.navy}`;
     const value = `pt-1  text text_type_digits-default ${styles.navy}`;
 
-    if (card === {} || card === undefined) {
+
+    if (card === undefined) {
         return null;
     }
 
