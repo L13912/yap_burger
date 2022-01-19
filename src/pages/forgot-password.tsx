@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, FC, ChangeEvent, FormEvent} from 'react';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {Input, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {forgotPassword} from '../services/actions/user-actions';
 
-export default function ForgotPassword() {
+const ForgotPassword: FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector(store => store.userReducer.user);
-    const forgotPasswordSuccess = useSelector(store => store.userReducer.forgotPasswordSuccess);
+    const user = useSelector((store: any) => store.userReducer.user);
+    const forgotPasswordSuccess = useSelector((store: any) => store.userReducer.forgotPasswordSuccess);
     const [form, setValue] = useState({email: ''});
 
-    function onSubmit(e) {
+    function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         dispatch(forgotPassword(form));
     }
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
@@ -47,3 +47,5 @@ export default function ForgotPassword() {
                 </div>
     );
 }
+
+export default ForgotPassword;

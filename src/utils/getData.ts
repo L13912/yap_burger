@@ -1,4 +1,5 @@
 import {API_URL} from '../constants';
+import {TCard, TUser} from "../types/data-types";
 
 const getIngredientsData = async () => {
     const res = await fetch(`${API_URL}/ingredients`);
@@ -9,7 +10,7 @@ const getIngredientsData = async () => {
     return obj;
 }
 
-const getOrderData = async (orderList) => {
+const getOrderData = async (orderList: Array<TCard>) => {
     const res = await fetch(`${API_URL}/orders`, {
         method: "POST",
         headers: {
@@ -26,7 +27,7 @@ const getOrderData = async (orderList) => {
     return obj;
 }
 
-const register = async (user) => {
+const register = async (user: TUser) => {
     const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -37,7 +38,7 @@ const register = async (user) => {
     return obj;
 }
 
-const login = async (user) => {
+const login = async (user: TUser) => {
     const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -48,7 +49,7 @@ const login = async (user) => {
     return obj;
 }
 
-const logout = async (user) => {
+const logout = async () => {
     const token = localStorage.getItem('refreshToken');
     const res = await fetch(`${API_URL}/auth/logout`,
         {method: 'POST', mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify({token})});
@@ -59,7 +60,7 @@ const logout = async (user) => {
     return obj;
 }
 
-const forgotRequest = async (user) => {
+const forgotRequest = async (user: TUser) => {
     const res = await fetch(`${API_URL}/password-reset`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -70,7 +71,7 @@ const forgotRequest = async (user) => {
     return obj;
 }
 
-const resetRequest = async (user) => {
+const resetRequest = async (user: TUser) => {
     const res = await fetch(`${API_URL}/password-reset/reset`, {
         method: "POST", mode: 'cors', headers: {"Content-Type": "application/json"}, body: JSON.stringify(user)
     })
@@ -81,7 +82,7 @@ const resetRequest = async (user) => {
     return obj;
 }
 
-const getUserData = async (token) => {
+const getUserData = async (token: string) => {
     const res = await fetch(`${API_URL}/auth/user`,
         {
             method: 'GET', mode: 'cors',
@@ -94,7 +95,7 @@ const getUserData = async (token) => {
     return obj;
 }
 
-const patchUserData = async (user, token) => {
+const patchUserData = async (user: TUser, token: string) => {
     const res = await fetch(`${API_URL}/auth/user`,
         {
             method: 'PATCH', mode: 'cors', headers: {"Content-Type": "application/json", "authorization": token},
@@ -119,7 +120,8 @@ const getAccessToken = async () => {
     return obj;
 }
 
-async function getRequestBody(res) {
+/*Вот тут нужна дополнительная типизация? ТК функция универсальная, в нее может и строка приходить, и объекты разных конфигураций*/
+async function getRequestBody(res: any) {
     const text = await res.text();
     try {
         return JSON.parse(text);

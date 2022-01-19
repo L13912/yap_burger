@@ -17,7 +17,7 @@ import ForgotPassword from '../../pages/forgot-password';
 import ResetPassword from '../../pages/reset-password';
 import Profile from '../../pages/profile';
 import {getUser} from '../../services/actions/user-actions';
-import {ProtectedRoute} from '../protected-route/protected-route';
+import ProtectedRoute from '../protected-route/protected-route';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"

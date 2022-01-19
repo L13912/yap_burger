@@ -1,7 +1,8 @@
+import React, {FC} from 'react';
 import {Link} from 'react-router-dom';
 import styles from './not-found.module.css'
 
-export default function NotFound404() {
+const NotFound404:FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
@@ -17,3 +18,5 @@ export default function NotFound404() {
         </div>
     )
 }
+
+export default NotFound404;

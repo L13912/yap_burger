@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, FC, ChangeEvent, FormEvent} from 'react';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {Input, Button, PasswordInput} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {resetPassword} from "../services/actions/user-actions";
 
-export default function ResetPassword() {
+const ResetPassword:FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector(store => store.userReducer.user);
+    const user = useSelector((store:any) => store.userReducer.user);
     const [form, setValue] = useState({password: '', token: ''});
-    const forgotPasswordSuccess = useSelector(store => store.userReducer.forgotPasswordSuccess);
-    const resetPasswordSuccess = useSelector(store => store.userReducer.resetPasswordSuccess);
+    const forgotPasswordSuccess = useSelector((store: any) => store.userReducer.forgotPasswordSuccess);
+    const resetPasswordSuccess = useSelector((store:any) => store.userReducer.resetPasswordSuccess);
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>):void => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
-    function onSubmit(e) {
+    function onSubmit(e: FormEvent):void {
         e.preventDefault();
         dispatch(resetPassword(form));
     }
@@ -36,7 +36,6 @@ export default function ResetPassword() {
                         <form onSubmit={onSubmit}>
                             <h1 className={'text text_type_main-medium mb-6'}>Восстановление пароля</h1>
                             <PasswordInput
-                                placeholder="Введите новый пароль"
                                 value={form.password}
                                 name="password"
                                 onChange={onChange}
@@ -60,3 +59,5 @@ export default function ResetPassword() {
                     />
     );
 }
+
+export default ResetPassword;

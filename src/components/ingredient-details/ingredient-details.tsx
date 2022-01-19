@@ -6,7 +6,7 @@ import {TCard, TIngredientDetails} from "../../types/data-types";
 
 
 const IngredientDetails:FC<TIngredientDetails> = () => {
-    // @ts-ignore
+    // @ts-ignore - Помогите пожалуйста - как типизировать хуки  react-router-dom? Не нашла документации
     const {id} = useParams();
     const [card, setCard] = useState<TCard>();
     const ingredients = useSelector((store: any) => store.reducer.ingredients);

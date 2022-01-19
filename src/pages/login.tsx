@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC, ChangeEvent, FormEvent} from 'react';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {loginUser} from '../services/actions/user-actions';
@@ -6,14 +6,15 @@ import {Input, Button, PasswordInput} from '@ya.praktikum/react-developer-burger
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from 'react-router-dom';
 
-export default function Login() {
+const Login:FC = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const user = useSelector(store => store.userReducer.user);
+    //@ts-ignore - Помогите пожалуйста - как типизировать хуки  react-router-dom? Не нашла документации
+    const history = useHistory() as any;
+    const user = useSelector((store:any) => store.userReducer.user);
     const [form, setValue] = useState({email: '', password: ''});
-    const loginUserSuccess = useSelector(store => store.userReducer.loginUserSuccess);
+    const loginUserSuccess = useSelector((store:any) => store.userReducer.loginUserSuccess);
 
-    function onSubmit(e) {
+    function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         dispatch(loginUser(form));
     }
@@ -23,7 +24,7 @@ export default function Login() {
         if (loginUserSuccess) history.replace('/')
     }, [loginUserSuccess])
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
@@ -43,7 +44,6 @@ export default function Login() {
                     <Input placeholder="Email" value={form.email} name="email" onChange={onChange}/>
                     <div className={'mb-6'}/>
                     <PasswordInput
-                        placeholder="Password"
                         value={form.password}
                         name="password"
                         onChange={onChange}
@@ -67,3 +67,6 @@ export default function Login() {
             </div>
     );
 }
+
+
+export default Login;

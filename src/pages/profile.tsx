@@ -1,44 +1,44 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticEvent} from 'react';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {Input, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUser, patchUser} from "../services/actions/user-actions";
 
-export default function Profile() {
-    const user = useSelector(store => store.userReducer.user);
+const Profile:FC = () => {
+    const user = useSelector((store:any) => store.userReducer.user);
     const [edited, setEdited] = useState(false);
     const dispatch = useDispatch();
     const [form, setValue] = useState({...user, password: '12345678'});
-    const [touched, setTouched] = useState([]);
+    const [touched, setTouched] = useState<Array<string>>([]);
 
     useEffect(() => {
         setValue({...user, password: '12345678'})
     }, [user]);
 
-    function onFocus(e) {
+    function onFocus(e: FocusEvent<HTMLFormElement>):void {
         e.preventDefault();
         if (e.target.name === 'password') {
             setValue({...form, password: ''});
         }
     }
 
-    function onChange(e) {
+    function onChange(e: ChangeEvent<HTMLInputElement>):void {
         setEdited(true);
         if (!touched.includes(e.target.name)) setTouched([...touched, e.target.name]);
         setValue({...form, [e.target.name]: e.target.value});
     }
 
-    function onSave(e) {
+    function onSave(e: FormEvent<HTMLFormElement>):void {
         e.preventDefault();
-        const body = {};
+        const body: any = {};
         touched.forEach((el) => body[el] = form[el]);
         setTouched([]);
         setEdited(false);
         dispatch(patchUser(body));
     }
 
-    function onCancel(e) {
+    function onCancel(e: SyntheticEvent):void {
         e.preventDefault();
         setValue({...user, password: '12345678'});
         setEdited(false);
@@ -104,3 +104,5 @@ export default function Profile() {
             </div>
     );
 }
+
+export default Profile;

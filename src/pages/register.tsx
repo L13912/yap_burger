@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, FC, ChangeEvent, FormEvent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './commonStyles.module.css';
 import {Link, Redirect} from 'react-router-dom';
 import {registerUser} from '../services/actions/user-actions';
 import {Input, Button, PasswordInput} from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function Register() {
+const Register:FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector(store => store.userReducer.user);
+    const user = useSelector((store: any) => store.userReducer.user);
     const [form, setValue] = useState({name: '', email: '', password: ''});
-    const registerUserSuccess = useSelector(store => store.userReducer.registerUserSuccess);
+    const registerUserSuccess = useSelector((store: any) => store.userReducer.registerUserSuccess);
 
-    function onSubmit(e) {
+    function onSubmit(e: FormEvent):void {
         e.preventDefault();
         dispatch(registerUser(form));
     }
 
-    const onChange = e => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>):void => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
@@ -39,7 +39,6 @@ export default function Register() {
                         <Input placeholder="Email" value={form.email} name="email" onChange={onChange}/>
                         <div className={'mb-6'}/>
                         <PasswordInput
-                            placeholder="Password"
                             value={form.password}
                             name="password"
                             onChange={onChange}
@@ -58,3 +57,5 @@ export default function Register() {
                 </div>
     );
 }
+
+export default Register;
