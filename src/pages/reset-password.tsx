@@ -1,27 +1,27 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
-import styles from './commonStyles.module.css';
-import { Link, Redirect } from 'react-router-dom';
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from '../services/actions/user-actions';
+import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
+import styles from './commonStyles.module.css'
+import { Link, Redirect } from 'react-router-dom'
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetPassword } from '../services/actions/user-actions'
 
 const ResetPassword: FC = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((store: any) => store.userReducer.user);
-  const [form, setValue] = useState({ password: '', token: '' });
-  const forgotPasswordSuccess = useSelector((store: any) => store.userReducer.forgotPasswordSuccess);
-  const resetPasswordSuccess = useSelector((store: any) => store.userReducer.resetPasswordSuccess);
+  const dispatch = useDispatch()
+  const user = useSelector((store: any) => store.userReducer.user)
+  const [form, setValue] = useState({ password: '', token: '' })
+  const forgotPasswordSuccess = useSelector((store: any) => store.userReducer.forgotPasswordSuccess)
+  const resetPasswordSuccess = useSelector((store: any) => store.userReducer.resetPasswordSuccess)
 
   const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setValue({ ...form, [e.target.name]: e.target.value });
-  };
-
-  function onSubmit(e: FormEvent): void {
-    e.preventDefault();
-    dispatch(resetPassword(form));
+    setValue({ ...form, [e.target.name]: e.target.value })
   }
 
-  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`;
+  function onSubmit(e: FormEvent): void {
+    e.preventDefault()
+    dispatch(resetPassword(form))
+  }
+
+  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
   return user ? (
     <Redirect to={{ pathname: '/' }} />
   ) : resetPasswordSuccess ? (
@@ -45,7 +45,7 @@ const ResetPassword: FC = () => {
     </div>
   ) : (
     <Redirect to={{ pathname: '/login' }} />
-  );
-};
+  )
+}
 
-export default ResetPassword;
+export default ResetPassword

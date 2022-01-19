@@ -1,57 +1,57 @@
-import { useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticEvent } from 'react';
-import styles from './commonStyles.module.css';
-import { Link, Redirect } from 'react-router-dom';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, patchUser } from '../services/actions/user-actions';
+import { useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticEvent } from 'react'
+import styles from './commonStyles.module.css'
+import { Link, Redirect } from 'react-router-dom'
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser, patchUser } from '../services/actions/user-actions'
 
 const Profile: FC = () => {
-  const user = useSelector((store: any) => store.userReducer.user);
-  const [edited, setEdited] = useState(false);
-  const dispatch = useDispatch();
-  const [form, setValue] = useState({ ...user, password: '12345678' });
-  const [touched, setTouched] = useState<Array<string>>([]);
+  const user = useSelector((store: any) => store.userReducer.user)
+  const [edited, setEdited] = useState(false)
+  const dispatch = useDispatch()
+  const [form, setValue] = useState({ ...user, password: '12345678' })
+  const [touched, setTouched] = useState<Array<string>>([])
 
   useEffect(() => {
-    setValue({ ...user, password: '12345678' });
-  }, [user]);
+    setValue({ ...user, password: '12345678' })
+  }, [user])
 
   function onFocus(e: FocusEvent<HTMLFormElement>): void {
-    e.preventDefault();
+    e.preventDefault()
     if (e.target.name === 'password') {
-      setValue({ ...form, password: '' });
+      setValue({ ...form, password: '' })
     }
   }
 
   function onChange(e: ChangeEvent<HTMLInputElement>): void {
-    setEdited(true);
-    if (!touched.includes(e.target.name)) setTouched([...touched, e.target.name]);
-    setValue({ ...form, [e.target.name]: e.target.value });
+    setEdited(true)
+    if (!touched.includes(e.target.name)) setTouched([...touched, e.target.name])
+    setValue({ ...form, [e.target.name]: e.target.value })
   }
 
   function onSave(e: FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-    const body: any = {};
-    touched.forEach((el) => (body[el] = form[el]));
-    setTouched([]);
-    setEdited(false);
-    dispatch(patchUser(body));
+    e.preventDefault()
+    const body: any = {}
+    touched.forEach(el => (body[el] = form[el]))
+    setTouched([])
+    setEdited(false)
+    dispatch(patchUser(body))
   }
 
   function onCancel(e: SyntheticEvent): void {
-    e.preventDefault();
-    setValue({ ...user, password: '12345678' });
-    setEdited(false);
+    e.preventDefault()
+    setValue({ ...user, password: '12345678' })
+    setEdited(false)
   }
 
-  const logout = () => dispatch(logoutUser());
+  const logout = () => dispatch(logoutUser())
 
-  const linkClasses = `${styles.profileLink} text text_type_main-medium text_color_inactive pl-2`;
-  const activeLinkClasses = `${styles.profileLink} mt-10 text text_type_main-medium text_color_primary pl-2`;
+  const linkClasses = `${styles.profileLink} text text_type_main-medium text_color_inactive pl-2`
+  const activeLinkClasses = `${styles.profileLink} mt-10 text text_type_main-medium text_color_primary pl-2`
   return !user ? (
     <Redirect
       to={{
-        pathname: '/login',
+        pathname: '/login'
       }}
     />
   ) : (
@@ -94,7 +94,7 @@ const Profile: FC = () => {
         )}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

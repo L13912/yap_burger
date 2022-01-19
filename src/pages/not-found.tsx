@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './not-found.module.css';
+import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
+import styles from './not-found.module.css'
 
 const NotFound404: FC = () => {
   return (
@@ -16,7 +16,7 @@ const NotFound404: FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NotFound404;
+export default NotFound404

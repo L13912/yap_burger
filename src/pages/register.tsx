@@ -1,26 +1,26 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import styles from './commonStyles.module.css';
-import { Link, Redirect } from 'react-router-dom';
-import { registerUser } from '../services/actions/user-actions';
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import styles from './commonStyles.module.css'
+import { Link, Redirect } from 'react-router-dom'
+import { registerUser } from '../services/actions/user-actions'
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const Register: FC = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((store: any) => store.userReducer.user);
-  const [form, setValue] = useState({ name: '', email: '', password: '' });
-  const registerUserSuccess = useSelector((store: any) => store.userReducer.registerUserSuccess);
+  const dispatch = useDispatch()
+  const user = useSelector((store: any) => store.userReducer.user)
+  const [form, setValue] = useState({ name: '', email: '', password: '' })
+  const registerUserSuccess = useSelector((store: any) => store.userReducer.registerUserSuccess)
 
   function onSubmit(e: FormEvent): void {
-    e.preventDefault();
-    dispatch(registerUser(form));
+    e.preventDefault()
+    dispatch(registerUser(form))
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setValue({ ...form, [e.target.name]: e.target.value });
-  };
+    setValue({ ...form, [e.target.name]: e.target.value })
+  }
 
-  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`;
+  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return user ? (
     <Redirect to={{ pathname: '/' }} />
@@ -45,7 +45,7 @@ const Register: FC = () => {
         </Link>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

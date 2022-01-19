@@ -1,35 +1,35 @@
-import React, { useEffect, useState, FC, ChangeEvent, FormEvent } from 'react';
-import styles from './commonStyles.module.css';
-import { Link, Redirect } from 'react-router-dom';
-import { loginUser } from '../services/actions/user-actions';
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { THistory } from '../types/data-types';
+import React, { useEffect, useState, FC, ChangeEvent, FormEvent } from 'react'
+import styles from './commonStyles.module.css'
+import { Link, Redirect } from 'react-router-dom'
+import { loginUser } from '../services/actions/user-actions'
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { THistory } from '../types/data-types'
 
 const Login: FC = () => {
-  const dispatch = useDispatch();
-  const history = useHistory() as THistory;
-  const user = useSelector((store: any) => store.userReducer.user);
-  const [form, setValue] = useState({ email: '', password: '' });
-  const loginUserSuccess = useSelector((store: any) => store.userReducer.loginUserSuccess);
+  const dispatch = useDispatch()
+  const history = useHistory() as THistory
+  const user = useSelector((store: any) => store.userReducer.user)
+  const [form, setValue] = useState({ email: '', password: '' })
+  const loginUserSuccess = useSelector((store: any) => store.userReducer.loginUserSuccess)
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    dispatch(loginUser(form));
+    e.preventDefault()
+    dispatch(loginUser(form))
   }
 
   useEffect(() => {
-    if (loginUserSuccess) history.replace('/');
-  }, [loginUserSuccess]);
+    if (loginUserSuccess) history.replace('/')
+  }, [loginUserSuccess])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...form, [e.target.name]: e.target.value });
-  };
+    setValue({ ...form, [e.target.name]: e.target.value })
+  }
 
-  const fromPage = history.location?.state?.from;
+  const fromPage = history.location?.state?.from
 
-  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`;
+  const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return user && fromPage ? (
     <Redirect to={fromPage} />
@@ -58,7 +58,7 @@ const Login: FC = () => {
         </Link>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
