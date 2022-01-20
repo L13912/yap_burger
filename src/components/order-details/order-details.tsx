@@ -1,12 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './order-details.module.css';
 import image from '../../images/done.gif';
 import {useSelector} from 'react-redux';
 
-
-const OrderDetails = () => {
-
-    const orderInfo = useSelector(store => store.reducer.order);
+const OrderDetails:FC = () => {
+    const orderInfo = useSelector((store: any) => store.reducer.order);
     const idStyles = `text text_type_digits-large pb-6 ${styles.id}`;
     const idTextStyles = `text text_type_main-medium pb-15 ${styles.idText} ${styles.light}`;
     const imageStyles = `pb-15 ${styles.image}`;

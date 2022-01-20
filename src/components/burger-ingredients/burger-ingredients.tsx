@@ -1,27 +1,24 @@
-import React, {useRef} from 'react';
+import React, {useRef, SyntheticEvent, FC} from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
 import {useSelector} from 'react-redux';
 
+import {TCard, TIngredients} from "../../types/data-types";
 
-const BurgerIngredients = () => {
-    const ingredients = useSelector(store => store.reducer.ingredients);
+const BurgerIngredients:FC = () => {
+    const ingredients = useSelector((store: any) => store.reducer.ingredients);
     const [current, setCurrent] = React.useState('Булки');
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const title = `mb-6 ${styles.title}`;
     const cards = `ml-4 mb-8 ${styles.cards}`;
     const scrollContClasses = `custom-scroll mt-10 mb-10 ${styles.scrollCont}`;
 
-    const buns = [];
-    const sauces = [];
-    const main = [];
+    const buns: Array<TCard> = [];
+    const sauces: Array<TCard> = [];
+    const main: Array<TCard> = [];
 
-    const bunsRef = useRef(null);
-    const saucesRef = useRef(null);
-    const mainRef = useRef(null);
-
-    function sortIngredients(ingredients) {
+    function sortIngredients(ingredients: TIngredients) {
         for (const item of ingredients) {
             if (item.type === 'bun') buns.push(item);
             if (item.type === 'sauce') sauces.push(item);
@@ -29,8 +26,12 @@ const BurgerIngredients = () => {
         }
     }
 
-    function handleScroll(e) {
-        const scrollPos = e.target.scrollTop;
+    const bunsRef = useRef<HTMLElement>(null!);
+    const saucesRef = useRef<HTMLElement>(null!);
+    const mainRef = useRef<HTMLElement>(null!);
+
+    function handleScroll(e: SyntheticEvent ) {
+        const scrollPos = e.currentTarget.scrollTop;
         const bunsPos = bunsRef.current.offsetTop / 2;
         const saucesPos = saucesRef.current.offsetTop / 2;
         const mainPos = mainRef.current.offsetTop / 2;

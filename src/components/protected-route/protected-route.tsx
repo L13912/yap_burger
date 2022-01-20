@@ -1,9 +1,10 @@
 import {Route, Redirect} from 'react-router-dom';
+import React, {FC} from 'react';
 import {useSelector} from "react-redux";
-import PropTypes from "prop-types";
+import {TProtectedRoute} from "../../types/data-types";
 
-export function ProtectedRoute({children, ...rest}) {
-    const user = useSelector(store => store.userReducer.user);
+const ProtectedRoute:FC<TProtectedRoute> = ({children, ...rest}) => {
+    const user = useSelector((store: any) => store.userReducer.user);
 
     return (
         <Route
@@ -17,8 +18,6 @@ export function ProtectedRoute({children, ...rest}) {
             }
         />
     );
-}
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.element.isRequired,
 };
+
+export default ProtectedRoute;
