@@ -55,7 +55,7 @@ const login = async (user: TUser) => {
   return obj
 }
 
-const logout = async () => {
+const logout = async (user: TUser) => {
   const token = localStorage.getItem('refreshToken')
   const res = await fetch(`${API_URL}/auth/logout`, {
     method: 'POST',

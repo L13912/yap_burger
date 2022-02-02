@@ -44,7 +44,7 @@ const Profile: FC = () => {
     setEdited(false)
   }
 
-  const logout = () => dispatch(logoutUser())
+  const logout = () => dispatch(logoutUser(user))
 
   const linkClasses = `${styles.profileLink} text text_type_main-medium text_color_inactive pl-2`
   const activeLinkClasses = `${styles.profileLink} mt-10 text text_type_main-medium text_color_primary pl-2`

@@ -1,4 +1,6 @@
 import { register, login, forgotRequest, logout, getAccessToken, getUserData, patchUserData, resetRequest } from '../../utils/getData'
+import {TUser} from "../../types/data-types";
+import { AppDispatch} from "../../utils";
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_REQUEST_SUCCESS = 'REGISTER_USER_REQUEST_SUCCESS'
@@ -29,8 +31,121 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_REQUEST_SUCCESS = 'LOGOUT_REQUEST_SUCCESS'
 export const LOGOUT_REQUEST_FAILED = 'LOGOUT_REQUEST_FAILED'
 
-export function registerUser(user) {
-  return function (dispatch) {
+export type TUserActions =
+    IRegisterUserRequest |
+    IRegisterUserRequestSuccess |
+    IRegisterUserRequestFailed  |
+    ILoginUserRequest |
+    ILoginUserRequestSuccess |
+    ILoginUserRequestFailed |
+    ISetIsAuth |
+    IResetIsAuth |
+    ISetUser |
+    IResetUser |
+    IGetUserRequest |
+    IGetUserRequestSuccess |
+    IGetUserRequestFailed |
+    IForgotPasswordRequest |
+    IForgotPasswordSuccess |
+    IForgotPasswordFailed |
+    IResetPasswordRequest |
+    IResetPasswordSuccess |
+    IResetPasswordFailed |
+    ILogoutRequest |
+    ILogoutSuccess |
+    ILogoutFailed;
+
+
+export interface IRegisterUserRequest {
+  readonly type: typeof REGISTER_USER_REQUEST;
+}
+
+export interface IRegisterUserRequestSuccess {
+  readonly type: typeof REGISTER_USER_REQUEST_SUCCESS;
+}
+
+export interface IRegisterUserRequestFailed {
+  readonly type: typeof REGISTER_USER_REQUEST_FAILED;
+}
+
+export interface ILoginUserRequest {
+  readonly type: typeof LOGIN_REQUEST;
+}
+
+export interface ILoginUserRequestSuccess {
+  readonly type: typeof LOGIN_REQUEST_SUCCESS;
+}
+
+export interface ILoginUserRequestFailed {
+  readonly type: typeof LOGIN_REQUEST_FAILED;
+}
+
+export interface ISetIsAuth {
+  readonly type: typeof SET_IS_AUTH;
+}
+
+export interface IResetIsAuth {
+  readonly type: typeof RESET_IS_AUTH;
+}
+
+export interface ISetUser {
+  readonly type: typeof SET_USER;
+}
+
+export interface IResetUser {
+  readonly type: typeof RESET_USER;
+}
+
+export interface IGetUserRequest {
+  readonly type: typeof GET_USER_REQUEST;
+}
+
+export interface IGetUserRequestSuccess {
+  readonly type: typeof GET_USER_REQUEST_SUCCESS;
+}
+
+export interface IGetUserRequestFailed {
+  readonly type: typeof GET_USER_REQUEST_FAILED;
+}
+
+export interface IForgotPasswordRequest {
+  readonly type: typeof FORGOT_PASSWORD_REQUEST;
+}
+
+export interface IForgotPasswordSuccess {
+  readonly type: typeof FORGOT_PASSWORD_REQUEST_SUCCESS;
+}
+
+export interface IForgotPasswordFailed {
+  readonly type: typeof FORGOT_PASSWORD_REQUEST_FAILED;
+}
+
+export interface IResetPasswordRequest {
+  readonly type: typeof RESET_PASSWORD_REQUEST;
+}
+
+export interface IResetPasswordSuccess {
+  readonly type: typeof RESET_PASSWORD_REQUEST_SUCCESS;
+}
+
+export interface IResetPasswordFailed {
+  readonly type: typeof RESET_PASSWORD_REQUEST_FAILED;
+}
+
+export interface ILogoutRequest {
+  readonly type: typeof LOGOUT_REQUEST;
+}
+
+export interface ILogoutSuccess {
+  readonly type: typeof LOGOUT_REQUEST_SUCCESS;
+}
+
+export interface ILogoutFailed {
+  readonly type: typeof LOGOUT_REQUEST_FAILED;
+}
+
+export function registerUser(user: TUser) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: REGISTER_USER_REQUEST })
     register(user)
       .then(res => {
@@ -47,8 +162,8 @@ export function registerUser(user) {
   }
 }
 
-export function loginUser(user) {
-  return async function (dispatch) {
+export function loginUser(user: TUser) {
+  return async function (dispatch: AppDispatch) {
     dispatch({ type: LOGIN_REQUEST })
     login(user)
       .then(res => {
@@ -67,8 +182,8 @@ export function loginUser(user) {
   }
 }
 
-export function patchUser(user) {
-  return async function (dispatch) {
+export function patchUser(user: TUser) {
+  return async function (dispatch: AppDispatch) {
     try {
       dispatch({ type: GET_USER_REQUEST })
       const token = await getAccessToken()
@@ -83,7 +198,7 @@ export function patchUser(user) {
 }
 
 export function getUser() {
-  return async function (dispatch) {
+  return async function (dispatch: AppDispatch) {
     try {
       dispatch({ type: GET_USER_REQUEST })
       const token = await getAccessToken()
@@ -98,8 +213,8 @@ export function getUser() {
   }
 }
 
-export function forgotPassword(user) {
-  return async function (dispatch) {
+export function forgotPassword(user: TUser) {
+  return async function (dispatch: AppDispatch) {
     dispatch({ type: FORGOT_PASSWORD_REQUEST })
     forgotRequest(user)
       .then(res => {
@@ -115,8 +230,8 @@ export function forgotPassword(user) {
   }
 }
 
-export function resetPassword(user) {
-  return async function (dispatch) {
+export function resetPassword(user: TUser) {
+  return async function (dispatch: AppDispatch) {
     dispatch({ type: RESET_PASSWORD_REQUEST })
     resetRequest(user)
       .then(res => {
@@ -132,8 +247,8 @@ export function resetPassword(user) {
   }
 }
 
-export function logoutUser(user) {
-  return async function (dispatch) {
+export function logoutUser(user: TUser) {
+  return async function (dispatch: AppDispatch) {
     dispatch({ type: LOGOUT_REQUEST })
     dispatch({ type: RESET_USER })
     dispatch({ type: RESET_IS_AUTH })

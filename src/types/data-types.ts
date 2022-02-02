@@ -52,10 +52,11 @@ export type TProtectedRoute = {
 }
 
 export type TUser = {
-  readonly id: number
-  readonly password: string
-  readonly email: string
-  readonly name: string
+  readonly id?: number
+  readonly password?: string
+  readonly login?: string
+  readonly email?: string
+  readonly name?: string
 }
 
 export type THistory = {
