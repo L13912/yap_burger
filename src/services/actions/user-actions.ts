@@ -1,6 +1,5 @@
 import { register, login, forgotRequest, logout, getAccessToken, getUserData, patchUserData, resetRequest } from '../../utils/getData'
-import {TUser} from "../../types/data-types";
-import { AppDispatch} from "../../utils";
+import {TUser, TToken, AppDispatch} from "../../types/data-types";
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_REQUEST_SUCCESS = 'REGISTER_USER_REQUEST_SUCCESS'
@@ -82,6 +81,8 @@ export interface ILoginUserRequestFailed {
 
 export interface ISetIsAuth {
   readonly type: typeof SET_IS_AUTH;
+  readonly refreshToken: string;
+
 }
 
 export interface IResetIsAuth {
@@ -90,6 +91,7 @@ export interface IResetIsAuth {
 
 export interface ISetUser {
   readonly type: typeof SET_USER;
+  readonly user: TUser;
 }
 
 export interface IResetUser {
@@ -186,7 +188,7 @@ export function patchUser(user: TUser) {
   return async function (dispatch: AppDispatch) {
     try {
       dispatch({ type: GET_USER_REQUEST })
-      const token = await getAccessToken()
+      const token: TToken = await getAccessToken()
       const res = await patchUserData(user, token.accessToken)
       dispatch({ type: GET_USER_REQUEST_SUCCESS })
       dispatch({ type: SET_USER, user: res })
@@ -201,7 +203,7 @@ export function getUser() {
   return async function (dispatch: AppDispatch) {
     try {
       dispatch({ type: GET_USER_REQUEST })
-      const token = await getAccessToken()
+      const token: TToken = await getAccessToken()
       const res = await getUserData(token.accessToken)
       dispatch({ type: GET_USER_REQUEST_SUCCESS })
       dispatch({ type: SET_USER, user: res })

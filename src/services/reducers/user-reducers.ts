@@ -19,10 +19,32 @@ import {
   RESET_PASSWORD_REQUEST_SUCCESS,
   RESET_PASSWORD_REQUEST_FAILED,
   LOGOUT_REQUEST_SUCCESS,
-  LOGOUT_REQUEST
+  LOGOUT_REQUEST, TUserActions
 } from '../actions/user-actions'
+import {TUser} from "../../types/data-types";
 
-const initialState = {
+export type TUserState = {
+  registerUserRequest: boolean,
+  registerUserRequestFailed: boolean,
+  registerUserSuccess: boolean,
+  loginRequest: boolean,
+  loginRequestFailed: boolean,
+  loginUserSuccess: boolean,
+  user: TUser | null,
+  token: string,
+  forgotPasswordSuccess: boolean,
+  forgotPasswordRequest: boolean,
+  forgotPasswordRequestFailed: boolean,
+  resetPasswordSuccess: boolean,
+  resetPasswordRequest: boolean,
+  resetPasswordRequestFailed: boolean,
+  isAuth: boolean,
+  getUserRequest: boolean,
+  getUserRequestFailed: boolean,
+  isUserLoaded: boolean
+};
+
+const initialState: TUserState = {
   registerUserRequest: false,
   registerUserRequestFailed: false,
   registerUserSuccess: false,
@@ -34,10 +56,16 @@ const initialState = {
   forgotPasswordRequestFailed: true,
   resetPasswordSuccess: false,
   resetPasswordRequest: false,
-  resetPasswordRequestFailed: true
+  resetPasswordRequestFailed: true,
+  isAuth: false,
+  loginRequest: false,
+  loginRequestFailed: false,
+  getUserRequest: false,
+  getUserRequestFailed: false,
+  isUserLoaded: false
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserActions): TUserState  => {
   switch (action.type) {
     case REGISTER_USER_REQUEST: {
       return { ...state, registerUserRequest: true }

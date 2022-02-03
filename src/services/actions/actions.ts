@@ -1,6 +1,5 @@
 import { getIngredientsData, getOrderData } from '../../utils/getData';
-import {TIngredients} from "../../types/data-types";
-import { AppDispatch} from "../../utils";
+import {TIngredients, AppDispatch} from "../../types/data-types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
@@ -19,7 +18,7 @@ export const GET_ORDER_SUCCESS: 'GET_ORDER_SUCCESS' = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_ERROR: 'GET_ORDER_ERROR' = 'GET_ORDER_ERROR';
 export const CLEAR_ORDER: 'CLEAR_ORDER' = 'CLEAR_ORDER';
 
-export type TUserActions =
+export type TActions =
     IGetIngredientsRequest |
     IGetIngredientsSuccess |
     IGetIngredientsFailed |

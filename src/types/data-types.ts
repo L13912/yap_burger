@@ -1,4 +1,16 @@
 import { ReactNode } from 'react'
+import { store } from '../services/store'
+import { ThunkAction } from 'redux-thunk'
+import { Action, ActionCreator } from 'redux'
+import { Dispatch } from 'redux'
+import { TUserActions } from '../services/actions/user-actions'
+import { TActions } from '../services/actions/actions'
+
+export type RootState = ReturnType<typeof store.getState>
+export type TApplicationActions = TUserActions | TActions
+
+export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TApplicationActions>>
+export type AppDispatch = Dispatch<TApplicationActions>
 
 export type TCard = {
   _id: string
@@ -66,4 +78,9 @@ export type THistory = {
       from: string
     }
   }
+}
+
+export type TToken = {
+  readonly accessToken: string
+  readonly refreshToken: string
 }
