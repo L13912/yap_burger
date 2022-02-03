@@ -11,9 +11,23 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
-  CLEAR_ORDER
+  CLEAR_ORDER, TActions
 } from '../actions/actions'
 import update from 'immutability-helper'
+import {TCard, TIngredientDetails} from "../../types/data-types";
+
+export type TState = {
+  ingredients: Array<TCard> | null,
+  ingredientsRequest: boolean,
+  ingredientsError: boolean,
+  order: object,
+  orderRequest: boolean,
+  orderError: boolean,
+  constructorIngredients: { buns: Array<TCard>, toppings: Array<TCard> },
+  ingredientDetails: TIngredientDetails,
+  ingredientsFailed: boolean,
+  orderFailed: boolean
+};
 
 const initialState = {
   ingredients: [],
@@ -23,10 +37,12 @@ const initialState = {
   orderRequest: false,
   orderError: false,
   constructorIngredients: { buns: [], toppings: [] },
-  ingredientDetails: {}
+  ingredientDetails: {},
+  ingredientsFailed: false,
+  orderFailed: false
 }
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state: TState = initialState, action: TActions): TState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {

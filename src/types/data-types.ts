@@ -84,3 +84,7 @@ export type TToken = {
   readonly accessToken: string
   readonly refreshToken: string
 }
+
+export type TOrder = {
+  name?: number
+}

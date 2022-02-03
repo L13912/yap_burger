@@ -1,5 +1,5 @@
 import { getIngredientsData, getOrderData } from '../../utils/getData';
-import {TIngredients, AppDispatch} from "../../types/data-types";
+import {TIngredients, AppDispatch, TOrder, TCard, TIngredientDetails} from "../../types/data-types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
@@ -24,7 +24,14 @@ export type TActions =
     IGetIngredientsFailed |
     IGetOrderRequest |
     IGetOrderSuccess |
-    IGetOrderFailed;
+    IGetOrderFailed |
+    IClearOrder |
+    IAddConstructorIngredient |
+    IDeleteConstructorIngredient |
+    ISetIngredientDetails |
+    IDeleteIngredientsDetail |
+    IChangeIngredientsOrder |
+    IClearConstructor;
 
 export interface IGetIngredientsRequest {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
@@ -32,6 +39,9 @@ export interface IGetIngredientsRequest {
 
 export interface IGetIngredientsSuccess {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  readonly ingredients: {
+    data: TIngredients
+  }
 }
 
 export interface IGetIngredientsFailed {
@@ -44,11 +54,46 @@ export interface IGetOrderRequest {
 
 export interface IGetOrderSuccess {
   readonly type: typeof GET_ORDER_SUCCESS;
+  readonly order: TOrder
 }
 
 export interface IGetOrderFailed {
   readonly type: typeof GET_ORDER_ERROR;
 }
+
+export interface IClearOrder {
+  readonly type: typeof CLEAR_ORDER;
+}
+
+export interface IAddConstructorIngredient {
+  readonly type: typeof ADD_CONSTRUCTOR_INGREDIENT;
+  readonly card: TCard;
+}
+
+export interface IDeleteConstructorIngredient {
+  readonly type: typeof DELETE_CONSTRUCTOR_INGREDIENT;
+  readonly card: TCard;
+  readonly guid?: string;
+}
+export interface IClearConstructor {
+  readonly type: typeof CLEAR_CONSTRUCTOR;
+}
+
+export interface ISetIngredientDetails {
+  readonly card: TIngredientDetails;
+  readonly type: typeof SET_INGREDIENT_DETAILS;
+}
+
+export interface IDeleteIngredientsDetail {
+  readonly type: typeof DELETE_INGREDIENT_DETAILS;
+}
+
+export interface IChangeIngredientsOrder {
+  readonly type: typeof CHANGE_INGREDIENTS_ORDER;
+  readonly hoverIndex: number;
+  readonly dragIndex: number
+}
+
 
 export function getIngredients() {
   return function (dispatch: AppDispatch) {

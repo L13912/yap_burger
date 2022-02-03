@@ -65,7 +65,7 @@ const initialState: TUserState = {
   isUserLoaded: false
 }
 
-export const userReducer = (state = initialState, action: TUserActions): TUserState  => {
+export const userReducer = (state: TUserState = initialState, action: TUserActions): TUserState  => {
   switch (action.type) {
     case REGISTER_USER_REQUEST: {
       return { ...state, registerUserRequest: true }
