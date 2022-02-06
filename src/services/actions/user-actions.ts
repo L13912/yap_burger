@@ -82,7 +82,7 @@ export interface ILoginUserRequestFailed {
 export interface ISetIsAuth {
   readonly type: typeof SET_IS_AUTH;
   readonly refreshToken: string;
-
+  readonly accessToken?: string;
 }
 
 export interface IResetIsAuth {

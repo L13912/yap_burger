@@ -22,6 +22,7 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
+import Order from "../feed-order-details/order";
 
 const App:FC = () => {
     const dispatch = useDispatch();
@@ -67,10 +68,23 @@ const App:FC = () => {
                 <ProtectedRoute path='/profile'>
                     <Profile/>
                 </ProtectedRoute>
+                <ProtectedRoute path='/profile/orders'>
+                    <Profile/>
+                </ProtectedRoute>
+                <Route path='/feed'>
+                    <Profile/>
+                </Route>
+                <ProtectedRoute path='/profile/orders/:id'>
+                    <Order/>
+                </ProtectedRoute>
+                <Route path='/feed/:id'>
+                    <Order/>
+                </Route>
                 <Route path='/ingredients/:id' component={Ingredient}/>
                 <Route component={NotFound}/>
             </Switch>
-            {background && <Route path='/ingredients/:id'>
+            {background &&
+            <Route path='/ingredients/:id'>
                 <Modal
                     title='Детали ингредиента'
                     close={handleCloseModal}
@@ -78,8 +92,28 @@ const App:FC = () => {
                     <IngredientDetails/>
                 </Modal>
             </Route>}
+            {background &&
+            <ProtectedRoute path='/profile/orders/:id'>
+                <Modal
+                    title=''
+                    close={handleCloseModal}
+                >
+                    <Order/>
+                </Modal>
+            </ProtectedRoute>
+            }
+            {background &&
+            <Route path='/feed/:id'>
+                <Modal
+                    title=''
+                    close={handleCloseModal}
+                >
+                    <Order/>
+                </Modal>
+            </Route>
+            }
         </div>
     );
-}
+};
 
 export default App;

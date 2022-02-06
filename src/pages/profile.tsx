@@ -1,16 +1,20 @@
 import { useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticEvent } from 'react'
 import styles from './commonStyles.module.css'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, patchUser } from '../services/actions/user-actions'
+import Orders from '../components/orders/orders'
 
 const Profile: FC = () => {
   const user = useSelector((store: any) => store.userReducer.user)
+  const location = useLocation()
   const [edited, setEdited] = useState(false)
   const dispatch = useDispatch()
   const [form, setValue] = useState({ ...user, password: '12345678' })
   const [touched, setTouched] = useState<Array<string>>([])
+
+  const isOrders = location.pathname === '/profile/orders'
 
   useEffect(() => {
     setValue({ ...user, password: '12345678' })
@@ -59,12 +63,12 @@ const Profile: FC = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link to="/profile" className={activeLinkClasses}>
+            <Link to="/profile" className={!isOrders ? activeLinkClasses : linkClasses}>
               Профиль
             </Link>
           </li>
           <li>
-            <Link to="/orders" className={linkClasses}>
+            <Link to="/profile/orders" className={isOrders ? activeLinkClasses : linkClasses}>
               История заказов
             </Link>
           </li>
@@ -78,21 +82,25 @@ const Profile: FC = () => {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </nav>
-      <form className={'form'} onFocus={onFocus} onSubmit={onSave}>
-        <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} icon={'EditIcon'} />
-        <div className={'mb-6'} />
-        <Input placeholder="Email" value={form.email} name="email" onChange={onChange} icon={'EditIcon'} />
-        <div className={'mb-6'} />
-        <Input placeholder="Password" value={form.password} name="password" onChange={onChange} icon={'EditIcon'} type="password" />
-        {edited && (
-          <div className="mt-10">
-            <Button type="secondary" onClick={onCancel}>
-              Отмена
-            </Button>
-            <Button>Сохранить</Button>
-          </div>
-        )}
-      </form>
+      {!isOrders ? (
+        <form className={'form'} onFocus={onFocus} onSubmit={onSave}>
+          <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} icon={'EditIcon'} />
+          <div className={'mb-6'} />
+          <Input placeholder="Email" value={form.email} name="email" onChange={onChange} icon={'EditIcon'} />
+          <div className={'mb-6'} />
+          <Input placeholder="Password" value={form.password} name="password" onChange={onChange} icon={'EditIcon'} type="password" />
+          {edited && (
+            <div className="mt-10">
+              <Button type="secondary" onClick={onCancel}>
+                Отмена
+              </Button>
+              <Button>Сохранить</Button>
+            </div>
+          )}
+        </form>
+      ) : (
+        <Orders />
+      )}
     </div>
   )
 }

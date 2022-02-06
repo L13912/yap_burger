@@ -11,11 +11,11 @@ const getIngredientsData = async () => {
 }
 
 const getOrderData = async (orderList: Array<TCard>) => {
+  const token = localStorage.getItem('accessToken')
   const res = await fetch(`${API_URL}/orders`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    //@ts-ignore
+    headers: { 'Content-Type': 'application/json', authorization: token },
     body: JSON.stringify({
       ingredients: orderList
     })
@@ -127,7 +127,7 @@ const patchUserData = async (user: TUser, token: string) => {
 
 const getAccessToken = async () => {
   const token = localStorage.getItem('refreshToken')
-  if (!token) throw new Error('Авторизуйтесь')
+  if (!token) return '' /*throw new Error('Авторизуйтесь')*/
   const res = await fetch(`${API_URL}/auth/token`, {
     method: 'POST',
     mode: 'cors',
@@ -138,6 +138,8 @@ const getAccessToken = async () => {
   if (!res.ok) {
     throw new Error(obj.message)
   }
+  console.log(obj)
+  localStorage.setItem('accessToken', obj.accessToken)
   return obj
 }
 

@@ -41,7 +41,7 @@ const AppHeader:FC = () => {
                         <Logo/>
                     </Link>
                 </h2>
-                <Link to='/profile' className={styles.login}>
+                <Link to='/profile/orders' className={styles.login}>
                     <h2 className={styles.login}>
                         <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
                         <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>

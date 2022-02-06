@@ -20,7 +20,7 @@
     box-sizing: border-box;
     height: auto;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     position: relative;
     text-align: left;
     margin-top: 100px;

@@ -87,7 +87,7 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
       }
     }
     case SET_IS_AUTH: {
-      localStorage.setItem('refreshToken', action.refreshToken)
+      localStorage.setItem('refreshToken', action.refreshToken);
       return {
         ...state,
         isAuth: true
