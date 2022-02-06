@@ -22,7 +22,8 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
-import Order from "../feed-order-details/order";
+import FeedOrderDetails from "../feed-order-details/feed-order-details";
+import Feed from "../feed/feed";
 
 const App:FC = () => {
     const dispatch = useDispatch();
@@ -65,20 +66,20 @@ const App:FC = () => {
                 <Route path='/register' component={Register} exact={true}/>
                 <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
                 <Route path='/reset-password' component={ResetPassword}/>
+                <Route path='/feed'>
+                    <Feed/>
+                </Route>
                 <ProtectedRoute path='/profile'>
                     <Profile/>
                 </ProtectedRoute>
                 <ProtectedRoute path='/profile/orders'>
                     <Profile/>
                 </ProtectedRoute>
-                <Route path='/feed'>
-                    <Profile/>
-                </Route>
                 <ProtectedRoute path='/profile/orders/:id'>
-                    <Order/>
+                    <FeedOrderDetails/>
                 </ProtectedRoute>
                 <Route path='/feed/:id'>
-                    <Order/>
+                    <FeedOrderDetails/>
                 </Route>
                 <Route path='/ingredients/:id' component={Ingredient}/>
                 <Route component={NotFound}/>
@@ -98,7 +99,7 @@ const App:FC = () => {
                     title=''
                     close={handleCloseModal}
                 >
-                    <Order/>
+                    <FeedOrderDetails/>
                 </Modal>
             </ProtectedRoute>
             }
@@ -108,7 +109,7 @@ const App:FC = () => {
                     title=''
                     close={handleCloseModal}
                 >
-                    <Order/>
+                    <FeedOrderDetails/>
                 </Modal>
             </Route>
             }

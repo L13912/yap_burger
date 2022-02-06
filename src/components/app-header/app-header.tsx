@@ -28,7 +28,7 @@ const AppHeader:FC = () => {
                             <span className={currentPage === '' ? activeClass : inactiveClass}>Конструктор</span>
                         </h2>
                     </Link>
-                    <Link to='/orders' className={itemClasses}>
+                    <Link to='/feed' className={itemClasses}>
                         <h2 className={styles.navItem}>
                             <ListIcon type={currentPage === 'orders' ? 'primary' : 'secondary'}/>
                             <span

@@ -15,7 +15,6 @@ const OrderCard: FC<T> = ({order}) => {
     const history = useHistory();
     const location = useLocation();
     const [isVisible, setVisible] = useState(false);
-    console.log(order)
     const ingredients = useSelector(store => store.reducer.ingredients);
 
 
@@ -28,7 +27,8 @@ const OrderCard: FC<T> = ({order}) => {
 
     const openModal = () => {
         setVisible(!isVisible);
-        history.push(`${location.pathname}/:${order}`, {background: location});
+        console.log(order.number)
+        history.push(`${location.pathname}/:${order.number}`, {background: location});
     }
 
     const statusText:string = order.status === 'done' ? 'Выполнен'
