@@ -1,10 +1,15 @@
 .feed {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feedCont {
     display: flex;
 }
 
 .cont {
     padding: 0 8px 0 0;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 220px);
     overflow-y: auto;
     overflow-x: hidden;
     margin-right: -14px;
@@ -17,5 +22,41 @@
 }
 
 .right {
-    margin-left: 50px;
+    height: calc(100vh - 220px);
+    width: 590px;
+    margin-right: -14px;
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0px auto;
+}
+
+.ordersCont {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+
+.ordersWidth {
+    width: 50%;
+}
+
+.order {
+    color: #00CCCC;
+    list-style: none;
+}
+
+.ordersList {
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.total {
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }

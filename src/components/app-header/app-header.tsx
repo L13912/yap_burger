@@ -30,9 +30,9 @@ const AppHeader:FC = () => {
                     </Link>
                     <Link to='/feed' className={itemClasses}>
                         <h2 className={styles.navItem}>
-                            <ListIcon type={currentPage === 'orders' ? 'primary' : 'secondary'}/>
+                            <ListIcon type={currentPage === 'feed' ? 'primary' : 'secondary'}/>
                             <span
-                                className={currentPage === 'orders' ? activeClass : inactiveClass}>Лента заказов</span>
+                                className={currentPage === 'feed' ? activeClass : inactiveClass}>Лента заказов</span>
                         </h2>
                     </Link>
                 </nav>
