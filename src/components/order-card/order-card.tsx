@@ -1,10 +1,11 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {FC, useState} from "react";
 import {useHistory, useLocation} from 'react-router-dom';
-import { useSelector } from "../../utils/hooks";
-import { TOrder, TCard } from "../../types/data-types";
+import {useDispatch, useSelector} from "../../utils/hooks";
+import {TCard, TOrder} from "../../types/data-types";
 import styles from './order-card.module.css';
-import {useDispatch} from '../../utils/hooks';
+import {getDate} from "../../utils/date";
+
 
 type T = {
     order: TOrder;
@@ -34,6 +35,7 @@ const OrderCard: FC<T> = ({order}) => {
     const statusText:string = order.status === 'done' ? 'Выполнен'
         : order.status === 'pending' ? 'Готовится' : 'Создан';
 
+    const orderDate: string = getDate(order);
 
     const contClass = `${styles.cont} p-6 mr-2 mb-4`;
     const numberClass = `${styles.number} text text_type_main-small`;
@@ -51,7 +53,7 @@ const OrderCard: FC<T> = ({order}) => {
                #{order.number}
                 </span>
                 <span className={dateClass}>
-                            {order.createdAt}
+                            {orderDate}
                 </span>
             </div>
             <div className={nameClass}>

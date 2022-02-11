@@ -7,7 +7,6 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
 
-
 const AppHeader:FC = () => {
     const location = useLocation();
     const currentPage = location.pathname.split('/')[1];

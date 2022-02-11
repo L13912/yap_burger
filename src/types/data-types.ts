@@ -97,7 +97,7 @@ export type TOrder = {
   readonly _id?: string
   readonly ingredients?: Array<string>
   readonly status: string
-  readonly createdAt?: string
+  readonly createdAt: string | number | Date
   readonly name?: string
   readonly number?: number
   readonly updatedAt?: string
