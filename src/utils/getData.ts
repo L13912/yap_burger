@@ -3,11 +3,7 @@ import { TCard, TUser } from '../types/data-types'
 
 const getIngredientsData = async () => {
   const res = await fetch(`${API_URL}/ingredients`)
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const getOrderData = async (orderList: Array<TCard>) => {
@@ -20,11 +16,7 @@ const getOrderData = async (orderList: Array<TCard>) => {
       ingredients: orderList
     })
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const register = async (user: TUser) => {
@@ -34,11 +26,7 @@ const register = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const login = async (user: TUser) => {
@@ -48,11 +36,7 @@ const login = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const logout = async (user: TUser) => {
@@ -63,11 +47,7 @@ const logout = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token })
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const forgotRequest = async (user: TUser) => {
@@ -77,11 +57,7 @@ const forgotRequest = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const resetRequest = async (user: TUser) => {
@@ -91,11 +67,7 @@ const resetRequest = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const getUserData = async (token: string) => {
@@ -104,11 +76,7 @@ const getUserData = async (token: string) => {
     mode: 'cors',
     headers: { 'Content-Type': 'application/json', authorization: token }
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const patchUserData = async (user: TUser, token: string) => {
@@ -118,11 +86,7 @@ const patchUserData = async (user: TUser, token: string) => {
     headers: { 'Content-Type': 'application/json', authorization: token },
     body: JSON.stringify(user)
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  return obj
+  return checkResponse(res);
 }
 
 const getAccessToken = async () => {
@@ -134,13 +98,7 @@ const getAccessToken = async () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token })
   })
-  const obj = await getRequestBody(res)
-  if (!res.ok) {
-    throw new Error(obj.message)
-  }
-  console.log(obj)
-  localStorage.setItem('accessToken', obj.accessToken)
-  return obj
+  return checkResponse(res);
 }
 
 async function getRequestBody(res: Response) {
@@ -150,6 +108,15 @@ async function getRequestBody(res: Response) {
   } catch {
     return { message: text }
   }
+}
+
+async function checkResponse(res: Response) {
+  const obj = await getRequestBody(res)
+  if (!res.ok) {
+    throw new Error(obj.message)
+  }
+  if (obj.accessToken) localStorage.setItem('accessToken', obj.accessToken)
+  return obj
 }
 
 export {

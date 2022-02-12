@@ -34,7 +34,6 @@ const FeedOrderDetails: FC = () => {
         if (!ingredientsIds) return [];
         for (const item of ingredientsIds) {
             orderIngredients.push(
-
                 ingredients?.find((el: TCard) => el._id === item)
             );
         }
@@ -44,9 +43,6 @@ const FeedOrderDetails: FC = () => {
     const filterIngredients = orderIngredients
         .filter((item, index, arr) => arr.indexOf(item) === index)
         .map((item) => [item, orderIngredients.filter((el) => el === item).length]);
-
-
-
 
     const openModal = () => {
         setVisible(!isVisible);

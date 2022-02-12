@@ -3,16 +3,16 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { loginUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from '../utils/hooks';
 import { useHistory } from 'react-router-dom'
 import { THistory } from '../types/data-types'
 
 const Login: FC = () => {
   const dispatch = useDispatch()
   const history = useHistory() as THistory
-  const user = useSelector((store: any) => store.userReducer.user)
-  const [form, setValue] = useState({ email: '', password: '' })
-  const loginUserSuccess = useSelector((store: any) => store.userReducer.loginUserSuccess)
+  const user = useSelector(store => store.userReducer.user)
+  const [form, setValue] = useState({ email: '', password: '', name: '' })
+  const loginUserSuccess = useSelector(store => store.userReducer.loginUserSuccess)
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -33,7 +33,7 @@ const Login: FC = () => {
 
   return user && fromPage ? (
     <Redirect to={fromPage} />
-  ) : user ? (
+  ) : user.email !== '' ? (
     <Redirect to={{ pathname: '/' }} />
   ) : (
     <div className={styles.page}>

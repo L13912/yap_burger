@@ -2,7 +2,7 @@ import React, {useEffect, FC} from 'react';
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {Switch, Route, useLocation, useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch} from '../../utils/hooks';
 
 import styles from './app.module.css';
 

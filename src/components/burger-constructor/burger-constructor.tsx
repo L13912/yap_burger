@@ -5,7 +5,7 @@ import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from '../../utils/hooks';
 import {useDrop} from 'react-dnd';
 import {
     ADD_CONSTRUCTOR_INGREDIENT,
@@ -19,8 +19,8 @@ import {TCard, TConstructorIngredients} from "../../types/data-types";
 
 const BurgerConstructor:FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector((store: any) => store.userReducer.user);
-    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
+    const user = useSelector(store => store.userReducer.user);
+    const ingredients = useSelector(store => store.reducer.constructorIngredients);
     const [total, setTotal] = React.useState(0);
     const [isVisible, setVisible] = useState(false);
 
@@ -60,6 +60,7 @@ const BurgerConstructor:FC = () => {
         const orderList = [];
         for (let bun of ingredients.buns) orderList.push(bun._id);
         for (let topping of ingredients.toppings) orderList.push(topping._id);
+        // @ts-ignore
         dispatch(getOrder(orderList))
     }
 

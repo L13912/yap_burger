@@ -1,5 +1,5 @@
 import { getIngredientsData, getOrderData } from '../../utils/getData';
-import {TIngredients, AppDispatch, TOrder, TCard, TIngredientDetails} from "../../types/data-types";
+import {TIngredients, AppDispatch, TOrder, TCard, TIngredientDetails, AppThunk} from "../../types/data-types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';

@@ -1,10 +1,10 @@
 import {Route, Redirect} from 'react-router-dom';
 import React, {FC} from 'react';
-import {useSelector} from "react-redux";
+import {useSelector} from '../../utils/hooks';
 import {TProtectedRoute} from "../../types/data-types";
 
 const ProtectedRoute:FC<TProtectedRoute> = ({children, ...rest}) => {
-    const user = useSelector((store: any) => store.userReducer.user);
+    const user = useSelector(store => store.userReducer.user);
 
     return (
         <Route

@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from '../../utils/hooks';
 import OrderCard from "../order-card/order-card";
 
 const Orders:FC = () => {
-    const orders = useSelector((store: any) => { return store.wsReduser.orders}) || [];
+    const orders = useSelector(store => { return store.wsReduser.orders}) || [];
     const dispatch = useDispatch();
     const scrollCont = `custom-scroll  ${styles.cont}`;
 

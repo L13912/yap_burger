@@ -1,5 +1,5 @@
 import { register, login, forgotRequest, logout, getAccessToken, getUserData, patchUserData, resetRequest } from '../../utils/getData'
-import {TUser, TToken, AppDispatch} from "../../types/data-types";
+import {TUser, TToken, AppDispatch, AppThunk} from "../../types/data-types";
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_REQUEST_SUCCESS = 'REGISTER_USER_REQUEST_SUCCESS'

@@ -28,10 +28,6 @@
     flex: auto;
 }
 
-.image {
-    flex: auto;
-}
-
 .totalCost {
     display: flex;
     flex-flow: row nowrap;
@@ -47,3 +43,59 @@
     color: brown;
 }
 
+
+.imageBorder {
+    border: 2px solid #801ab2;
+    background-color: black;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 100%;
+    margin-right: -20px;
+    display: flex;box-sizing: border-box;
+    position: relative;
+}
+
+.imageBorder:nth-child(1) {
+    z-index: 10;
+}
+.imageBorder:nth-child(2) {
+    z-index: 9;
+}
+.imageBorder:nth-child(3) {
+    z-index: 8;
+}
+.imageBorder:nth-child(4) {
+    z-index: 7;
+}
+.imageBorder:nth-child(5) {
+    z-index: 6;
+}
+.imageBorder:nth-child(6) {
+    z-index: 5;
+}
+
+
+.image {
+    text-align: center;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    position: relative;
+}
+
+.count {
+    z-index: 6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(28, 28, 33, 0.6);
+    border-radius: 50%;
+}

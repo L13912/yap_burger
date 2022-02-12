@@ -1,22 +1,21 @@
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {FC, useState} from "react";
 import {useHistory, useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from "../../utils/hooks";
+import {useSelector} from "../../utils/hooks";
 import {TCard, TOrder} from "../../types/data-types";
 import styles from './order-card.module.css';
 import {getDate} from "../../utils/date";
-
 
 type T = {
     order: TOrder;
 };
 
 const OrderCard: FC<T> = ({order}) => {
-    const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const [isVisible, setVisible] = useState(false);
     const ingredients = useSelector(store => store.reducer.ingredients);
+    const orderIngredients = order.ingredients;
 
 
     const total = order?.ingredients?.reduce((prev, current) => {
@@ -45,6 +44,12 @@ const OrderCard: FC<T> = ({order}) => {
     const imageContClass = `${styles.items} mt-6`
     const res = order.status
     const statusClass = `text text_type_main-small ${styles[res]}`;
+    const restClass = `text text_type_digits-default ${styles.count}`
+
+    function uniqIngredients(array: Array<string> | undefined) {
+        const res: any = new Set(array);
+        return [...res];
+    }
 
     return (
         <div className={contClass} onClick={openModal}>
@@ -64,9 +69,14 @@ const OrderCard: FC<T> = ({order}) => {
             </div>
             <div className={imageContClass}>
                 <div className={styles.images}>
-                    {order?.ingredients?.map((itemId:string, index: number) => {
+                    {uniqIngredients(order?.ingredients).filter((itemId:string, index: number) => index < 6).map((itemId:string, index: number) => {
                     const currentIngredient = ingredients?.find((el: TCard) => el._id === itemId);
-                    return (<img className={styles.image} src={currentIngredient?.image} key={index} alt={'ingredient_picture'}/>)
+                    const rest = order?.ingredients ? (order?.ingredients?.length - 6) : 0
+                    return (
+                        <div className={styles.imageBorder} key={index}>
+                            <img className={styles.image} src={currentIngredient?.image} key={index} alt={'ingredient_picture'}/>
+                            {index === 5 && <span className={restClass}>+{rest}</span>}
+                        </div>)
                 })}
                 </div>
                 <div className={totalClass}>
@@ -76,7 +86,7 @@ const OrderCard: FC<T> = ({order}) => {
             </div>
         </div>
     );
-}
+};
 
 export default OrderCard;
 

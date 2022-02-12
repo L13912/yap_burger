@@ -3,7 +3,6 @@ import { TWsActions } from './actions/ws-actions'
 import { Middleware, MiddlewareAPI } from 'redux'
 import { TWsActionsType } from '../types/data-types'
 
-
 export const socketMiddleware = (wsUrl: string, wsActions: TWsActionsType): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null
@@ -17,7 +16,8 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWsActionsType): Midd
         socket = new WebSocket(`${wsUrl}/all`)
       }
       if (type === wsPrivatInit) {
-        socket = new WebSocket(`${wsUrl}?token=${localStorage.getItem('accessToken')!.split(' ')[1]}`)
+        const token = localStorage.getItem('accessToken')
+        socket = new WebSocket(`${wsUrl}?token=${token!.split(' ')[1]}`)
       }
 
       if (socket) {

@@ -16,11 +16,16 @@ import {
 import update from 'immutability-helper'
 import {TCard, TIngredientDetails} from "../../types/data-types";
 
+type TOrderDetails = {
+  name?: string,
+  order?: { number: number }
+}
+
 export type TState = {
   ingredients: Array<TCard> | null,
   ingredientsRequest: boolean,
   ingredientsError: boolean,
-  order: object,
+  order: TOrderDetails,
   orderRequest: boolean,
   orderError: boolean,
   constructorIngredients: { buns: Array<TCard>, toppings: Array<TCard> },

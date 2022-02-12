@@ -30,7 +30,7 @@ export type TUserState = {
   loginRequest: boolean,
   loginRequestFailed: boolean,
   loginUserSuccess: boolean,
-  user: TUser | null,
+  user: TUser,
   token: string,
   forgotPasswordSuccess: boolean,
   forgotPasswordRequest: boolean,
@@ -49,7 +49,7 @@ const initialState: TUserState = {
   registerUserRequestFailed: false,
   registerUserSuccess: false,
   loginUserSuccess: false,
-  user: null,
+  user: { email: '', name: '' },
   token: '',
   forgotPasswordSuccess: false,
   forgotPasswordRequest: false,
@@ -153,7 +153,7 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
     case RESET_USER: {
       return {
         ...state,
-        user: null
+        user: { email: '', name: '' }
       }
     }
 

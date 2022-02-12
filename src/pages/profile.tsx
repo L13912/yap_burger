@@ -2,19 +2,19 @@ import { useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticE
 import styles from './commonStyles.module.css'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from '../utils/hooks';
 import { logoutUser, patchUser } from '../services/actions/user-actions'
 import Orders from '../components/orders/orders'
 
 const Profile: FC = () => {
-  const user = useSelector((store: any) => store.userReducer.user)
+  const user = useSelector(store => store.userReducer.user)
   const location = useLocation()
   const [edited, setEdited] = useState(false)
   const dispatch = useDispatch()
   const [form, setValue] = useState({ ...user, password: '12345678' })
   const [touched, setTouched] = useState<Array<string>>([])
 
-  const isOrders = location.pathname === '/profile/orders'
+  const isOrders = user.email !== '' && location.pathname === '/profile/orders'
 
   useEffect(() => {
     setValue({ ...user, password: '12345678' })
@@ -36,6 +36,7 @@ const Profile: FC = () => {
   function onSave(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault()
     const body: any = {}
+    // @ts-ignore
     touched.forEach(el => (body[el] = form[el]))
     setTouched([])
     setEdited(false)
@@ -52,7 +53,7 @@ const Profile: FC = () => {
 
   const linkClasses = `${styles.profileLink} text text_type_main-medium text_color_inactive pl-2`
   const activeLinkClasses = `${styles.profileLink} mt-10 text text_type_main-medium text_color_primary pl-2`
-  return !user ? (
+  return user.email === '' ? (
     <Redirect
       to={{
         pathname: '/login'

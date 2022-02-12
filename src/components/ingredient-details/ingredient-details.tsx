@@ -1,22 +1,23 @@
 import React, {useEffect, useState, FC} from 'react';
 import styles from './indredient-details.module.css';
-import {useSelector} from "react-redux";
+import {useSelector} from '../../utils/hooks';
 import {useParams} from 'react-router-dom';
 import {TCard, TIngredientDetails} from "../../types/data-types";
 
 const IngredientDetails:FC<TIngredientDetails> = () => {
     const {id}: {id: string} = useParams();
     const [card, setCard] = useState<TCard>();
-    const ingredients = useSelector((store: any) => store.reducer.ingredients);
-    const tCard = useSelector((store: any) => store.reducer.ingredientDetails);
+    const ingredients = useSelector(store => store.reducer.ingredients);
+    const tCard = useSelector(store => store.reducer.ingredientDetails);
 
     function getCurrentIngredient() {
         if (!id) return tCard;
-        return ingredients.find((i: { _id: string; }) => i._id === id);
+        return ingredients?.find((i: { _id: string; }) => i._id === id);
     }
 
     useEffect(() => {
         const crd = getCurrentIngredient()
+        // @ts-ignore
         setCard(crd === null ? {} : crd);
     }, [ingredients])
 

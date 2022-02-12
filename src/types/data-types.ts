@@ -1,4 +1,4 @@
-import {PropsWithChildren, ReactNode} from 'react'
+import {ReactNode} from 'react'
 import { store } from '../services/store'
 import { ThunkAction } from 'redux-thunk'
 import { Action, ActionCreator } from 'redux'
@@ -75,8 +75,8 @@ export type TUser = {
   readonly id?: number
   readonly password?: string
   readonly login?: string
-  readonly email?: string
-  readonly name?: string
+  email: string
+  name: string
 }
 
 export type THistory = {

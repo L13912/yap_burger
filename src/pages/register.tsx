@@ -1,5 +1,5 @@
 import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from '../utils/hooks';
 import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { registerUser } from '../services/actions/user-actions'
@@ -7,9 +7,9 @@ import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 const Register: FC = () => {
   const dispatch = useDispatch()
-  const user = useSelector((store: any) => store.userReducer.user)
+  const user = useSelector(store => store.userReducer.user)
   const [form, setValue] = useState({ name: '', email: '', password: '' })
-  const registerUserSuccess = useSelector((store: any) => store.userReducer.registerUserSuccess)
+  const registerUserSuccess = useSelector(store => store.userReducer.registerUserSuccess)
 
   function onSubmit(e: FormEvent): void {
     e.preventDefault()

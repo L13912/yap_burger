@@ -3,7 +3,7 @@ import styles from './ingredient-card.module.css';
 import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import image from '../../images/img.png';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from '../../utils/hooks';
 import {useDrag} from 'react-dnd';
 import {useHistory, useLocation} from 'react-router-dom';
 import {SET_INGREDIENT_DETAILS} from "../../services/actions/actions";
@@ -23,7 +23,7 @@ const IngredientCard:FC<TIngredientCard> = ({card}) => {
             opacity: monitor.isDragging() ? 0.5 : 1,
         }),
     })
-    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
+    const ingredients = useSelector(store => store.reducer.constructorIngredients);
     const count = () => {
         let value = 0;
         for (let bun of ingredients.buns)
