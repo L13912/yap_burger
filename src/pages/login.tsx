@@ -3,7 +3,7 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { loginUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import {useDispatch, useSelector} from '../utils/hooks';
+import { useDispatch, useSelector } from '../utils/hooks'
 import { useHistory } from 'react-router-dom'
 import { THistory } from '../types/data-types'
 

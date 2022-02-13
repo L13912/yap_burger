@@ -95,8 +95,7 @@ export interface IChangeIngredientsOrder {
 }
 
 
-export function getIngredients() {
-  return function (dispatch: AppDispatch) {
+export const getIngredients: AppThunk = () => async (dispatch: AppDispatch) => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST
     })
@@ -119,11 +118,9 @@ export function getIngredients() {
           type: GET_INGREDIENTS_ERROR
         })
       })
-  }
 }
 
-export function getOrder(orderList: TIngredients) {
-  return function (dispatch: AppDispatch) {
+export const getOrder: AppThunk = (orderList: TIngredients) => async (dispatch: AppDispatch) => {
     dispatch({
       type: GET_ORDER_REQUEST
     })
@@ -146,5 +143,4 @@ export function getOrder(orderList: TIngredients) {
           type: GET_ORDER_ERROR
         })
       })
-  }
 }

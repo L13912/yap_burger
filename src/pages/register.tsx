@@ -1,5 +1,5 @@
 import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
-import {useDispatch, useSelector} from '../utils/hooks';
+import { useDispatch, useSelector } from '../utils/hooks'
 import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { registerUser } from '../services/actions/user-actions'
@@ -22,7 +22,7 @@ const Register: FC = () => {
 
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
-  return user ? (
+  return user.email !== '' ? (
     <Redirect to={{ pathname: '/' }} />
   ) : registerUserSuccess ? (
     <Redirect to={{ pathname: '/' }} />

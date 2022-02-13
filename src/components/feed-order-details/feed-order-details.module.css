@@ -87,3 +87,7 @@
 .sum {
     justify-self: end;
 }
+
+.number {
+    margin-top: -120px;
+}

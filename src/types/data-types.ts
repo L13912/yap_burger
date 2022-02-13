@@ -1,4 +1,4 @@
-import {ReactNode} from 'react'
+import { ReactNode } from 'react'
 import { store } from '../services/store'
 import { ThunkAction } from 'redux-thunk'
 import { Action, ActionCreator } from 'redux'

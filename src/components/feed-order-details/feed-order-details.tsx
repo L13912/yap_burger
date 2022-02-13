@@ -1,22 +1,20 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, {FC, useEffect, useState} from 'react';
-import {useDispatch} from '../../utils/hooks';
-import {useHistory, useLocation} from 'react-router-dom';
+import React, {FC, useState} from 'react';
+import {useHistory, useLocation, useParams} from 'react-router-dom';
 import { useSelector } from "../../utils/hooks";
-import {TCard, TIngredients, TOrder} from "../../types/data-types";
+import {TCard, TOrder} from "../../types/data-types";
 
 import styles from './feed-order-details.module.css';
 import {getDate} from "../../utils/date";
 
 const FeedOrderDetails: FC = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const [isVisible, setVisible] = useState(false);
     const orders = useSelector(store => { return store.wsReduser.orders}) || [];
     const ingredients = useSelector(store => store.reducer.ingredients);
-    const tN = location.pathname.split(':');
-    const number = parseInt(tN[1]);
+    const { id }: {id: string} = useParams();
+    const number = Number(id);
     const order: TOrder | undefined = orders.find((el: TOrder) => el.number === number);
     const orderDate: string = getDate(order);
 
@@ -37,7 +35,6 @@ const FeedOrderDetails: FC = () => {
                 ingredients?.find((el: TCard) => el._id === item)
             );
         }
-        console.log(orderIngredients)
         return orderIngredients;
     }
     const filterIngredients = orderIngredients
@@ -65,7 +62,7 @@ const FeedOrderDetails: FC = () => {
 
     return (
         <div className={contClass}  onClick={openModal}>
-            <div className={numberClass}>#{number}</div>
+            <h3 className={numberClass}>#{number}</h3>
             <div className={nameClass}>{order?.name}</div>
             <div className={statusClass}>
                 {statusText}

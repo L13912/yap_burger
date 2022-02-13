@@ -41,8 +41,7 @@ const BurgerIngredients:FC = () => {
         if (scrollPos >= mainPos) setCurrent('Начинки');
     }
 
-    // @ts-ignore
-    sortIngredients(ingredients);
+    if (ingredients) sortIngredients(ingredients);
 
     return (
         <div className={ingredientsClasses}>

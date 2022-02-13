@@ -2,7 +2,7 @@ import { useState, useEffect, FC, FocusEvent, ChangeEvent, FormEvent, SyntheticE
 import styles from './commonStyles.module.css'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import {useDispatch, useSelector} from '../utils/hooks';
+import { useDispatch, useSelector } from '../utils/hooks'
 import { logoutUser, patchUser } from '../services/actions/user-actions'
 import Orders from '../components/orders/orders'
 

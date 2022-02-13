@@ -2,7 +2,7 @@ import React, { useState, FC, ChangeEvent, FormEvent } from 'react'
 import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import {useDispatch, useSelector} from '../utils/hooks';
+import { useDispatch, useSelector } from '../utils/hooks'
 import { resetPassword } from '../services/actions/user-actions'
 
 const ResetPassword: FC = () => {
@@ -22,7 +22,7 @@ const ResetPassword: FC = () => {
   }
 
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
-  return user ? (
+  return user.email !== '' ? (
     <Redirect to={{ pathname: '/' }} />
   ) : resetPasswordSuccess ? (
     <Redirect to={{ pathname: '/' }} />

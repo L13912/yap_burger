@@ -24,6 +24,8 @@ import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
 import FeedOrderDetails from "../feed-order-details/feed-order-details";
 import Feed from "../feed/feed";
+import OrderCardDetails from "../../pages/order-card-details";
+import ProfileOrderDetails from "../../pages/profile-order-details";
 
 const App:FC = () => {
     const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const App:FC = () => {
         dispatch({
             type: DELETE_INGREDIENT_DETAILS
         })
-        history.push('/');
+        history.goBack();
     };
 
     const titleClasses = `text text_type_main-large pt-4 ${styles.title}`;
@@ -66,21 +68,19 @@ const App:FC = () => {
                 <Route path='/register' component={Register} exact={true}/>
                 <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
                 <Route path='/reset-password' component={ResetPassword}/>
+                <Route path='/feed/:id' component={OrderCardDetails}/>
                 <Route path='/feed'>
                     <Feed/>
                 </Route>
-                <ProtectedRoute path='/profile'>
-                    <Profile/>
+                <ProtectedRoute path='/profile/orders/:id'>
+                    <ProfileOrderDetails/>
                 </ProtectedRoute>
                 <ProtectedRoute path='/profile/orders'>
                     <Profile/>
                 </ProtectedRoute>
-                <ProtectedRoute path='/profile/orders/:id'>
-                    <FeedOrderDetails/>
+                <ProtectedRoute path='/profile'>
+                    <Profile/>
                 </ProtectedRoute>
-                <Route path='/feed/:id'>
-                    <FeedOrderDetails/>
-                </Route>
                 <Route path='/ingredients/:id' component={Ingredient}/>
                 <Route component={NotFound}/>
             </Switch>

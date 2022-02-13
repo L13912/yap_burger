@@ -3,7 +3,7 @@ import { TCard, TUser } from '../types/data-types'
 
 const getIngredientsData = async () => {
   const res = await fetch(`${API_URL}/ingredients`)
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const getOrderData = async (orderList: Array<TCard>) => {
@@ -16,7 +16,7 @@ const getOrderData = async (orderList: Array<TCard>) => {
       ingredients: orderList
     })
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const register = async (user: TUser) => {
@@ -26,7 +26,7 @@ const register = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const login = async (user: TUser) => {
@@ -36,7 +36,7 @@ const login = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const logout = async (user: TUser) => {
@@ -47,7 +47,7 @@ const logout = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token })
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const forgotRequest = async (user: TUser) => {
@@ -57,7 +57,7 @@ const forgotRequest = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const resetRequest = async (user: TUser) => {
@@ -67,7 +67,7 @@ const resetRequest = async (user: TUser) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const getUserData = async (token: string) => {
@@ -76,7 +76,7 @@ const getUserData = async (token: string) => {
     mode: 'cors',
     headers: { 'Content-Type': 'application/json', authorization: token }
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const patchUserData = async (user: TUser, token: string) => {
@@ -86,7 +86,7 @@ const patchUserData = async (user: TUser, token: string) => {
     headers: { 'Content-Type': 'application/json', authorization: token },
     body: JSON.stringify(user)
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 const getAccessToken = async () => {
@@ -98,7 +98,7 @@ const getAccessToken = async () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token })
   })
-  return checkResponse(res);
+  return checkResponse(res)
 }
 
 async function getRequestBody(res: Response) {
