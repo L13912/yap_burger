@@ -61,7 +61,7 @@ const FeedOrderDetails: FC = () => {
     const sumClass = `${styles.sum} text text_type_digits-default pr-1`
 
     return (
-        <div className={contClass}  onClick={openModal}>
+        <div className={contClass}>
             <h3 className={numberClass}>#{number}</h3>
             <div className={nameClass}>{order?.name}</div>
             <div className={statusClass}>

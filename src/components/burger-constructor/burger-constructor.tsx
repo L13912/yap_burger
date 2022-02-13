@@ -119,7 +119,7 @@ const BurgerConstructor:FC = () => {
                     <p className={totalCountClass}>{total}</p>
                     <CurrencyIcon type="primary"/>
                 </div>
-                {user ? <Button type="primary" size="large"
+                {user.email !== '' ? <Button type="primary" size="large"
                                 onClick={(event) => sendOrder(event)}
                     >
                         Оформить заказ

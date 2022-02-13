@@ -3,7 +3,7 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
-import { logoutUser, patchUser } from '../services/actions/user-actions'
+import {getUser, logoutUser, patchUser} from '../services/actions/user-actions'
 import Orders from '../components/orders/orders'
 
 const Profile: FC = () => {
@@ -13,6 +13,10 @@ const Profile: FC = () => {
   const dispatch = useDispatch()
   const [form, setValue] = useState({ ...user, password: '12345678' })
   const [touched, setTouched] = useState<Array<string>>([])
+
+  useEffect(() => {
+    dispatch(getUser())
+  }, [])
 
   const isOrders = user.email !== '' && location.pathname === '/profile/orders'
 
