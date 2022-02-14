@@ -20,7 +20,7 @@
     box-sizing: border-box;
     height: auto;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     position: relative;
     text-align: left;
     margin-top: 100px;
@@ -57,4 +57,11 @@
     margin: 100px auto;
     width: 600px;
     text-align: center;
+}
+
+
+.ingredient h3 {
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
 }

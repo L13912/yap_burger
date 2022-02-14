@@ -7,7 +7,6 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
 
-
 const AppHeader:FC = () => {
     const location = useLocation();
     const currentPage = location.pathname.split('/')[1];
@@ -28,11 +27,11 @@ const AppHeader:FC = () => {
                             <span className={currentPage === '' ? activeClass : inactiveClass}>Конструктор</span>
                         </h2>
                     </Link>
-                    <Link to='/orders' className={itemClasses}>
+                    <Link to='/feed' className={itemClasses}>
                         <h2 className={styles.navItem}>
-                            <ListIcon type={currentPage === 'orders' ? 'primary' : 'secondary'}/>
+                            <ListIcon type={currentPage === 'feed' ? 'primary' : 'secondary'}/>
                             <span
-                                className={currentPage === 'orders' ? activeClass : inactiveClass}>Лента заказов</span>
+                                className={currentPage === 'feed' ? activeClass : inactiveClass}>Лента заказов</span>
                         </h2>
                     </Link>
                 </nav>
@@ -41,7 +40,7 @@ const AppHeader:FC = () => {
                         <Logo/>
                     </Link>
                 </h2>
-                <Link to='/profile' className={styles.login}>
+                <Link to='/profile/orders' className={styles.login}>
                     <h2 className={styles.login}>
                         <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
                         <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>

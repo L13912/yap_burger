@@ -1,4 +1,24 @@
 import { ReactNode } from 'react'
+import { store } from '../services/store'
+import { ThunkAction } from 'redux-thunk'
+import { Action, ActionCreator } from 'redux'
+import { Dispatch } from 'redux'
+import { TUserActions } from '../services/actions/user-actions'
+import { TActions } from '../services/actions/actions'
+import {
+  WS_START,
+  WS_PRIVAT_START,
+  WS_CONNECTION_CLOSE,
+  WS_CONNECTION_SUCCESS,
+  WS_GET_MESSAGE,
+  TWsActions
+} from '../services/actions/ws-actions'
+
+export type RootState = ReturnType<typeof store.getState>
+export type TApplicationActions = TUserActions | TActions | TWsActions
+
+export type AppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, RootState, TApplicationActions>>
+export type AppDispatch = Dispatch<TApplicationActions>
 
 export type TCard = {
   _id: string
@@ -52,10 +72,11 @@ export type TProtectedRoute = {
 }
 
 export type TUser = {
-  readonly id: number
-  readonly password: string
-  readonly email: string
-  readonly name: string
+  readonly id?: number
+  readonly password?: string
+  readonly login?: string
+  email: string
+  name: string
 }
 
 export type THistory = {
@@ -65,4 +86,50 @@ export type THistory = {
       from: string
     }
   }
+}
+
+export type TToken = {
+  readonly accessToken: string
+  readonly refreshToken: string
+}
+
+export type TOrder = {
+  readonly _id?: string
+  readonly ingredients?: Array<string>
+  readonly status: string
+  readonly createdAt: string | number | Date
+  readonly name?: string
+  readonly number?: number
+  readonly updatedAt?: string
+}
+
+export type TWSMessage = {
+  readonly orders: Array<TOrder>
+  readonly success: boolean
+  readonly total: number
+  readonly totalToday: number
+}
+
+export type TOrders = Array<TOrder>
+
+export type TStatus = {
+  readonly orderStatus: string
+}
+
+export type TWsActionsType = {
+  readonly wsInit: typeof WS_START
+  readonly wsPrivatInit: typeof WS_PRIVAT_START
+  readonly wsClose: typeof WS_CONNECTION_CLOSE
+  readonly onOpen: typeof WS_CONNECTION_SUCCESS
+  readonly onMessage: typeof WS_GET_MESSAGE
+}
+
+export type TFeedOrder = {
+  readonly createdAt: string
+  readonly ingredients: any[] | string[]
+  readonly name: string
+  readonly number: number
+  readonly status: string
+  readonly updatedAt: string
+  readonly _id: string
 }

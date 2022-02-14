@@ -3,37 +3,36 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { loginUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../utils/hooks'
 import { useHistory } from 'react-router-dom'
-import { THistory } from '../types/data-types'
 
 const Login: FC = () => {
   const dispatch = useDispatch()
-  const history = useHistory() as THistory
-  const user = useSelector((store: any) => store.userReducer.user)
-  const [form, setValue] = useState({ email: '', password: '' })
-  const loginUserSuccess = useSelector((store: any) => store.userReducer.loginUserSuccess)
-
+  const history = useHistory() as any
+  const user = useSelector(store => store.userReducer.user)
+  const [form, setValue] = useState({ email: '', password: '', name: '' })
+  const loginUserSuccess = useSelector(store => store.userReducer.loginUserSuccess)
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     dispatch(loginUser(form))
   }
 
+  const fromPage = history.location?.state?.from;
   useEffect(() => {
-    if (loginUserSuccess) history.replace('/')
+    if (loginUserSuccess) {
+      history.replace(fromPage);
+    }
   }, [loginUserSuccess])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value })
   }
 
-  const fromPage = history.location?.state?.from
-
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
-  return user && fromPage ? (
+  return user.email !== '' && fromPage ? (
     <Redirect to={fromPage} />
-  ) : user ? (
+  ) : user.email !== '' ? (
     <Redirect to={{ pathname: '/' }} />
   ) : (
     <div className={styles.page}>

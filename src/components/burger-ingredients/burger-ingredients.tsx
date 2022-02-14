@@ -2,12 +2,12 @@ import React, {useRef, SyntheticEvent, FC} from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCard from "../ingredient-card/ingredient-card";
-import {useSelector} from 'react-redux';
+import {useSelector} from '../../utils/hooks';
 
 import {TCard, TIngredients} from "../../types/data-types";
 
 const BurgerIngredients:FC = () => {
-    const ingredients = useSelector((store: any) => store.reducer.ingredients);
+    const ingredients = useSelector(store => store.reducer.ingredients);
     const [current, setCurrent] = React.useState('Булки');
     const ingredientsClasses = `mt-5 mr-5 ${styles.ingredients}`;
     const title = `mb-6 ${styles.title}`;
@@ -41,7 +41,7 @@ const BurgerIngredients:FC = () => {
         if (scrollPos >= mainPos) setCurrent('Начинки');
     }
 
-    sortIngredients(ingredients);
+    if (ingredients) sortIngredients(ingredients);
 
     return (
         <div className={ingredientsClasses}>

@@ -1,7 +1,7 @@
 import React, {useRef, FC} from 'react';
 import styles from './constructor-card.module.css';
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from '../../utils/hooks';
 import {useDrag, useDrop} from 'react-dnd';
 import {
     DELETE_CONSTRUCTOR_INGREDIENT
@@ -11,7 +11,7 @@ import {TCard, TConstCard} from "../../types/data-types";
 export const ConstructorCard: FC<TConstCard> = ({card, moveCard, type, index}) => {
     const dispatch = useDispatch();
     const moveRef = useRef(null);
-    const ingredients = useSelector((store: any) => store.reducer.constructorIngredients);
+    const ingredients = useSelector(store => store.reducer.constructorIngredients);
 
     const listItem = `mr-1 ${styles.listItem}`;
 

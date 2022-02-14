@@ -2,7 +2,7 @@ import React, {useEffect, FC} from 'react';
 import {DndProvider} from 'react-dnd'
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {Switch, Route, useLocation, useHistory} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch} from '../../utils/hooks';
 
 import styles from './app.module.css';
 
@@ -22,6 +22,10 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {DELETE_INGREDIENT_DETAILS} from "../../services/actions/actions"
 import {getIngredients} from '../../services/actions/actions';
+import FeedOrderDetails from "../feed-order-details/feed-order-details";
+import Feed from "../feed/feed";
+import OrderCardDetails from "../../pages/order-card-details";
+import ProfileOrderDetails from "../../pages/profile-order-details";
 
 const App:FC = () => {
     const dispatch = useDispatch();
@@ -43,7 +47,7 @@ const App:FC = () => {
         dispatch({
             type: DELETE_INGREDIENT_DETAILS
         })
-        history.push('/');
+        history.goBack();
     };
 
     const titleClasses = `text text_type_main-large pt-4 ${styles.title}`;
@@ -64,13 +68,24 @@ const App:FC = () => {
                 <Route path='/register' component={Register} exact={true}/>
                 <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
                 <Route path='/reset-password' component={ResetPassword}/>
+                <Route path='/feed/:id' component={OrderCardDetails}/>
+                <Route path='/feed'>
+                    <Feed/>
+                </Route>
+                <ProtectedRoute path='/profile/orders/:id'>
+                    <ProfileOrderDetails/>
+                </ProtectedRoute>
+                <ProtectedRoute path='/profile/orders'>
+                    <Profile/>
+                </ProtectedRoute>
                 <ProtectedRoute path='/profile'>
                     <Profile/>
                 </ProtectedRoute>
                 <Route path='/ingredients/:id' component={Ingredient}/>
                 <Route component={NotFound}/>
             </Switch>
-            {background && <Route path='/ingredients/:id'>
+            {background &&
+            <Route path='/ingredients/:id'>
                 <Modal
                     title='Детали ингредиента'
                     close={handleCloseModal}
@@ -78,8 +93,28 @@ const App:FC = () => {
                     <IngredientDetails/>
                 </Modal>
             </Route>}
+            {background &&
+            <ProtectedRoute path='/profile/orders/:id'>
+                <Modal
+                    title=''
+                    close={handleCloseModal}
+                >
+                    <FeedOrderDetails/>
+                </Modal>
+            </ProtectedRoute>
+            }
+            {background &&
+            <Route path='/feed/:id'>
+                <Modal
+                    title=''
+                    close={handleCloseModal}
+                >
+                    <FeedOrderDetails/>
+                </Modal>
+            </Route>
+            }
         </div>
     );
-}
+};
 
 export default App;
