@@ -4,6 +4,9 @@ import { Link, Redirect } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
 import { forgotPassword } from '../services/actions/user-actions'
+import {PUBLIC_URL} from "../constants";
+
+const pUrl = PUBLIC_URL;
 
 const ForgotPassword: FC = () => {
   const dispatch = useDispatch()
@@ -23,9 +26,9 @@ const ForgotPassword: FC = () => {
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return user.email !== '' ? (
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to={{ pathname: `${pUrl}/` }} />
   ) : forgotPasswordSuccess ? (
-    <Redirect to={{ pathname: '/reset-password' }} />
+    <Redirect to={{ pathname: `${pUrl}/reset-password` }} />
   ) : (
     <div className={styles.page}>
       <form onSubmit={onSubmit}>
@@ -36,7 +39,7 @@ const ForgotPassword: FC = () => {
       </form>
       <p className={'text text_type_main-default text_color_inactive mt-10 pt-10  mb-4'}>
         Уже зарегистрированы?
-        <Link to="/login" className={linkClasses}>
+        <Link to={`${pUrl}/login`} className={linkClasses}>
           Войти
         </Link>
       </p>

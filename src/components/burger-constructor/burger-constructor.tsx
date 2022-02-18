@@ -14,8 +14,10 @@ import {
     getOrder, CHANGE_INGREDIENTS_ORDER
 } from "../../services/actions/actions";
 import {Link} from "react-router-dom";
-
 import {TCard, TConstructorIngredients} from "../../types/data-types";
+import {PUBLIC_URL} from "../../constants";
+
+const pUrl = PUBLIC_URL;
 
 const BurgerConstructor:FC = () => {
     const dispatch = useDispatch();
@@ -124,7 +126,7 @@ const BurgerConstructor:FC = () => {
                     >
                         Оформить заказ
                     </Button> :
-                    <Link to='/login' className={linkClass}>
+                    <Link to={`${pUrl}/login`} className={linkClass}>
                         <Button type='primary'>
                             Авторизуйтесь
                         </Button>

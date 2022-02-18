@@ -5,7 +5,6 @@ import {useSelector} from "../../utils/hooks";
 import {TCard, TOrder} from "../../types/data-types";
 import styles from './order-card.module.css';
 import {getDate} from "../../utils/date";
-import {SET_INGREDIENT_DETAILS} from "../../services/actions/actions";
 
 type T = {
     order: TOrder;
@@ -24,15 +23,6 @@ const OrderCard: FC<T> = ({order}) => {
         return prev + ingredient.price;
     }, 0);
 
-
-/*    const openModal = () => {
-        setVisible(!isVisible);
-        dispatch({
-            type: SET_INGREDIENT_DETAILS,
-            card
-        });
-        history.push(`/ingredients/${card._id}`, {background: location});
-    }*/
     const openModal = () => {
         setVisible(!isVisible);
         history.push(`${location.pathname}/${order.number}`, {background: location});
