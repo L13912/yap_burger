@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/yap_burger/static/css/main.790bf820.chunk.css",
-    "main.js": "/yap_burger/static/js/main.d50861bd.chunk.js",
-    "main.js.map": "/yap_burger/static/js/main.d50861bd.chunk.js.map",
-    "runtime-main.js": "/yap_burger/static/js/runtime-main.afd0e38f.js",
-    "runtime-main.js.map": "/yap_burger/static/js/runtime-main.afd0e38f.js.map",
+    "main.js": "/yap_burger/static/js/main.30625dee.chunk.js",
+    "main.js.map": "/yap_burger/static/js/main.30625dee.chunk.js.map",
+    "runtime-main.js": "/yap_burger/static/js/runtime-main.aa2dcfd8.js",
+    "runtime-main.js.map": "/yap_burger/static/js/runtime-main.aa2dcfd8.js.map",
     "static/css/2.114ede42.chunk.css": "/yap_burger/static/css/2.114ede42.chunk.css",
-    "static/js/2.e252bc0f.chunk.js": "/yap_burger/static/js/2.e252bc0f.chunk.js",
-    "static/js/2.e252bc0f.chunk.js.map": "/yap_burger/static/js/2.e252bc0f.chunk.js.map",
-    "static/js/3.f93de1d3.chunk.js": "/yap_burger/static/js/3.f93de1d3.chunk.js",
-    "static/js/3.f93de1d3.chunk.js.map": "/yap_burger/static/js/3.f93de1d3.chunk.js.map",
+    "static/js/2.10265678.chunk.js": "/yap_burger/static/js/2.10265678.chunk.js",
+    "static/js/2.10265678.chunk.js.map": "/yap_burger/static/js/2.10265678.chunk.js.map",
+    "static/js/3.c82ef4ee.chunk.js": "/yap_burger/static/js/3.c82ef4ee.chunk.js",
+    "static/js/3.c82ef4ee.chunk.js.map": "/yap_burger/static/js/3.c82ef4ee.chunk.js.map",
     "index.html": "/yap_burger/index.html",
     "static/css/2.114ede42.chunk.css.map": "/yap_burger/static/css/2.114ede42.chunk.css.map",
     "static/css/main.790bf820.chunk.css.map": "/yap_burger/static/css/main.790bf820.chunk.css.map",
-    "static/js/2.e252bc0f.chunk.js.LICENSE.txt": "/yap_burger/static/js/2.e252bc0f.chunk.js.LICENSE.txt",
+    "static/js/2.10265678.chunk.js.LICENSE.txt": "/yap_burger/static/js/2.10265678.chunk.js.LICENSE.txt",
     "static/media/fonts.css": "/yap_burger/static/media/iceland.77ad7fc2.woff",
     "static/media/done.cc5a59a7.gif": "/yap_burger/static/media/done.cc5a59a7.gif",
     "static/media/img.9eef3adb.png": "/yap_burger/static/media/img.9eef3adb.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.afd0e38f.js",
+    "static/js/runtime-main.aa2dcfd8.js",
     "static/css/2.114ede42.chunk.css",
-    "static/js/2.e252bc0f.chunk.js",
+    "static/js/2.10265678.chunk.js",
     "static/css/main.790bf820.chunk.css",
-    "static/js/main.d50861bd.chunk.js"
+    "static/js/main.30625dee.chunk.js"
   ]
 }
