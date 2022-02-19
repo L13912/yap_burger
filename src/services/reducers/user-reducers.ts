@@ -44,7 +44,7 @@ export type TUserState = {
   isUserLoaded: boolean
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   registerUserRequest: false,
   registerUserRequestFailed: false,
   registerUserSuccess: false,
