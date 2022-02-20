@@ -4,9 +4,9 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { registerUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import {PUBLIC_URL} from "../constants";
+import { PUBLIC_URL } from '../constants'
 
-const pUrl = PUBLIC_URL;
+const pUrl = PUBLIC_URL
 
 const Register: FC = () => {
   const dispatch = useDispatch()

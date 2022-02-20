@@ -5,9 +5,9 @@ import { loginUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
 import { useHistory } from 'react-router-dom'
-import {PUBLIC_URL} from "../constants";
+import { PUBLIC_URL } from '../constants'
 
-const pUrl = PUBLIC_URL;
+const pUrl = PUBLIC_URL
 
 const Login: FC = () => {
   const dispatch = useDispatch()
@@ -20,10 +20,10 @@ const Login: FC = () => {
     dispatch(loginUser(form))
   }
 
-  const fromPage = history.location?.state?.from;
+  const fromPage = history.location?.state?.from
   useEffect(() => {
     if (loginUserSuccess) {
-      history.replace(fromPage);
+      history.replace(fromPage)
     }
   }, [loginUserSuccess])
 

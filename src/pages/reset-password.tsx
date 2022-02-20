@@ -4,9 +4,9 @@ import { Link, Redirect } from 'react-router-dom'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
 import { resetPassword } from '../services/actions/user-actions'
-import {PUBLIC_URL} from "../constants";
+import { PUBLIC_URL } from '../constants'
 
-const pUrl = PUBLIC_URL;
+const pUrl = PUBLIC_URL
 
 const ResetPassword: FC = () => {
   const dispatch = useDispatch()

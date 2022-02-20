@@ -174,8 +174,7 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
       return {
         ...state,
         getUserRequest: false,
-        getUserRequestFailed: false,
-        isUserLoaded: true
+        getUserRequestFailed: false
       }
     }
 

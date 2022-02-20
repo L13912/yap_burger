@@ -3,11 +3,11 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
-import {getUser, logoutUser, patchUser} from '../services/actions/user-actions'
+import { getUser, logoutUser, patchUser } from '../services/actions/user-actions'
 import Orders from '../components/orders/orders'
-import {PUBLIC_URL} from "../constants";
+import { PUBLIC_URL } from '../constants'
 
-const pUrl = PUBLIC_URL;
+const pUrl = PUBLIC_URL
 
 const Profile: FC = () => {
   const user = useSelector(store => store.userReducer.user)

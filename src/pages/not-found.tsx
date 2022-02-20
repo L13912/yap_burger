@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './not-found.module.css'
-import {PUBLIC_URL} from "../constants";
+import { PUBLIC_URL } from '../constants'
 
-const pUrl = PUBLIC_URL;
+const pUrl = PUBLIC_URL
 
 const NotFound404: FC = () => {
   return (
