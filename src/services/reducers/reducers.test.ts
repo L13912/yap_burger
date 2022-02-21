@@ -1,11 +1,11 @@
-import { reducer, initialState, TState } from './reducers';
+import { reducer, initialState } from './reducers';
 import * as types from '../actions/actions';
-import { TCard  } from '../../types/data-types';
+
 
 const ingredientMock: any = [{
     "_id": "id",
     "name": "name",
-    "type": "type",
+    "type": "bun",
     "proteins": 0,
     "fat": 0,
     "carbohydrates": 0,
@@ -33,6 +33,21 @@ const orderMock: any = {
     success: true
 }
 
+const bun = {
+    calories: 643,
+    carbohydrates: 85,
+    fat: 26,
+    guid: "d7831e4f-1f31-e1f3-4494-646463d41a91",
+    image: "https://code.s3.yandex.net/react/code/bun-01.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+    name: "Флюоресцентная булка R2-D3",
+    price: 988,
+    proteins: 44,
+    type: "bun",
+    __v: 0,
+    _id: "60d3b41abdacab0026a733c7"
+}
 
 describe('Main reducer', () => {
     it('should return the initial state', () => {
@@ -172,6 +187,23 @@ describe('Main reducer', () => {
             orderFailed: false,
             orderRequest: false,
             order: {}
+        })
+    })
+
+    it('should handle ADD_CONSTRUCTOR_INGREDIENT', () => {
+        expect(
+            reducer(
+                {
+                    ...initialState,
+                },
+                {
+                    type: types.ADD_CONSTRUCTOR_INGREDIENT,
+                    card: bun
+                }
+            )
+        ).toEqual({
+            ...initialState,
+            constructorIngredients: { buns: [bun], toppings: []}
         })
     })
 })

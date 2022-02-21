@@ -78,7 +78,6 @@ export const reducer = (state: TState = initialState, action: TActions): TState 
       }
     }
     case GET_ORDER_SUCCESS: {
-      console.log(action.order)
       return {
         ...state,
         orderFailed: false,
