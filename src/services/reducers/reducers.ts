@@ -34,7 +34,7 @@ export type TState = {
   orderFailed: boolean
 };
 
-const initialState = {
+export const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsError: false,
@@ -78,6 +78,7 @@ export const reducer = (state: TState = initialState, action: TActions): TState 
       }
     }
     case GET_ORDER_SUCCESS: {
+      console.log(action.order)
       return {
         ...state,
         orderFailed: false,
