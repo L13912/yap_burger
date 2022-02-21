@@ -155,7 +155,6 @@ export const reducer = (state: TState = initialState, action: TActions): TState 
         ...state,
         constructorIngredients: {
           ...state.constructorIngredients,
-          /*                    buns: [...state.constructorIngredients.buns],*/
           toppings: newOrderArr
         }
       }

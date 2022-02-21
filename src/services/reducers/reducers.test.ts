@@ -1,5 +1,6 @@
 import { reducer, initialState } from './reducers';
 import * as types from '../actions/actions';
+import {CLEAR_CONSTRUCTOR, DELETE_CONSTRUCTOR_INGREDIENT, DELETE_INGREDIENT_DETAILS} from "../actions/actions";
 
 
 const ingredientMock: any = [{
@@ -204,6 +205,55 @@ describe('Main reducer', () => {
         ).toEqual({
             ...initialState,
             constructorIngredients: { buns: [bun], toppings: []}
+        })
+    })
+
+    it('should handle DELETE_CONSTRUCTOR_INGREDIENT', () => {
+        expect(
+            reducer(
+                {
+                    ...initialState,
+                },
+                {
+                    type: types.DELETE_CONSTRUCTOR_INGREDIENT,
+                    card: bun
+                }
+            )
+        ).toEqual({
+            ...initialState,
+            constructorIngredients: { buns: [], toppings: []}
+        })
+    })
+
+    it('should handle CLEAR_CONSTRUCTOR', () => {
+        expect(
+            reducer(
+                {
+                    ...initialState,
+                },
+                {
+                    type: types.CLEAR_CONSTRUCTOR
+                }
+            )
+        ).toEqual({
+            ...initialState,
+            constructorIngredients: { buns: [], toppings: []}
+        })
+    })
+
+    it('should handle DELETE_INGREDIENT_DETAILS', () => {
+        expect(
+            reducer(
+                {
+                    ...initialState,
+                },
+                {
+                    type: types.DELETE_INGREDIENT_DETAILS
+                }
+            )
+        ).toEqual({
+            ...initialState,
+            ingredientDetails: {}
         })
     })
 })
