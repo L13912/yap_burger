@@ -43,7 +43,7 @@ const AppHeader:FC = () => {
                         <Logo/>
                     </Link>
                 </h2>
-                <Link to={`${pUrl}/profile/orders`} className={styles.login}>
+                <Link to={`${pUrl}/profile/orders`} className={styles.login} data-cypress-id='loginLinkHeader'>
                     <h2 className={styles.login}>
                         <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
                         <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>
