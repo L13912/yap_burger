@@ -38,7 +38,8 @@
     "prettier": "prettier --write src/**/*.{ts,tsx}",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "cypress:open": "./node_modules/.bin/cypress open"
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "cypress": "cypress open cache clear"
   },
   "eslintConfig": {
     "extends": [
