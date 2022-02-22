@@ -1,4 +1,6 @@
-describe('should open localhost', () => {
+import '@4tw/cypress-drag-drop';
+
+describe('проверяем доступность страницы', () => {
     before(() => {
         cy.visit('http://localhost:3000')
     })
