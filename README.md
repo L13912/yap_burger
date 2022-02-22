@@ -20,7 +20,8 @@ npm run test
 
 ####Запускает тесты через cypress.
 ```
-npm cypress:open
+yarn start
+yarn cypress:open
 ```
 
 ####Собирает приложение для продакшена в папку build.
