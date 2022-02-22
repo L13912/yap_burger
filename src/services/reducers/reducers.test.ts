@@ -241,6 +241,26 @@ describe('Main reducer', () => {
         })
     })
 
+    it('should handle SET_INGREDIENT_DETAILS', () => {
+        // @ts-ignore
+        expect(
+            reducer(
+                {
+                    ...initialState,
+                },
+                {
+                    type: types.SET_INGREDIENT_DETAILS,
+                    // @ts-ignore
+                    card: bun
+
+                }
+            )
+        ).toEqual({
+            ...initialState,
+            ingredientDetails: bun
+        })
+    })
+
     it('should handle DELETE_INGREDIENT_DETAILS', () => {
         expect(
             reducer(
