@@ -34,7 +34,7 @@ const IngredientDetails:FC<TIngredientDetails> = () => {
     }
 
     return (
-        <div className={styles.detailsCard}>
+        <div className={styles.detailsCard} data-cypress-id='detailsCard'>
             <img className={imageClasses} alt="Заказ принят" src={card.image}/>
             <p className={textClasses}>{card.name}</p>
             <div className={details}>

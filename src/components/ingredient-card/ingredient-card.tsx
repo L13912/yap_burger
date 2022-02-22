@@ -50,7 +50,12 @@ const IngredientCard:FC<TIngredientCard> = ({card}) => {
     const descriptionClasses = `mt-5 mr-5 text text_type_main-default ${styles.description}`;
 
     return (
-        <div className={cardClasses} ref={dragRef} style={{opacity}} onClick={openModal}>
+        <div className={cardClasses}
+             ref={dragRef}
+             style={{opacity}}
+             onClick={openModal}
+             data-cypress-id='ingredientCard'
+        >
             {count() > 0 && <Counter count={count()} size="default"/>}
             <div className={image}>
                 <img className={styles.image} alt='Фото ингредиента' src={card.image}/>
