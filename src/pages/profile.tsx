@@ -3,8 +3,11 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
-import {getUser, logoutUser, patchUser} from '../services/actions/user-actions'
+import { getUser, logoutUser, patchUser } from '../services/actions/user-actions'
 import Orders from '../components/orders/orders'
+import { PUBLIC_URL } from '../constants'
+
+const pUrl = PUBLIC_URL
 
 const Profile: FC = () => {
   const user = useSelector(store => store.userReducer.user)
@@ -18,7 +21,7 @@ const Profile: FC = () => {
     dispatch(getUser())
   }, [])
 
-  const isOrders = user.email !== '' && location.pathname === '/profile/orders'
+  const isOrders = user.email !== '' && location.pathname === `${pUrl}/profile/orders`
 
   useEffect(() => {
     setValue({ ...user, password: '12345678' })
@@ -60,7 +63,7 @@ const Profile: FC = () => {
   return user.email === '' ? (
     <Redirect
       to={{
-        pathname: '/login'
+        pathname: `${pUrl}/login`
       }}
     />
   ) : (
@@ -68,17 +71,17 @@ const Profile: FC = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link to="/profile" className={!isOrders ? activeLinkClasses : linkClasses}>
+            <Link to={`${pUrl}/profile`} className={!isOrders ? activeLinkClasses : linkClasses}>
               Профиль
             </Link>
           </li>
           <li>
-            <Link to="/profile/orders" className={isOrders ? activeLinkClasses : linkClasses}>
+            <Link to={`${pUrl}/profile/orders`} className={isOrders ? activeLinkClasses : linkClasses}>
               История заказов
             </Link>
           </li>
           <li>
-            <Link to="/login" onClick={logout} className={linkClasses}>
+            <Link to={`${pUrl}/login`} onClick={logout} className={linkClasses}>
               Выход
             </Link>
           </li>

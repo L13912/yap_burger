@@ -41,10 +41,12 @@ export type TUserState = {
   isAuth: boolean,
   getUserRequest: boolean,
   getUserRequestFailed: boolean,
-  isUserLoaded: boolean
+  isUserLoaded: boolean,
+  refreshToken: string | undefined,
+  accessToken: string | undefined
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   registerUserRequest: false,
   registerUserRequestFailed: false,
   registerUserSuccess: false,
@@ -62,13 +64,16 @@ const initialState: TUserState = {
   loginRequestFailed: false,
   getUserRequest: false,
   getUserRequestFailed: false,
-  isUserLoaded: false
+  isUserLoaded: false,
+  refreshToken: undefined,
+  accessToken: undefined
 }
 
 export const userReducer = (state: TUserState = initialState, action: TUserActions): TUserState  => {
   switch (action.type) {
     case REGISTER_USER_REQUEST: {
-      return { ...state, registerUserRequest: true }
+      return { ...state,
+        registerUserRequest: true }
     }
     case REGISTER_USER_REQUEST_SUCCESS: {
       return {
@@ -121,6 +126,15 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
       }
     }
 
+    case LOGIN_REQUEST_FAILED: {
+      return {
+        ...state,
+        loginRequest: false,
+        loginRequestFailed: true,
+        loginUserSuccess: false
+      }
+    }
+
     case LOGOUT_REQUEST: {
       return {
         ...state,
@@ -135,14 +149,6 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
       }
     }
 
-    case LOGIN_REQUEST_FAILED: {
-      return {
-        ...state,
-        loginRequest: false,
-        loginRequestFailed: true,
-        loginUserSuccess: false
-      }
-    }
     case SET_USER: {
       return {
         ...state,
@@ -168,8 +174,7 @@ export const userReducer = (state: TUserState = initialState, action: TUserActio
       return {
         ...state,
         getUserRequest: false,
-        getUserRequestFailed: false,
-        isUserLoaded: true
+        getUserRequestFailed: false
       }
     }
 

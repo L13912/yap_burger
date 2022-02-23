@@ -14,8 +14,10 @@ import {
     getOrder, CHANGE_INGREDIENTS_ORDER
 } from "../../services/actions/actions";
 import {Link} from "react-router-dom";
-
 import {TCard, TConstructorIngredients} from "../../types/data-types";
+import {PUBLIC_URL} from "../../constants";
+
+const pUrl = PUBLIC_URL;
 
 const BurgerConstructor:FC = () => {
     const dispatch = useDispatch();
@@ -90,7 +92,7 @@ const BurgerConstructor:FC = () => {
     }, [ingredients.toppings, dispatch])
 
     return (
-        <div className={constructor} ref={dropRef}>
+        <div className={constructor} ref={dropRef} data-cypress-id='dragDropCont'>
             {total === 0 && <div className={styles.info}>
                 Выберите булки, начинки и соусы в левой части, и перетащите сюда
             </div>}
@@ -119,12 +121,13 @@ const BurgerConstructor:FC = () => {
                     <p className={totalCountClass}>{total}</p>
                     <CurrencyIcon type="primary"/>
                 </div>
-                {user.email !== '' ? <Button type="primary" size="large"
+                {user.email !== '' ?
+                    <Button type="primary" size="large" data-cypress-id='createOrder'
                                 onClick={(event) => sendOrder(event)}
                     >
                         Оформить заказ
                     </Button> :
-                    <Link to='/login' className={linkClass}>
+                    <Link to={`${pUrl}/login`} className={linkClass}  data-cypress-id='login'>
                         <Button type='primary'>
                             Авторизуйтесь
                         </Button>

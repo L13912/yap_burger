@@ -5,6 +5,9 @@ import { loginUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from '../utils/hooks'
 import { useHistory } from 'react-router-dom'
+import { PUBLIC_URL } from '../constants'
+
+const pUrl = PUBLIC_URL
 
 const Login: FC = () => {
   const dispatch = useDispatch()
@@ -17,10 +20,10 @@ const Login: FC = () => {
     dispatch(loginUser(form))
   }
 
-  const fromPage = history.location?.state?.from;
+  const fromPage = history.location?.state?.from
   useEffect(() => {
     if (loginUserSuccess) {
-      history.replace(fromPage);
+      history.replace(fromPage)
     }
   }, [loginUserSuccess])
 
@@ -33,7 +36,7 @@ const Login: FC = () => {
   return user.email !== '' && fromPage ? (
     <Redirect to={fromPage} />
   ) : user.email !== '' ? (
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to={{ pathname: `${pUrl}/` }} />
   ) : (
     <div className={styles.page}>
       <form onSubmit={onSubmit}>
@@ -46,13 +49,13 @@ const Login: FC = () => {
       </form>
       <p className={'text text_type_main-default text_color_inactive mt-10 pt-10  mb-4'}>
         Вы - новый пользователь?
-        <Link to="/register" className={linkClasses}>
+        <Link to={`${pUrl}/register`} className={linkClasses}>
           Зарегистрироваться
         </Link>
       </p>
       <p className={'text text_type_main-default text_color_inactive  mb-4'}>
         Забыли пароль?
-        <Link to="/forgot-password" className={linkClasses}>
+        <Link to={`${pUrl}/forgot-password`} className={linkClasses}>
           Восстановить пароль
         </Link>
       </p>

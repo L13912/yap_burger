@@ -26,6 +26,9 @@ import FeedOrderDetails from "../feed-order-details/feed-order-details";
 import Feed from "../feed/feed";
 import OrderCardDetails from "../../pages/order-card-details";
 import ProfileOrderDetails from "../../pages/profile-order-details";
+import {PUBLIC_URL} from "../../constants";
+
+const pUrl = PUBLIC_URL;
 
 const App:FC = () => {
     const dispatch = useDispatch();
@@ -55,7 +58,7 @@ const App:FC = () => {
         <div className="App">
             <AppHeader/>
             <Switch location={background || location}>
-                <Route path={'/'} exact={true}>
+                <Route path={`${pUrl}/`} exact={true}>
                     <div className={styles.content}>
                         <h1 className={titleClasses}>Соберите бургер</h1>
                         <DndProvider backend={HTML5Backend}>
@@ -64,28 +67,28 @@ const App:FC = () => {
                         </DndProvider>
                     </div>
                 </Route>
-                <Route path='/login' component={Login} exact={true}/>
-                <Route path='/register' component={Register} exact={true}/>
-                <Route path='/forgot-password' component={ForgotPassword} exact={true}/>
-                <Route path='/reset-password' component={ResetPassword}/>
-                <Route path='/feed/:id' component={OrderCardDetails}/>
-                <Route path='/feed'>
+                <Route path={`${pUrl}/login`} component={Login} exact={true}/>
+                <Route path={`${pUrl}/register`} component={Register} exact={true}/>
+                <Route path={`${pUrl}/forgot-password`} component={ForgotPassword} exact={true}/>
+                <Route path={`${pUrl}/reset-password`} component={ResetPassword}/>
+                <Route path={`${pUrl}/feed/:id`} component={OrderCardDetails}/>
+                <Route path={`${pUrl}/feed`}>
                     <Feed/>
                 </Route>
-                <ProtectedRoute path='/profile/orders/:id'>
+                <ProtectedRoute path={`${pUrl}/profile/orders/:id`}>
                     <ProfileOrderDetails/>
                 </ProtectedRoute>
-                <ProtectedRoute path='/profile/orders'>
+                <ProtectedRoute path={`${pUrl}/profile/orders`}>
                     <Profile/>
                 </ProtectedRoute>
-                <ProtectedRoute path='/profile'>
+                <ProtectedRoute path={`${pUrl}/profile`}>
                     <Profile/>
                 </ProtectedRoute>
-                <Route path='/ingredients/:id' component={Ingredient}/>
+                <Route path={`${pUrl}/ingredients/:id`} component={Ingredient}/>
                 <Route component={NotFound}/>
             </Switch>
             {background &&
-            <Route path='/ingredients/:id'>
+            <Route path={`${pUrl}/ingredients/:id`}>
                 <Modal
                     title='Детали ингредиента'
                     close={handleCloseModal}
@@ -94,7 +97,7 @@ const App:FC = () => {
                 </Modal>
             </Route>}
             {background &&
-            <ProtectedRoute path='/profile/orders/:id'>
+            <ProtectedRoute path={`${pUrl}/profile/orders/:id`}>
                 <Modal
                     title=''
                     close={handleCloseModal}
@@ -104,7 +107,7 @@ const App:FC = () => {
             </ProtectedRoute>
             }
             {background &&
-            <Route path='/feed/:id'>
+            <Route path={`${pUrl}/feed/:id`}>
                 <Modal
                     title=''
                     close={handleCloseModal}

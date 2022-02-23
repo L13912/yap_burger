@@ -17,7 +17,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWsActionsType): Midd
       }
       if (type === wsPrivatInit) {
         const token = localStorage.getItem('accessToken')
-        if(token) socket = new WebSocket(`${wsUrl}?token=${token!.split(' ')[1]}`)
+        if (token) socket = new WebSocket(`${wsUrl}?token=${token!.split(' ')[1]}`)
       }
 
       if (socket) {

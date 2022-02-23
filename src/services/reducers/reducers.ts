@@ -34,7 +34,7 @@ export type TState = {
   orderFailed: boolean
 };
 
-const initialState = {
+export const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsError: false,
@@ -155,7 +155,6 @@ export const reducer = (state: TState = initialState, action: TActions): TState 
         ...state,
         constructorIngredients: {
           ...state.constructorIngredients,
-          /*                    buns: [...state.constructorIngredients.buns],*/
           toppings: newOrderArr
         }
       }

@@ -4,6 +4,9 @@ import styles from './commonStyles.module.css'
 import { Link, Redirect } from 'react-router-dom'
 import { registerUser } from '../services/actions/user-actions'
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { PUBLIC_URL } from '../constants'
+
+const pUrl = PUBLIC_URL
 
 const Register: FC = () => {
   const dispatch = useDispatch()
@@ -23,9 +26,9 @@ const Register: FC = () => {
   const linkClasses = `mt-10 text text_type_main-default pl-2 ${styles.link}`
 
   return user.email !== '' ? (
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to={{ pathname: `${pUrl}/` }} />
   ) : registerUserSuccess ? (
-    <Redirect to={{ pathname: '/' }} />
+    <Redirect to={{ pathname: `${pUrl}/` }} />
   ) : (
     <div className={styles.page}>
       <form onSubmit={onSubmit}>
@@ -40,7 +43,7 @@ const Register: FC = () => {
       </form>
       <p className={'text text_type_main-default text_color_inactive mt-10 pt-10  mb-4'}>
         Уже зарегистрированы?
-        <Link to="/login" className={linkClasses}>
+        <Link to={`${pUrl}/login`} className={linkClasses}>
           Войти
         </Link>
       </p>

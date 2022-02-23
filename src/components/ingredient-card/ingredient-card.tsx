@@ -8,6 +8,9 @@ import {useDrag} from 'react-dnd';
 import {useHistory, useLocation} from 'react-router-dom';
 import {SET_INGREDIENT_DETAILS} from "../../services/actions/actions";
 import {TIngredientCard} from "../../types/data-types";
+import {PUBLIC_URL} from "../../constants";
+
+const pUrl = PUBLIC_URL;
 
 
 const IngredientCard:FC<TIngredientCard> = ({card}) => {
@@ -39,7 +42,7 @@ const IngredientCard:FC<TIngredientCard> = ({card}) => {
             type: SET_INGREDIENT_DETAILS,
             card
         });
-        history.push(`/ingredients/${card._id}`, {background: location});
+        history.push(`${pUrl}/ingredients/${card._id}`, {background: location});
     }
 
     const cardClasses = `mt-5 mr-5 mb-8 ${styles.card}`;
@@ -47,7 +50,12 @@ const IngredientCard:FC<TIngredientCard> = ({card}) => {
     const descriptionClasses = `mt-5 mr-5 text text_type_main-default ${styles.description}`;
 
     return (
-        <div className={cardClasses} ref={dragRef} style={{opacity}} onClick={openModal}>
+        <div className={cardClasses}
+             ref={dragRef}
+             style={{opacity}}
+             onClick={openModal}
+             data-cypress-id='ingredientCard'
+        >
             {count() > 0 && <Counter count={count()} size="default"/>}
             <div className={image}>
                 <img className={styles.image} alt='Фото ингредиента' src={card.image}/>

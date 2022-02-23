@@ -6,6 +6,9 @@ import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
+import {PUBLIC_URL} from "../../constants";
+
+const pUrl = PUBLIC_URL;
 
 const AppHeader:FC = () => {
     const location = useLocation();
@@ -21,13 +24,13 @@ const AppHeader:FC = () => {
         <header className={headerClasses}>
             <div className={styles.content}>
                 <nav className={navClasses}>
-                    <Link to='/' className={itemClasses}>
+                    <Link to={`${pUrl}/`} className={itemClasses}>
                         <h2 className={styles.navItem}>
                             <BurgerIcon type={currentPage === '' ? 'primary' : 'secondary'}/>
                             <span className={currentPage === '' ? activeClass : inactiveClass}>Конструктор</span>
                         </h2>
                     </Link>
-                    <Link to='/feed' className={itemClasses}>
+                    <Link to={`${pUrl}/feed`} className={itemClasses}>
                         <h2 className={styles.navItem}>
                             <ListIcon type={currentPage === 'feed' ? 'primary' : 'secondary'}/>
                             <span
@@ -36,11 +39,11 @@ const AppHeader:FC = () => {
                     </Link>
                 </nav>
                 <h2 className={logoClasses}>
-                    <Link to='/'>
+                    <Link to={`${pUrl}/`}>
                         <Logo/>
                     </Link>
                 </h2>
-                <Link to='/profile/orders' className={styles.login}>
+                <Link to={`${pUrl}/profile/orders`} className={styles.login} data-cypress-id='loginLinkHeader'>
                     <h2 className={styles.login}>
                         <ProfileIcon type={currentPage === 'profile' ? 'primary' : 'secondary'}/>
                         <span className={currentPage === 'profile' ? activeClass : inactiveClass}>Личный кабинет</span>

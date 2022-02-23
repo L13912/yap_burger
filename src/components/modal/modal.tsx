@@ -23,7 +23,7 @@ const Modal:FC<TModal> = ({children, close, title}) => {
 
     return createPortal(
         <ModalOverlay close={close}>
-            <div className={modalClasses}>
+            <div className={modalClasses} data-cypress-id='modal'>
                 {title && <h3 className={titleClasses}>{title}</h3>
                 }
                 <div className={closeIconClasses} onClick={close}>
